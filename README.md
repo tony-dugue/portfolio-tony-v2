@@ -34,9 +34,9 @@ yarn dev
 
 Pour créer un dossier de production :
 ```bash
-npm run start
+npm run build
 # ou
-yarn start
+yarn build
 ```
 
 - Dans le terminal, accéder à : [http://localhost:3000](http://localhost:3000)
