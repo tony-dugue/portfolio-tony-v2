@@ -1,3 +1,6 @@
+@import "tools/mixins";
+@import "tools/variables";
+
 html,
 body {
   padding: 0;
@@ -24,3 +27,27 @@ a {
     background: black;
   }
 }
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+h1 {
+  color: $color-primary;
+}
+
+
+
+
+
+
+
+
+
+
+
+

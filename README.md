@@ -32,6 +32,13 @@ npm run dev
 yarn dev
 ```
 
+Pour créer un dossier de production :
+```bash
+npm run start
+# ou
+yarn start
+```
+
 - Dans le terminal, accéder à : [http://localhost:3000](http://localhost:3000)
 
 ## Ressources utilisées dans le projet
