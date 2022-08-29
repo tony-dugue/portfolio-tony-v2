@@ -1,12 +1,13 @@
 import type { NextPage } from 'next'
+import { METADATA } from "../constants";
 import Head from 'next/head'
 
 const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Mon portfolio</title>
-        <meta name="description" content="Mon portfolio" />
+        <title>{METADATA.title}</title>
+        <meta name="description" content={METADATA.description} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
