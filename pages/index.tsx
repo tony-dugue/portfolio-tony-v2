@@ -24,11 +24,8 @@ const Home: NextPage = () => {
 
 export default Home
 
-const Wrapper = styled.div`${tw`flex flex-col h-screen bg-red-300`}`
+const Wrapper = styled.div`${tw`flex flex-col h-screen bg-red-300 lg:pl-12 lg:pr-12`}`
 const First = styled.div`${tw`bg-red-500 flex-1`}`
 
-const Second = styled.div`
-  color: yellow;
-  ${tw`flex-1`}
-`
+const Second = styled.div`${tw`flex-1`}`
 

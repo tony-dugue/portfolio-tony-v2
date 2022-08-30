@@ -17,6 +17,7 @@
     "next-transpile-modules": "^9.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-responsive": "^9.0.0-beta.10",
     "sass": "^1.54.5",
     "twin.macro": "^2.8.2"
   },
@@ -24,6 +25,7 @@
     "@types/node": "18.7.13",
     "@types/react": "18.0.17",
     "@types/react-dom": "18.0.6",
+    "@types/react-responsive": "^8.0.5",
     "@types/styled-components": "^5.1.26",
     "autoprefixer": "^10.4.8",
     "eslint": "8.22.0",
