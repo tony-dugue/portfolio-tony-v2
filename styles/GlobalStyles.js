@@ -186,12 +186,32 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     font-family: 'Latinka', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    //cursor: none;
   }
   
   html {
     box-sizing: border-box;
     font-size: 18px;
     scroll-behavior: smooth;
+    -ms-overflow-style: scrollbar;
+    scrollbar-color: black;
+    scrollbar-width: thin;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0.375rem;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgba(94, 94, 94, 0.5);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgb(170, 170, 170);
+  }
+
+  ::-moz-selection,
+  ::selection {
+    color: white;
+    background: black;
   }
   
   body {
@@ -218,6 +238,12 @@ const GlobalStyles = createGlobalStyle`
       color:inherit;
     }
   }
+
+  a,
+  input[type="checkbox"] {
+    cursor: none !important;
+  }
+  
   p, ul, ol, a {
     font-size: 1rem;
     margin-top: 0;

@@ -13,7 +13,7 @@ const Header: React.FunctionComponent<Props> = (props:Props) => {
       <Container>
 
         <ImageWrapper>
-          <a href="#home">
+          <a href="#home" className='link'>
             <img src="/images/usb-blue.png" alt="Logo - Tony Dugué" />
           </a>
         </ImageWrapper>
