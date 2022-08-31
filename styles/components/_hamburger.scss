@@ -2,7 +2,6 @@
   z-index: 1;
 
   .checkbox-toggle {
-    @apply absolute top-0 right-0 w-6 h-6 opacity-0;
     z-index: 2;
 
     &:checked {
@@ -10,7 +9,6 @@
         .hamburger {
           > div {
             transform: rotate(135deg);
-
             &:before {
               top: 0;
               transform: rotate(90deg);
@@ -19,6 +17,20 @@
               top: 0;
               transform: rotate(90deg);
               opacity: 0;
+            }
+          }
+        }
+      }
+      ~ {
+        .menu {
+          pointer-events: auto;
+          visibility: visible;
+          > div {
+            transform: scale(1);
+            transition-duration: 0.75s;
+            > div {
+              opacity: 1;
+              transition: opacity 0.4s ease 0.4s;
             }
           }
         }
@@ -35,17 +47,15 @@
     }
   }
   .hamburger {
-    @apply absolute top-0 right-0 w-6 h-6 flex items-center justify-center;
     z-index: 1;
     backface-visibility: hidden;
 
     > div {
-      @apply relative flex-none w-full bg-white duration-300 flex items-center justify-center;
       height: 0.125rem;
       transition: all 0.4s ease;
       -webkit-box-pack: center;
-
-      &:before, &:after {
+      &:before,
+      &:after {
         content: "";
         z-index: 1;
         position: absolute;
@@ -58,6 +68,29 @@
       }
       &:after {
         top: 0.5rem;
+      }
+    }
+  }
+  .menu {
+    backface-visibility: hidden;
+    outline: 0.0625rem solid transparent;
+    > div {
+      width: 250vw;
+      height: 250vw;
+      transform: scale(0);
+      border-radius: 50%;
+      transition: all 0.4s ease;
+      backface-visibility: hidden;
+      backdrop-filter: blur(0.625rem);
+      -webkit-backdrop-filter: blur(0.625rem);
+      background: rgba(0, 0, 0, 0.5);
+      @supports not (backdrop-filter: blur(0.625rem)) {
+        background: rgba(0, 0, 0, 0.8);
+      }
+
+      > div {
+        max-width: 90vw;
+        transition: opacity 0.4s ease;
       }
     }
   }

@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { METADATA } from "../constants";
 import Layout from '../components/Layout'
 import Header from "../components/Header";
+import NavBar from "../components/NavBar";
 
 const Home: NextPage = () => {
   return (
@@ -12,7 +13,9 @@ const Home: NextPage = () => {
       </Head>
 
       <Layout>
-        <Header />
+        <Header>
+          <NavBar />
+        </Header>
       </Layout>
     </>
   )
