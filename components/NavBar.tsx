@@ -24,7 +24,11 @@ const NavBar = () => {
 
 export default NavBar;
 
-const Wrapper = styled.div`${tw`fixed top-0 left-0 w-full h-full overflow-hidden invisible pointer-events-none flex items-center justify-center`}`
+const Wrapper = styled.div`
+  background-color: ${props => props.theme.colorSecondary};
+  color: ${props => props.theme.colorWhite};
+  
+  ${tw`fixed top-0 left-0 w-full h-full overflow-hidden invisible pointer-events-none flex items-center justify-center`}`
 
 const Container = styled.div`${tw`flex-none overflow-hidden flex items-center justify-center`}`
 

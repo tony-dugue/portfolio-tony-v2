@@ -41,4 +41,7 @@ const HamburgerInput = styled.input`${tw`absolute top-0 right-0 w-6 h-6 opacity-
 
 const HamburgerCtr = styled.div`${tw`absolute top-0 right-0 w-6 h-6 flex items-center justify-center`}`
 
-const HamburgerItem = styled.div`${tw`relative flex-none w-full bg-white duration-300 flex items-center justify-center`}`
+const HamburgerItem = styled.div`
+  background-color: ${props => props.theme.colorPrimary};
+  ${tw`relative flex-none w-full duration-300 flex items-center justify-center`}
+`
