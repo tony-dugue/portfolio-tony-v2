@@ -2,9 +2,9 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import { METADATA } from "../constants";
 
-import Layout from '../components/Layout'
-import Header from "../components/Header";
-import NavBar from "../components/NavBar";
+import Layout from '../components/layout/Layout'
+import Header from "../components/header/Header";
+import NavigationMenu from "../components/header/NavigationMenu";
 
 const Home: NextPage = () => {
   return (
@@ -15,7 +15,7 @@ const Home: NextPage = () => {
 
       <Layout>
         <Header>
-          <NavBar />
+          <NavigationMenu />
         </Header>
       </Layout>
     </>

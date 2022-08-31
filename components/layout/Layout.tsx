@@ -1,6 +1,6 @@
 import React from "react";
 import Head from 'next/head'
-import { METADATA } from '../constants'
+import { METADATA } from '../../constants'
 
 interface Props {
   children: React.ReactNode

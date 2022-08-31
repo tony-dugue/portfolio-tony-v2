@@ -1,8 +1,21 @@
-import { NAVLINKS } from '../constants';
+import {useEffect} from "react";
+import { NAVLINKS } from '../../constants';
 import styled from "styled-components";
 import tw from "twin.macro";
 
-const NavBar = () => {
+const NavigationMenu = () => {
+
+  useEffect(() => {
+
+    // close menu navigation
+    const anchorNodes = document.querySelectorAll('a[href^="#"]');
+
+    anchorNodes.forEach(el => {
+      const checkbox: HTMLInputElement | null = document.querySelector('.checkbox-toggle');
+      el.addEventListener('click', () => checkbox!.checked = false )
+    })
+  });
+
   return (
     <Wrapper className="menu">
       <Container>
@@ -22,7 +35,7 @@ const NavBar = () => {
   )
 }
 
-export default NavBar;
+export default NavigationMenu;
 
 const Wrapper = styled.div`
   background-color: ${props => props.theme.colorSecondary};
@@ -38,4 +51,4 @@ const ListContainer = styled.ul`${tw`list-none py-4 px-0 m-0 block max-h-screen`
 
 const NavItem = styled.li`${tw`p-0 m-6 text-2xl block`}`
 
-const NavLink = styled.a`${tw`relative inline font-bold text-5xl duration-300 hover:no-underline hover:opacity-80`}`
+const NavLink = styled.a`${tw`relative inline font-bold text-2xl md:text-5xl duration-300 hover:no-underline hover:opacity-80`}`
