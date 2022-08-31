@@ -5,6 +5,7 @@ import { METADATA } from "../constants";
 import Layout from '../components/layout/Layout'
 import Header from "../components/header/Header";
 import NavigationMenu from "../components/header/NavigationMenu";
+import ProgressIndicator from "../components/elements/utils/ProgressIndicator"
 
 const Home: NextPage = () => {
   return (
@@ -14,9 +15,14 @@ const Home: NextPage = () => {
       </Head>
 
       <Layout>
+
+        <ProgressIndicator></ProgressIndicator>
+
         <Header>
           <NavigationMenu />
         </Header>
+
+        <div style={{ height: '2000px' }}></div>
       </Layout>
     </>
   )
