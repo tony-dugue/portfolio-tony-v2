@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
-import RoundButton from "../elements/buttons/RoundButton"
+import RoundButton from "../../buttons/RoundButton"
 
 interface Props {
   children: React.ReactNode

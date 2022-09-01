@@ -1,5 +1,5 @@
 import {useEffect} from "react";
-import { NAVLINKS } from '../../constants';
+import { NAVLINKS } from '../../../constants';
 import styled from "styled-components";
 import tw from "twin.macro";
 

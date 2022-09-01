@@ -202,10 +202,12 @@ const GlobalStyles = createGlobalStyle`
     width: 0.375rem;
   }
   ::-webkit-scrollbar-track {
-    background: rgba(94, 94, 94, 0.5);
+    //background: rgba(94, 94, 94, 0.5);
+    background: white;
   }
   ::-webkit-scrollbar-thumb {
-    background: rgb(170, 170, 170);
+    //background: rgb(170, 170, 170);
+    background: #0f3b56;
   }
 
   ::-moz-selection,
