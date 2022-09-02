@@ -27,3 +27,24 @@ export const NAVLINKS = [
   }
 ]
 
+export const TYPED_STRINGS = [
+  'Développement Frontend',
+  'Développement Backend',
+  'Développement FullStack JS'
+]
+
+export const EMAIL = 'duguetony@gmail.com'
+
+// export const SOCIAL_LINKS = {
+//   linkedin: 'https://duguetony.fr',
+//   github: 'https://duguetony.fr',
+//   instagram: 'https://duguetony.fr',
+//   facebook: 'https://duguetony.fr',
+// }
+
+export const SOCIAL_LINKS = [
+  { name: 'linkedin', url: 'https://duguetony.fr'},
+  { name: 'github', url: 'https://duguetony.fr'},
+  { name: 'instagram', url: 'https://duguetony.fr'},
+  { name: 'facebook', url: 'https://duguetony.fr'}
+]

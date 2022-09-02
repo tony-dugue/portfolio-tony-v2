@@ -40,7 +40,9 @@ const Header: React.FunctionComponent<Props> = (props:Props) => {
 
 export default Header;
 
-const Wrapper = styled.div`${tw`w-full fixed top-0 2xl:container mx-auto xl:px-20 md:px-12 px-4`}`
+const Wrapper = styled.nav`
+  ${tw`w-full fixed top-0 left-0 right-0 2xl:container mx-auto xl:px-20 md:px-12 px-4 select-none z-50`}
+`
 
 const Container = styled.div`
   height: 100px;
@@ -103,7 +105,7 @@ const OuterMenu = styled.div`
   z-index: 1;
 
   .checkbox-toggle {
-    z-index: 2;
+    z-index: 9999;
     cursor: pointer;
 
     &:checked {
@@ -149,7 +151,7 @@ const OuterMenu = styled.div`
     }
   }
   .hamburger {
-    z-index: 1;
+    z-index: 9998;
     backface-visibility: hidden;
 
     > div {
@@ -159,7 +161,7 @@ const OuterMenu = styled.div`
       &:before,
       &:after {
         content: "";
-        z-index: 1;
+        z-index: 9999;
         position: absolute;
         left: 0;
         width: 100%;

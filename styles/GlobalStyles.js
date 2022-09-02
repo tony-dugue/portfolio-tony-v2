@@ -158,7 +158,7 @@ const GlobalStyles = createGlobalStyle`
     url('/fonts/Latinka-ExtraBold.woff') format('woff'),
     url('/fonts/Latinka-ExtraBold.woff2') format('woff2'),
     url('/fonts/Latinka-ExtraBold.ttf') format('truetype');
-    font-weight: 600;
+    font-weight: 700;
     font-style: normal;
   }
 

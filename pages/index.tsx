@@ -3,13 +3,15 @@ import {useEffect} from "react";
 import Head from 'next/head'
 import { METADATA } from "../constants";
 
+import styled from "styled-components";
+import tw from "twin.macro";
+
 import Layout from '../components/common/layout/Layout'
 import Header from "../components/common/header/Header";
 import NavigationMenu from "../components/common/header/NavigationMenu";
 import ProgressIndicator from "../components/common/elements/ProgressIndicator"
 import Cursor from "../components/common/elements/Cursor"
-import styled from "styled-components";
-import tw from "twin.macro";
+import Hero from "../components/home/Hero"
 
 const Home: NextPage = () => {
 
@@ -34,17 +36,10 @@ const Home: NextPage = () => {
         </Header>
 
         <Cursor isDesktop></Cursor>
-        <Section></Section>
-        <Section></Section>
-        <Section></Section>
-        <Section></Section>
-        <Section></Section>
-
+        <Hero></Hero>
       </Layout>
     </>
   )
 }
 
 export default Home
-
-const Section = styled.div`${tw`min-h-screen`}`
