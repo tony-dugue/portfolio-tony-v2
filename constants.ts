@@ -35,16 +35,20 @@ export const TYPED_STRINGS = [
 
 export const EMAIL = 'duguetony@gmail.com'
 
-// export const SOCIAL_LINKS = {
-//   linkedin: 'https://duguetony.fr',
-//   github: 'https://duguetony.fr',
-//   instagram: 'https://duguetony.fr',
-//   facebook: 'https://duguetony.fr',
-// }
-
 export const SOCIAL_LINKS = [
   { name: 'linkedin', url: 'https://duguetony.fr'},
   { name: 'github', url: 'https://duguetony.fr'},
   { name: 'instagram', url: 'https://duguetony.fr'},
   { name: 'facebook', url: 'https://duguetony.fr'}
+]
+
+export const PROJECTS = [
+  {
+    name: 'Airmdrone',
+    image: '/images/projects/airmdrone.png',
+    description: 'Site vitrine pour améliorer la visibilité d\'un pilote de drone professionnel',
+    gradient: ['rgba(15,44,109, 0.5)', 'rgb(15,44,109)'],
+    url: 'https://www.airmdrone.com/',
+    tech: ['html', 'sass', 'javascript', 'gsap']
+  }
 ]

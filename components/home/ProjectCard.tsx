@@ -1,0 +1,100 @@
+import React, { useEffect, useRef } from 'react';
+import VanillaTilt from 'vanilla-tilt';
+import styled from "styled-components";
+import tw from "twin.macro";
+
+interface Props {
+  project: {}
+}
+
+const ProjectCard = (props:Props) => {
+
+  const { project } = props
+
+  const projectCard = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    VanillaTilt.init(projectCard.current!, {
+      max: 5,
+      speed: 400,
+      glare: true,
+      'max-glare': 0.2
+    });
+  }, [projectCard]);
+
+
+  return (
+    <ProjectCardWrapper ref={projectCard} style={{ background: `linear-gradient(90deg, ${project.gradient[0]} 0%, ${project!.gradient[1]} 100%)` }}>
+
+      <img src='/svgs/project-bg.svg' alt='Project' className="project-img-first" />
+      <img src={project.image} alt={project.name} className="project-img-second" />
+
+      <div className="tech-ctr-first" style={{ background: `linear-gradient(180deg, ${project.gradient[0]} 0%, rgba(0,0,0,0) 100%)` }}></div>
+      <div className="tech-ctr-second" style={{ background: `linear-gradient(0deg, ${project.gradient[0]} 10%, rgba(0,0,0,0) 100%)` }}></div>
+
+      <h1 className='tech-name'>{project.name}</h1>
+
+      <div className="tech-icons">
+        <div className="tech-icons-item">
+          {project.tech.map((el, i) => (
+            <img className={i % 2 === 0 ? 'ml-12' : ''} src={`/svgs/tech/${el}.svg`} alt={el} height={45} width={45} key={el} />
+          ))}
+        </div>
+      </div>
+
+      <h2 className='tech-desc'>{project.description}</h2>
+
+    </ProjectCardWrapper>
+  )
+}
+
+export default ProjectCard;
+
+const ProjectCardWrapper = styled.div`
+  height: 26rem;
+  width: 38rem;
+  background: black;
+  transform-style: preserve-3d;
+  transform: perspective(1000px);
+  ${tw`rounded-3xl relative overflow-hidden p-6 flex-col flex justify-between`}
+
+  img {
+    object-fit: cover;
+  }
+
+  .project-img-first {
+    ${tw`absolute w-full h-full top-0 left-0 opacity-20`}
+  }
+  
+  .project-img-second {
+    width: 16.8rem;
+    transform: rotate(-22.5deg) translateZ(1.875rem);
+    ${tw`absolute top-0 right-8 rounded-xl shadow-xl z-0`}
+  }
+
+  .tech-icons {
+    transform: rotate(-22.5deg) translateZ(1.875rem);
+    ${tw`w-1/2 h-full absolute left-24 top-0 flex items-center`}
+    
+    &-item {
+      ${tw`flex flex-col gap-4`}
+    }
+  }
+  
+  .tech-ctr-first {
+    ${tw`absolute top-0 left-0 w-full h-20`}
+  }
+
+  .tech-ctr-second {
+    ${tw`absolute bottom-0 left-0 w-full h-32`}
+  }
+  
+  .tech-name {
+    ${tw`text-4xl z-10`}
+  }
+  
+  .tech-desc {
+    color: ${props => props.theme.colorWhite};
+    ${tw`text-xl z-10 tracking-wide font-medium`}
+  }
+`
