@@ -4,6 +4,9 @@ const withTM = require('next-transpile-modules')(['gsap'])
 
 const nextConfig = {
   reactStrictMode: false,
+  compiler: {
+    styledComponents: true,
+  },
   webpack: (config) => {
     config.resolve.fallback = { fs: false }
 

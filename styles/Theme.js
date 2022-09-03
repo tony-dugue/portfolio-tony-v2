@@ -61,5 +61,5 @@ export const light =  {
   Box-shadow
   ========================================================================== */
 
-  navHeight: '5rem',
+  navHeight: '5.5rem',
 }

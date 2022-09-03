@@ -47,7 +47,7 @@ const Cursor: React.FunctionComponent<Props> = (props:Props) => {
     el.addEventListener('mouseleave', () => {
       setCursorVariant("default")
     });
-  });
+  })
 
   return (
     <>

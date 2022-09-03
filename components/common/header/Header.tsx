@@ -45,7 +45,7 @@ const Wrapper = styled.nav`
 `
 
 const Container = styled.div`
-  height: 100px;
+  height: ${props => props.theme.navHeight};
   ${tw`relative flex justify-between items-center`};
 
   @media screen and (max-width: 992px) {

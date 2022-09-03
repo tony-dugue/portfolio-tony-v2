@@ -1,120 +1,172 @@
-import { useEffect, useRef } from "react";
-import {SOCIAL_LINKS, EMAIL, TYPED_STRINGS, NAVLINKS} from "../../constants";
-import Typed from 'typed.js';
+import {useEffect, useRef} from "react";
+import styled, {keyframes} from "styled-components";
+import {motion} from "framer-motion";
+import { gsap } from "gsap";
+import {ScrollTrigger} from "gsap/dist/ScrollTrigger";
 
-import styled from "styled-components";
-import tw from "twin.macro";
+const containerVariants = {
+  hidden : { opacity: 0 },
+  show : { opacity: 1, transition : { delayChildren: 1, staggerChildren: 0.2 } }
+}
 
-import SquareButton from "../buttons/SquareButton"
+const letterVariants = {
+  hidden : { opacity: 0 },
+  show : { opacity: 1 }
+}
 
 const Hero = () => {
 
-  const typedElRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const roundRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const typed = new Typed(typedElRef.current as Element, {
-      strings: TYPED_STRINGS,
-      typeSpeed: 50,
-      backSpeed: 50,
-      backDelay: 8000,
-      loop: true
-    });
 
-    return () => typed.destroy();
-  }, [typedElRef]);
+    if (typeof window !== "undefined") {
+      gsap.registerPlugin(ScrollTrigger);
+    }
+
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top top",
+        scrub: true,
+        pin: false
+      }
+    }).to(roundRef.current, { opacity: 0 })
+
+  }, [])
 
   return (
-    <Section>
-      <Container>
+    <div id="section-hero">
+      <Section  ref={sectionRef}>
 
-        <div>
-          <p>Hello 👋🏻</p>
-          <h1>Je suis Tony Dugué</h1>
-        </div>
+        <Container>
 
-        <p>
-          <span ref={typedElRef}></span>
-        </p>
+          <motion.div variants={containerVariants} initial="hidden" animate="show">
+            <Title>
+              <motion.h1 variants={letterVariants} data-scroll data-scroll-delay="0.15" data-scroll-speed="6">T</motion.h1>
+              <motion.h1 variants={letterVariants} data-scroll data-scroll-delay="0.13" data-scroll-speed="6">o</motion.h1>
+              <motion.h1 variants={letterVariants} data-scroll data-scroll-delay="0.09" data-scroll-speed="6">n</motion.h1>
+              <motion.h1 variants={letterVariants} data-scroll data-scroll-delay="0.09" data-scroll-speed="6">y</motion.h1>
+              <motion.h1 variants={letterVariants} data-scroll data-scroll-delay="0.06" data-scroll-speed="6">&nbsp;</motion.h1>
+              <motion.h1 variants={letterVariants} data-scroll data-scroll-delay="0.06" data-scroll-speed="6">D</motion.h1>
+              <motion.h1 variants={letterVariants} data-scroll data-scroll-delay="0.04" data-scroll-speed="6">u</motion.h1>
+              <motion.h1 variants={letterVariants} data-scroll data-scroll-delay="0.04" data-scroll-speed="6">g</motion.h1>
+              <motion.h1 variants={letterVariants} data-scroll data-scroll-delay="0.04" data-scroll-speed="6">u</motion.h1>
+              <motion.h1 variants={letterVariants} data-scroll data-scroll-delay="0.04" data-scroll-speed="6">é</motion.h1>
+            </Title>
 
-        <SocialContainer>
-          {SOCIAL_LINKS.map(link => (
-            <SocialLink href={link.url} className="link" key={link.name} rel='noreferrer' target='_blank'>
-              <img src={`/svgs/social/${link.name}.svg`} alt={link.name} width={40} height={40} />
-            </SocialLink>
-          ))}
-        </SocialContainer>
+            <Description variants={letterVariants} data-scroll data-scroll-delay="0.04" data-scroll-speed="2">
+              <mark>Développeur Web et Mobile - FullStack JS</mark>
+              <br />Rennes, France 🇫🇷
+              <span>Spécialisé en React, VueJS et NestJS.</span>
+            </Description>
+          </motion.div>
 
-        <Cta>
-          <SquareButton type='outline' name='Resume' newTab={true} href='/tony-dugue-cv.pdf'></SquareButton>
-          <SquareButton type='primary' newTab={false} name='Contact' href={'mailto:'+EMAIL}></SquareButton>
-        </Cta>
+          <Round className="round" ref={roundRef}>
+            <Circle>&#x2193;</Circle>
+            <img src='/images/rounded-text-black.png' alt="animation pour aller à la prochaine section" />
+          </Round>
 
-      </Container>
+        </Container>
 
-      <ImageCtr>
-        <img src='/svgs/illustration-bg.svg' alt='Illustration' width={1021} height={650} />
-      </ImageCtr>
-
-    </Section>
+      </Section>
+    </div>
   )
 }
 
-export default Hero;
+export default Hero
 
-const Section = styled.div`
-  ${tw`w-full flex md:items-center py-8 2xl:container mx-auto xl:px-20 md:px-12 px-4 min-h-screen relative`}
+const Section = styled.section`
+  min-height: ${props => `calc(100vh - ${props.theme.navHeight})`};
+  margin-top: ${props => props.theme.navHeight};
+  width: 100%;
+  position: relative;
 `
 
 const Container = styled.div`
-  ${tw`font-medium flex flex-col gap-5 pt-40 md:pt-0 select-none`};
+  width: 75%;
+  min-height: 90vh;
+  margin: 0 auto;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+`
 
-  @media screen and (max-width: 768px) {
-  ${tw`justify-center items-center`};
-}
+const Title = styled.div`
+  font-size: 3.2em;
+  font-family: ${props => props.theme.fontDin};
+  font-weight: 900;
+  text-transform: uppercase;
+  color: ${props => props.theme.colorTitle};
+  line-height: 0.7;
+  margin-top: 0;
+  
+  display: flex;
+`
 
-  h1 {
-    ${tw`text-3xl`};
-
-    @media screen and (max-width: 992px) {
-      ${tw`text-2xl`};
-    }
+const Description = styled(motion.p)`
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  
+  color: ${props => props.theme.colorText};
+  font-size: ${props => props.theme.fontlg};
+  line-height: 1.5;
+  
+  mark {
+    position: relative;
+    padding: 4px 5px;
+    border-radius: 6px;
+    margin-right: 5px;
+    
+    background-color: ${props => props.theme.colorMark};
   }
   
-  p, span {
-    ${tw`text-4xl`};
-
-    @media screen and (max-width: 768px) {
-      ${tw`text-2xl text-center`};
-    }
-  }
-
-  .typed-cursor {
-    font-size: 2rem;
+  span {
+    display: block;
+    margin-top: 10px;
+    color: ${props => props.theme.colorBlack};
   }
 `
 
-const SocialContainer = styled.div`
-  ${tw`flex gap-4`}
+const rotate = keyframes`
+  100% {
+    transform: rotate(1turn);
+  }
 `
 
-const SocialLink = styled.a`
-  ${tw`hover:opacity-80 duration-300`}
+const Round = styled.div`
+  position: absolute;
+  bottom: 3rem;
+  right: 90%;
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: 50%;
+  opacity: 1;
   
-    path {
-      fill: red;
-    }
-  
-`
-
-const Cta = styled.div`
-  ${tw`flex gap-5`}
-`
-
-const ImageCtr = styled.div`
-  ${tw`absolute right-0 bottom-0 -z-1 md:w-3/4 w-full`};
-
-  @media screen and (max-width: 768px) {
-    ${tw`hidden`};
+  img {
+    width: 100%;
+    height: auto;
+    animation: ${rotate} 25s linear infinite;
   }
-}
+`
+
+const Circle = styled.span`
+  width: 3.2rem;
+  height: 3.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  background-color: ${props => props.theme.colorSecondary};
+  color: ${props => props.theme.colorBackground};
+  font-size: 1.5rem;
 `

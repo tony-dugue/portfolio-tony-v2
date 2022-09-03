@@ -4,10 +4,6 @@ import Head from 'next/head'
 import { METADATA } from "../constants";
 
 import Layout from '../components/common/layout/Layout'
-import Header from "../components/common/header/Header";
-import NavigationMenu from "../components/common/header/NavigationMenu";
-import ProgressIndicator from "../components/common/elements/ProgressIndicator"
-import Cursor from "../components/common/elements/Cursor"
 import Hero from "../components/home/Hero"
 
 const Home: NextPage = () => {
@@ -26,14 +22,11 @@ const Home: NextPage = () => {
 
       <Layout>
 
-        <ProgressIndicator></ProgressIndicator>
+        {/*<HeroWithSvg />*/}
+        <Hero />
 
-        <Header>
-          <NavigationMenu />
-        </Header>
+        <div style={{ height: '400vh' }}></div>
 
-        <Cursor isDesktop />
-        <Hero></Hero>
       </Layout>
     </>
   )
