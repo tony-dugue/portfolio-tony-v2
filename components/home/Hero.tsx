@@ -3,6 +3,7 @@ import styled, {keyframes} from "styled-components";
 import {motion} from "framer-motion";
 import { gsap } from "gsap";
 import {ScrollTrigger} from "gsap/dist/ScrollTrigger";
+import {NAVLINKS} from "../../constants";
 
 const containerVariants = {
   hidden : { opacity: 0 },
@@ -37,8 +38,8 @@ const Hero = () => {
   }, [])
 
   return (
-    <div id="section-hero">
-      <Section  ref={sectionRef}>
+    <div>
+      <Section ref={sectionRef} id={NAVLINKS[0].ref}>
 
         <Container>
 

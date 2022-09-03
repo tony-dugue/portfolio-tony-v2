@@ -29,7 +29,7 @@ const Home: NextPage = () => {
         <Main>
           <HeroWithSvg />
           {/*<Hero />*/}
-          <Project />
+          <Project isDesktop />
 
           <div style={{ height: '400vh' }}></div>
         </Main>

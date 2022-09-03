@@ -24,7 +24,7 @@ const NavigationMenu = () => {
 
             {NAVLINKS.map(link => (
               <NavItem key={link.name}>
-                <NavLink className="link" href={link.ref}>{link.name}</NavLink>
+                <NavLink className="link" href={`#${link.ref}`}>{link.name}</NavLink>
               </NavItem>
             ))}
 

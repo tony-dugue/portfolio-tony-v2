@@ -24,7 +24,7 @@ const HeroWithSvg = () => {
   }, [typedElRef]);
 
   return (
-    <Section>
+    <Section id={NAVLINKS[0].ref}>
       <Container>
 
         <div>

@@ -7,23 +7,23 @@ export const METADATA = {
 export const NAVLINKS = [
   {
     name: 'Accueil',
-    ref: '#home'
+    ref: 'home'
   },
   {
     name: 'Projets',
-    ref: '#works'
+    ref: 'works'
   },
   {
     name: 'Compétences',
-    ref: '#skills'
+    ref: 'skills'
   },
   {
     name: 'Parcours',
-    ref: '#timeline'
+    ref: 'timeline'
   },
   {
     name: 'Contact',
-    ref: '#contact'
+    ref: 'contact'
   }
 ]
 
@@ -53,18 +53,26 @@ export const PROJECTS = [
   },
   {
     name: 'MotooPlanner',
-    image: '/images/projects/firmain.png',
+    image: '/images/projects/motooplanner.png',
     description: 'Application web pour faciliter la planification de road trip en moto en groupe',
     gradient: ['#00765F', '#238975'],
     url: 'https://motooplanner.tonydugue.fr/',
-    tech: ['react', 'sass', 'symfony', 'javascript']
+    tech: ['react', 'sass', 'symfony']
   },
   {
     name: 'Firmain',
-    image: '/images/projects/motooplanner.png',
+    image: '/images/projects/firmain.png',
     description: 'Plateforme numérique pour gérer avec simplicité les process RH de gestion des formations internes ou externes et des compétences',
     gradient: ['#172839', '#334659'],
     url: 'https://app.escaledescompetences.fr/',
     tech: ['react', 'sass', 'symfony']
+  },
+  {
+    name: 'Lemona Food Truck',
+    image: '/images/projects/lemona.jpg',
+    description: 'Site vitrine présentant l\'activité d\'une chaine de Food Truck vintage spécialisé dans les produits à base de Citron.',
+    gradient: ["#17007B", "#3A2C79"],
+    url: '#',
+    tech: ['pug', 'html', 'sass']
   }
 ]
