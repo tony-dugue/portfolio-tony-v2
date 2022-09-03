@@ -5,6 +5,9 @@ import { METADATA } from "../constants";
 
 import Layout from '../components/common/layout/Layout'
 import Hero from "../components/home/Hero"
+import Projects from "../components/home/Projects"
+import styled from "styled-components";
+import tw from "twin.macro";
 
 const Home: NextPage = () => {
 
@@ -22,10 +25,13 @@ const Home: NextPage = () => {
 
       <Layout>
 
-        {/*<HeroWithSvg />*/}
-        <Hero />
+        <Main>
+          {/*<HeroWithSvg />*/}
+          <Hero />
+          <Projects />
 
-        <div style={{ height: '400vh' }}></div>
+          <div style={{ height: '400vh' }}></div>
+        </Main>
 
       </Layout>
     </>
@@ -33,3 +39,7 @@ const Home: NextPage = () => {
 }
 
 export default Home
+
+const Main = styled.main`
+  ${tw`flex-col flex gap-y-28`}
+`

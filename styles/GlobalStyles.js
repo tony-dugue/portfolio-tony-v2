@@ -254,12 +254,34 @@ const GlobalStyles = createGlobalStyle`
   ul {
     list-style: none;
     padding: 0;
+
+    //li {
+    //  a {
+    //    background: linear-gradient(
+    //            90deg,
+    //            #ffffff 0%,
+    //            #ffffff 50%,
+    //            #6dd5ed 51%,
+    //            #2193b0 100%
+    //    );
+    //    background-size: 200% 100%;
+    //    -webkit-background-clip: text;
+    //    -webkit-text-fill-color: transparent;
+    //
+    //
+    //    &:hover {
+    //      background-position: 100% 0;
+    //    }
+    //  }
+    //}
   }
+  
   img {
     width: 100%;
     height: auto;
     object-fit: cover;
   }
+  
   hr {
     box-sizing: content-box;
     height: 0;
@@ -277,6 +299,12 @@ const GlobalStyles = createGlobalStyle`
     position: relative;
     padding: 4px 5px;
     border-radius: 6px;
+  }
+
+  .text-gradient {
+    background: linear-gradient(90deg, #0f3b56 0%, #2193b0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 `
 

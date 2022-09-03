@@ -46,7 +46,7 @@ const Layout: React.FunctionComponent<Props> = (props:Props) => {
 
         <Cursor isDesktop />
 
-        <main>{props.children}</main>
+        {props.children}
       </AnimatePresence>
     </>
   )
