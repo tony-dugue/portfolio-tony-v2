@@ -50,5 +50,21 @@ export const PROJECTS = [
     gradient: ['rgba(15,44,109, 0.5)', 'rgb(15,44,109)'],
     url: 'https://www.airmdrone.com/',
     tech: ['html', 'sass', 'javascript', 'gsap']
+  },
+  {
+    name: 'MotooPlanner',
+    image: '/images/projects/firmain.png',
+    description: 'Application web pour faciliter la planification de road trip en moto en groupe',
+    gradient: ['#00765F', '#238975'],
+    url: 'https://motooplanner.tonydugue.fr/',
+    tech: ['react', 'sass', 'symfony', 'javascript']
+  },
+  {
+    name: 'Firmain',
+    image: '/images/projects/motooplanner.png',
+    description: 'Plateforme numérique pour gérer avec simplicité les process RH de gestion des formations internes ou externes et des compétences',
+    gradient: ['#172839', '#334659'],
+    url: 'https://app.escaledescompetences.fr/',
+    tech: ['react', 'sass', 'symfony']
   }
 ]

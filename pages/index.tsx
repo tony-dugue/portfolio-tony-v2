@@ -4,7 +4,8 @@ import Head from 'next/head'
 import { METADATA } from "../constants";
 
 import Layout from '../components/common/layout/Layout'
-import Hero from "../components/home/Hero"
+//import Hero from "../components/home/Hero"
+import HeroWithSvg from "../components/home/HeroWithSvg"
 import Project from "../components/home/Project"
 import styled from "styled-components";
 import tw from "twin.macro";
@@ -26,8 +27,8 @@ const Home: NextPage = () => {
       <Layout>
 
         <Main>
-          {/*<HeroWithSvg />*/}
-          <Hero />
+          <HeroWithSvg />
+          {/*<Hero />*/}
           <Project />
 
           <div style={{ height: '400vh' }}></div>

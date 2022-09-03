@@ -14,7 +14,10 @@ const Project = () => {
 
       <ProjectItems>
         {PROJECTS.map(project => (
-          <ProjectCard project={project} key={project.name}></ProjectCard>
+          <ProjectCard
+            key={project.name}
+            {...project}
+          />
         ))}
       </ProjectItems>
 
@@ -46,5 +49,5 @@ const Container = styled.div`
 `
 
 const ProjectItems = styled.div`
-  ${tw`flex`}
+  ${tw`flex gap-x-16`}
 `

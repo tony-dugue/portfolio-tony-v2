@@ -4,12 +4,17 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 interface Props {
-  project: {}
+  name: string,
+  image: string,
+  description: string,
+  gradient: string[],
+  url: string,
+  tech: string[]
 }
 
-const ProjectCard = (props:Props) => {
+const ProjectCard: React.FunctionComponent<Props> = (props:Props) => {
 
-  const { project } = props
+  const { name, image, description, gradient, url, tech} = props
 
   const projectCard = useRef<HTMLDivElement>(null);
 
@@ -24,27 +29,29 @@ const ProjectCard = (props:Props) => {
 
 
   return (
-    <ProjectCardWrapper ref={projectCard} style={{ background: `linear-gradient(90deg, ${project.gradient[0]} 0%, ${project!.gradient[1]} 100%)` }}>
+    <a href={url} target='_blank' rel='noreferrer' className='link'>
+      <ProjectCardWrapper ref={projectCard} style={{ background: `linear-gradient(90deg, ${gradient[0]} 0%, ${gradient[1]} 100%)` }}>
 
-      <img src='/svgs/project-bg.svg' alt='Project' className="project-img-first" />
-      <img src={project.image} alt={project.name} className="project-img-second" />
+        <img src='/svgs/project-bg.svg' alt='Project' className="project-img-first" />
+        <img src={image} alt={name} className="project-img-second" />
 
-      <div className="tech-ctr-first" style={{ background: `linear-gradient(180deg, ${project.gradient[0]} 0%, rgba(0,0,0,0) 100%)` }}></div>
-      <div className="tech-ctr-second" style={{ background: `linear-gradient(0deg, ${project.gradient[0]} 10%, rgba(0,0,0,0) 100%)` }}></div>
+        <div className="tech-ctr-first" style={{ background: `linear-gradient(180deg, ${gradient[0]} 0%, rgba(0,0,0,0) 100%)` }}></div>
+        <div className="tech-ctr-second" style={{ background: `linear-gradient(0deg, ${gradient[0]} 10%, rgba(0,0,0,0) 100%)` }}></div>
 
-      <h1 className='tech-name'>{project.name}</h1>
+        <h1 className='tech-name'>{name}</h1>
 
-      <div className="tech-icons">
-        <div className="tech-icons-item">
-          {project.tech.map((el, i) => (
-            <img className={i % 2 === 0 ? 'ml-12' : ''} src={`/svgs/tech/${el}.svg`} alt={el} height={45} width={45} key={el} />
-          ))}
+        <div className="tech-icons">
+          <div className="tech-icons-item">
+            {tech.map((el, i) => (
+              <img className={i % 2 === 0 ? 'tech-icons-item-img' : ''} src={`/svgs/tech/${el}.svg`} alt={el} height={45} width={45} key={el} />
+            ))}
+          </div>
         </div>
-      </div>
 
-      <h2 className='tech-desc'>{project.description}</h2>
+        <h2 className='tech-desc'>{description}</h2>
 
-    </ProjectCardWrapper>
+      </ProjectCardWrapper>
+    </a>
   )
 }
 
@@ -77,7 +84,11 @@ const ProjectCardWrapper = styled.div`
     ${tw`w-1/2 h-full absolute left-24 top-0 flex items-center`}
     
     &-item {
-      ${tw`flex flex-col gap-4`}
+      ${tw`flex flex-col gap-4 pb-8`}
+      
+      &-img {
+        ${tw`ml-16`}
+      }
     }
   }
   
