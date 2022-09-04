@@ -41,7 +41,7 @@ const Header: React.FunctionComponent<Props> = (props:Props) => {
 export default Header;
 
 const Wrapper = styled.nav`
-  ${tw`w-full fixed top-0 left-0 right-0 2xl:container mx-auto xl:px-20 md:px-12 px-4 select-none z-50`}
+  ${tw`w-full fixed top-0 left-0 right-0 2xl:container mx-auto xl:px-20 md:px-12 px-4 select-none z-50 bg-gradient-to-b from-gray-200 to-transparent`}
 `
 
 const Container = styled.div`

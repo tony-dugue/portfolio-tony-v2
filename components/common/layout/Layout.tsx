@@ -38,12 +38,11 @@ const Layout: React.FunctionComponent<Props> = (props:Props) => {
 
       <AnimatePresence>
 
-        <ProgressIndicator />
-
         <Header>
           <NavigationMenu />
         </Header>
 
+        <ProgressIndicator />
         <Cursor isDesktop />
 
         {props.children}

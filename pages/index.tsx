@@ -3,14 +3,16 @@ import {useEffect} from "react";
 import Head from 'next/head'
 import { METADATA } from "../constants";
 
+import styled from "styled-components";
+import tw from "twin.macro";
+
 import Layout from '../components/common/layout/Layout'
 //import Hero from "../components/home/Hero"
 import HeroWithSvg from "../components/home/HeroWithSvg"
 import Project from "../components/home/Project"
 import Quote from "../components/home/Quote"
 import Skill from "../components/home/Skill"
-import styled from "styled-components";
-import tw from "twin.macro";
+import Collaboration from "../components/home/Collaboration";
 
 const Home: NextPage = () => {
 
@@ -37,6 +39,7 @@ const Home: NextPage = () => {
           <Project isDesktop />
           <Quote />
           <Skill />
+          <Collaboration />
         </Main>
 
       </Layout>
