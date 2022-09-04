@@ -196,6 +196,7 @@ const GlobalStyles = createGlobalStyle`
     -ms-overflow-style: scrollbar;
     scrollbar-color: black;
     scrollbar-width: thin;
+    overflow-x: hidden;
 
     @media (min-width: 768px) {
       font-size: 14px;

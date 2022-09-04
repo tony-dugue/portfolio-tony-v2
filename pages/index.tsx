@@ -17,13 +17,16 @@ import Footer from '../components/common/footer/Footer'
 
 const Home: NextPage = () => {
 
-  const [isDesktop, setisDesktop] = useState(true);
+  const [isDesktop, setIsDesktop] = useState(true);
+  const [clientHeight, setHeight] = useState(0);
 
   useEffect(() => {
     const result = (typeof window.orientation === 'undefined') && (navigator.userAgent.indexOf('IEMobile') === -1);
     window.history.scrollRestoration = 'manual';
-    setisDesktop(result);
-  }, [isDesktop]);
+    setIsDesktop(result);
+    setHeight(window.innerHeight);
+
+  }, [isDesktop, clientHeight]);
 
   return (
     <>
@@ -31,16 +34,16 @@ const Home: NextPage = () => {
         <title>{METADATA.title}</title>
       </Head>
 
-      <Layout>
+      <Layout isDesktop={isDesktop}>
 
         <Main>
           <Wrapper />
           <HeroWithSvg />
           {/*<Hero />*/}
-          <Project isDesktop />
-          <Quote />
+          <Project isDesktop={isDesktop} clientHeight={clientHeight} />
+          <Quote clientHeight={clientHeight} />
           <Skill />
-          <Collaboration />
+          <Collaboration clientHeight={clientHeight} />
           <Footer />
         </Main>
 

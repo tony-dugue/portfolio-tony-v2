@@ -6,7 +6,7 @@ interface Props {
   isDesktop: React.ReactNode
 }
 
-const Cursor: React.FunctionComponent<Props> = (props:Props) => {
+const Cursor: (props: Props) => "" | 0 | null | undefined | false | JSX.Element = (props:Props) => {
 
   const { isDesktop } = props
 
@@ -50,9 +50,7 @@ const Cursor: React.FunctionComponent<Props> = (props:Props) => {
   })
 
   return (
-    <>
-      <CursorMain className='cursor' variants={variants} animate={cursorVariant} />
-    </>
+    (isDesktop && document.body.clientWidth > 767) && <CursorMain className='cursor' variants={variants} animate={cursorVariant} />
   )
 }
 

@@ -1,10 +1,16 @@
-import { useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { gsap, Linear } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import styled from "styled-components";
 import tw from "twin.macro";
 
-const Quote = () => {
+interface Props {
+  clientHeight: number;
+}
+
+const Quote: React.FunctionComponent<Props> = (props:Props) => {
+
+  const { clientHeight } = props
 
   const quoteRef = useRef<HTMLDivElement>(null);
   const targetSection = useRef<HTMLDivElement>(null);
@@ -27,7 +33,7 @@ const Quote = () => {
 
   return (
     <Section ref={targetSection}>
-      <Container>
+      <Container style={ clientHeight > 650 ? { paddingTop: '40px', paddingBottom: '40px' } : { paddingTop: '60px', paddingBottom: '60px' } }>
         <h1 ref={quoteRef}>
           Autodidacte, j'aime aussi découvrir de nouveaux langages, frameworks, librairies, ... et travailler sur des<span className='text-strong'>&nbsp;projets variés</span> dans des domaines différents.</h1>
       </Container>

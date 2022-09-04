@@ -29,7 +29,7 @@ const ProjectCard: React.FunctionComponent<Props> = (props:Props) => {
 
 
   return (
-    <a href={url} target='_blank' rel='noreferrer' className='link'>
+    <a href={url} target='_blank' rel='noreferrer' className='link' style={{ maxWidth: '100%' }}>
       <ProjectCardWrapper ref={projectCard} style={{ background: `linear-gradient(90deg, ${gradient[0]} 0%, ${gradient[1]} 100%)` }}>
 
         <img src='/svgs/project-bg.svg' alt='Project' className="project-img-first" />
@@ -58,12 +58,16 @@ const ProjectCard: React.FunctionComponent<Props> = (props:Props) => {
 export default ProjectCard;
 
 const ProjectCardWrapper = styled.div`
-  height: 26rem;
+  height: 22rem;
   width: 38rem;
   background: black;
   transform-style: preserve-3d;
   transform: perspective(1000px);
-  ${tw`rounded-3xl relative overflow-hidden p-6 flex-col flex justify-between`}
+  ${tw`rounded-3xl relative overflow-hidden p-6 flex-col flex justify-between`};
+
+  @media screen and (max-width: 768px) {
+    height: 26rem;
+  }
 
   img {
     object-fit: cover;
@@ -88,7 +92,7 @@ const ProjectCardWrapper = styled.div`
 
   .tech-icons {
     transform: rotate(-22.5deg) translateZ(1.875rem);
-    ${tw`w-1/2 h-full absolute left-24 top-0 flex items-center`}
+    ${tw`w-1/2 h-full absolute left-24 top-0 sm:flex items-center hidden`}
     
     &-item {
       ${tw`flex flex-col gap-4 pb-8`}
@@ -108,7 +112,7 @@ const ProjectCardWrapper = styled.div`
   }
   
   .tech-name {
-    ${tw`text-4xl z-10`}
+    ${tw`text-3xl sm:text-4xl z-10`}
   }
   
   .tech-desc {

@@ -11,7 +11,8 @@ import Header from "../header/Header";
 import NavigationMenu from "../header/NavigationMenu";
 
 interface Props {
-  children: React.ReactNode
+  children: React.ReactNode,
+  isDesktop: boolean
 }
 
 const Layout: React.FunctionComponent<Props> = (props:Props) => {
@@ -43,7 +44,7 @@ const Layout: React.FunctionComponent<Props> = (props:Props) => {
         </Header>
 
         <ProgressIndicator />
-        <Cursor isDesktop />
+        <Cursor isDesktop={props.isDesktop} />
 
         {props.children}
       </AnimatePresence>

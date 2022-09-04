@@ -62,15 +62,19 @@ const HeroWithSvg = () => {
 export default HeroWithSvg;
 
 const Section = styled.div`
-  ${tw`w-full flex md:items-center py-8 2xl:container mx-auto xl:px-20 md:px-12 px-4 min-h-screen relative`}
+  ${tw`w-full flex md:items-center py-8 2xl:container mx-auto xl:px-20 md:px-12 px-4 min-h-screen relative`};
+
+  @media screen and (max-width: 768px) {
+  ${tw`flex-col`};
+}
 `
 
 const Container = styled.div`
-  ${tw`font-medium flex flex-col gap-5 pt-40 md:pt-0 select-none`};
+  ${tw`font-medium flex flex-col gap-5 pt-20 select-none`};
 
   @media screen and (max-width: 768px) {
-  ${tw`justify-center items-center`};
-}
+    ${tw`justify-center items-center gap-2`};
+  }
 
   h1 {
     ${tw`text-3xl`};
@@ -107,9 +111,5 @@ const Cta = styled.div`
 
 const ImageCtr = styled.div`
   ${tw`absolute right-0 bottom-0 -z-1 md:w-3/4 w-full`};
-
-  @media screen and (max-width: 768px) {
-    ${tw`hidden`};
-  }
 }
 `

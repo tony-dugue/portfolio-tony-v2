@@ -1,15 +1,23 @@
-import { useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { gsap, Linear } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import styled from "styled-components";
 import tw from "twin.macro";
 
-const Collaboration = () => {
+interface Props {
+  clientHeight: number;
+}
+
+const Collaboration: React.FunctionComponent<Props> = (props:Props) => {
+
+  const { clientHeight } = props
 
   const quoteRef = useRef<HTMLDivElement>(null);
   const targetSection = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+
+    const smallScreen = document.body.clientWidth < 767;
 
     const timeline = gsap.timeline({ defaults: { ease: Linear.easeNone } });
 
@@ -19,8 +27,8 @@ const Collaboration = () => {
 
     const slidingTimeline = gsap.timeline({ defaults: { ease: Linear.easeNone } });
 
-    slidingTimeline.to(targetSection.current!.querySelector('.ui-left'), { xPercent: -150 })
-      .from(targetSection.current!.querySelector('.ui-right'), { xPercent: -150 }, '<')
+    slidingTimeline.to(targetSection.current!.querySelector('.ui-left'), { xPercent: smallScreen ? -500 : -150 })
+      .from(targetSection.current!.querySelector('.ui-right'), { xPercent: smallScreen ? -500 : -150 }, '<')
 
     ScrollTrigger.create({
       trigger: targetSection.current,
@@ -42,7 +50,7 @@ const Collaboration = () => {
   return (
     <Section ref={targetSection}>
 
-      <Container>
+      <Container style={ clientHeight > 650 ? { paddingTop: '36px', paddingBottom: '36px' } : { paddingTop: '48px', paddingBottom: '48px' } }>
         <p className='ui-left'>
           {Array(5).fill(" React Next JavaScript Nest Sass ").reduce((str, el) => str.concat(el), '')}
         </p>
@@ -66,14 +74,14 @@ const Section = styled.section`
 
 const Container = styled.div`
 
-  ${tw`2xl:container py-48 mx-auto xl:px-20 md:px-12 px-4 flex flex-col gap-y-8`}
+  ${tw`2xl:container mx-auto xl:px-20 md:px-12 px-4 flex flex-col gap-y-8`}
   
   .ui-left {
-    ${tw`opacity-20 text-7xl font-bold whitespace-nowrap `}
+    ${tw`opacity-20 text-5xl md:text-7xl font-bold whitespace-nowrap `}
   }
   
   h1 {
-    ${tw`font-medium text-5xl text-center font-bold`}
+    ${tw`font-medium text-4xl md:text-5xl text-center font-bold`}
 
     .text-strong {
       background: linear-gradient(
@@ -90,6 +98,6 @@ const Container = styled.div`
   }
   
   .ui-right {
-    ${tw`opacity-20 text-7xl font-bold whitespace-nowrap `}
+    ${tw`opacity-20 text-5xl md:text-7xl font-bold whitespace-nowrap `}
   }
 `

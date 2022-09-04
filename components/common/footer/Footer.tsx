@@ -1,41 +1,36 @@
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import { EMAIL, NAVLINKS, SOCIAL_LINKS } from '../../../constants';
 import SquareButton from '../../buttons/SquareButton';
 import styled from "styled-components";
 import tw from "twin.macro";
 
 const Footer = () => {
-
-  const [height, setHeight] = useState(0);
-
-  useEffect(() => {
-    setHeight(window.innerWidth * 0.4);
-  }, [height])
-
   return (
-    <FooterSection id={NAVLINKS[4].ref} style={{ height, backgroundImage: `url(/svgs/footer.svg)` }}>
+    <FooterSection id={NAVLINKS[4].ref}>
 
-      <Container>
+      <FooterImg src="/svgs/footer-curve.svg" alt="Footer" className='w-full' />
 
-        <h1>Je recherche des défis ! N'hésitez pas à me contacter.</h1>
+      <Wrapper>
+        <Container>
 
-        <SocialContainer>
-          {SOCIAL_LINKS.map(link => (
-            <SocialLink href={link.url} className="link" key={link.name} rel='noreferrer' target='_blank'>
-              <img src={`/svgs/social/${link.name}.svg`} alt={link.name} width={40} height={40} />
-            </SocialLink>
-          ))}
-        </SocialContainer>
+          <h1>Je recherche des défis ! N'hésitez pas à me contacter.</h1>
 
-        <Cta>
-          <SquareButton type='outline' name='mon CV' newTab={true} href='/tony-dugue-cv.pdf'></SquareButton>
-          <SquareButton type='white' name={`Contact`} newTab={false} href={'mailto:' + EMAIL}></SquareButton>
-        </Cta>
+          <SocialContainer>
+            {SOCIAL_LINKS.map(link => (
+              <SocialLink href={link.url} className="link" key={link.name} rel='noreferrer' target='_blank'>
+                <img src={`/svgs/social/${link.name}.svg`} alt={link.name} width={40} height={40} />
+              </SocialLink>
+            ))}
+          </SocialContainer>
 
-        <p>Design & Développement avec ❤️ par Tony Dugué</p>
+          <Cta>
+            <SquareButton type='outline' name='mon CV' newTab={true} href='/tony-dugue-cv.pdf'></SquareButton>
+            <SquareButton type='white' name={`Contact`} newTab={false} href={'mailto:' + EMAIL}></SquareButton>
+          </Cta>
 
-      </Container>
+          <p>Design & Développement avec ❤️ par Tony Dugué</p>
+
+        </Container>
+      </Wrapper>
 
     </FooterSection>
   )
@@ -44,7 +39,16 @@ const Footer = () => {
 export default Footer;
 
 const FooterSection = styled.footer`
-  ${tw`w-full relative select-none bg-cover bg-bottom`}
+  background: url(/svgs/footer-bg.svg),linear-gradient(153.86deg,#02494c 0%,#016877 15.69%,#0D576D 48.9%,#004865 95.52%);
+  ${tw`w-full relative select-none bg-cover`}
+`
+
+const FooterImg = styled.img`
+  ${tw`w-full`}
+`
+
+const Wrapper = styled.div`
+  ${tw`h-full w-full`}
 `
 
 const Container = styled.div`

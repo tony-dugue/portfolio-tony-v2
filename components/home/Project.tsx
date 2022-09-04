@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef} from "react";
 import tw from "twin.macro";
 import { NAVLINKS, PROJECTS } from '../../constants';
 import { gsap, Power0 } from 'gsap'
@@ -8,18 +8,17 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import ProjectCard from './ProjectCard'
 
 interface Props {
-  isDesktop: boolean
+  isDesktop: boolean,
+  clientHeight: number
 }
 
 const Project: React.FunctionComponent<Props> = (props:Props) => {
 
-  const { isDesktop } = props
+  const { isDesktop, clientHeight } = props
 
 
   const targetSection = useRef<HTMLDivElement>(null);
   const sectionTitle = useRef<HTMLDivElement>(null);
-
-  const [height, setHeight] = useState(0);
 
   const screens = {
     sm: 640,
@@ -32,9 +31,7 @@ const Project: React.FunctionComponent<Props> = (props:Props) => {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    setHeight(window.innerHeight);
-
-    if (isDesktop && targetSection.current) {
+    if (isDesktop && targetSection.current && document.body.clientWidth > 767) {
 
       const timeline = gsap.timeline({ defaults: { ease: Power0.easeNone } });
       const cardWidth = 38;
@@ -58,20 +55,23 @@ const Project: React.FunctionComponent<Props> = (props:Props) => {
         pinSpacing: 'margin'
       });
 
+    } else {
+      //targetSection.current.querySelector('.project-wrapper').classList.add('overflow-y-scroll')
     }
-  }, [targetSection, PROJECTS, sectionTitle, height])
+
+  }, [targetSection, PROJECTS, sectionTitle])
 
   return (
     <Section ref={targetSection} id={NAVLINKS[1].ref}>
 
-      <SectionWrapper className={(height > 650 ? 'big' : 'small')}>
+      <SectionWrapper className={(clientHeight > 650 ? 'big' : 'small')}>
         <Container ref={sectionTitle}>
           <p>PROJETS</p>
           <h1 className="text-gradient">Mes réalisations</h1>
           <h2>Passionné depuis toujours par les nouvelles technologies mais aussi par le design, je conçois et réalise des applications web intuitive et fonctionnelle mais toujours avec une dose de créativité.</h2>
         </Container>
 
-        <ProjectItems>
+        <ProjectItems className="project-wrapper">
           {PROJECTS.map(project => (
             <ProjectCard
               key={project.name}
@@ -125,4 +125,8 @@ const Container = styled.div`
 
 const ProjectItems = styled.div`
   ${tw`flex gap-x-16`}
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `
