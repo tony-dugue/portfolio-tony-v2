@@ -29,7 +29,7 @@ const Quote = () => {
     <Section ref={targetSection}>
       <Container>
         <h1 ref={quoteRef}>
-          Autodidacte, j'aime aussi découvrir de nouveaux langages, frameworks, librairies, ... et travailler sur des  <span className='text-strong'>projets variés</span> dans des domaines différents.</h1>
+          Autodidacte, j'aime aussi découvrir de nouveaux langages, frameworks, librairies, ... et travailler sur des<span className='text-strong'>&nbsp;projets variés</span> dans des domaines différents.</h1>
       </Container>
     </Section>
   )

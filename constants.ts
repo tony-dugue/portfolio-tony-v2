@@ -7,19 +7,19 @@ export const METADATA = {
 export const NAVLINKS = [
   {
     name: 'Accueil',
-    ref: 'home'
+    ref: 'accueil'
   },
   {
     name: 'Projets',
-    ref: 'works'
+    ref: 'projets'
   },
   {
     name: 'Compétences',
-    ref: 'skills'
+    ref: 'competences'
   },
   {
     name: 'Parcours',
-    ref: 'timeline'
+    ref: 'parcours'
   },
   {
     name: 'Contact',
@@ -44,12 +44,12 @@ export const SOCIAL_LINKS = [
 
 export const PROJECTS = [
   {
-    name: 'Airmdrone',
-    image: '/images/projects/airmdrone.png',
-    description: 'Site vitrine pour améliorer la visibilité d\'un pilote de drone professionnel',
-    gradient: ['rgba(15,44,109, 0.5)', 'rgb(15,44,109)'],
-    url: 'https://www.airmdrone.com/',
-    tech: ['html', 'sass', 'javascript', 'gsap']
+    name: 'Firmain',
+    image: '/images/projects/firmain.png',
+    description: 'Plateforme numérique pour gérer avec simplicité les process RH de gestion des formations internes ou externes et des compétences',
+    gradient: ['#172839', '#334659'],
+    url: 'https://app.escaledescompetences.fr/',
+    tech: ['react', 'sass', 'symfony']
   },
   {
     name: 'MotooPlanner',
@@ -60,19 +60,25 @@ export const PROJECTS = [
     tech: ['react', 'sass', 'symfony']
   },
   {
-    name: 'Firmain',
-    image: '/images/projects/firmain.png',
-    description: 'Plateforme numérique pour gérer avec simplicité les process RH de gestion des formations internes ou externes et des compétences',
-    gradient: ['#172839', '#334659'],
-    url: 'https://app.escaledescompetences.fr/',
-    tech: ['react', 'sass', 'symfony']
-  },
-  {
     name: 'Lemona Food Truck',
     image: '/images/projects/lemona.jpg',
     description: 'Site vitrine présentant l\'activité d\'une chaine de Food Truck vintage spécialisé dans les produits à base de Citron.',
     gradient: ["#17007B", "#3A2C79"],
     url: '#',
     tech: ['pug', 'html', 'sass']
-  }
+  },
+  {
+    name: 'Airmdrone',
+    image: '/images/projects/airmdrone.png',
+    description: 'Site vitrine pour améliorer la visibilité d\'un pilote de drone professionnel',
+    gradient: ['rgba(15,44,109, 0.5)', 'rgb(15,44,109)'],
+    url: 'https://www.airmdrone.com/',
+    tech: ['html', 'sass', 'javascript', 'gsap']
+  },
 ]
+
+export const SKILLS = {
+  frontend: ['javascript', 'next', 'react', 'gsap', 'tailwind', 'sass', 'svg', 'html', 'css'],
+  userInterface: ['figma', 'sketch', 'illustrator', 'photoshop'],
+  other: ['git', 'webpack', 'gulp', 'aftereffects']
+}
