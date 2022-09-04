@@ -7,6 +7,7 @@ import Layout from '../components/common/layout/Layout'
 //import Hero from "../components/home/Hero"
 import HeroWithSvg from "../components/home/HeroWithSvg"
 import Project from "../components/home/Project"
+import Quote from "../components/home/Quote"
 import styled from "styled-components";
 import tw from "twin.macro";
 
@@ -16,6 +17,7 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     isDesktop = (typeof window.orientation === 'undefined') && (navigator.userAgent.indexOf('IEMobile') === -1);
+    window.scrollTo({top: 0});
   }, [isDesktop]);
 
   return (
@@ -27,11 +29,11 @@ const Home: NextPage = () => {
       <Layout>
 
         <Main>
+          <Wrapper />
           <HeroWithSvg />
           {/*<Hero />*/}
           <Project isDesktop />
-
-          <div style={{ height: '400vh' }}></div>
+          <Quote />
         </Main>
 
       </Layout>
@@ -43,4 +45,9 @@ export default Home
 
 const Main = styled.main`
   ${tw`flex-col flex gap-y-28`}
+`
+
+const Wrapper = styled.div`
+  background: ${props => props.theme.colorBackground};
+  ${tw`fixed top-0 left-0 h-screen w-screen -z-1`}
 `

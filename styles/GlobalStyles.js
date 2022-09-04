@@ -223,7 +223,6 @@ const GlobalStyles = createGlobalStyle`
     letter-spacing: .05em;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: #fafafa;
     position: relative;
     overflow-x: hidden;
   }
