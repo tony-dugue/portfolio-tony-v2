@@ -20,7 +20,7 @@ const SquareButton: React.FunctionComponent<Props> = (props:Props) => {
       href={href}
       target={newTab ? '_blank' : ''}
       rel={newTab ? 'noreferrer' : ''}
-      className={(type === 'primary' ? 'primary' : 'outline')}
+      className={(type === 'primary' ? 'primary' : type === 'white' ? 'white' : 'outline')}
     >
       {name}
     </ButtonLink>
@@ -54,6 +54,14 @@ const ButtonLink = styled.a`
       color: white;
       background: ${props => props.theme.colorPrimary};
       border: 2px solid ${props => props.theme.colorPrimary};
+    }
+  }
+  
+  &.white {
+    ${tw`bg-white text-gray-900`}
+
+    &:hover {
+      ${tw`opacity-90`}
     }
   }
 `

@@ -99,11 +99,6 @@ const SocialContainer = styled.div`
 
 const SocialLink = styled.a`
   ${tw`hover:opacity-80 duration-300`}
-  
-    path {
-      fill: red;
-    }
-  
 `
 
 const Cta = styled.div`

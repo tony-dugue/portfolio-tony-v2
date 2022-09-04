@@ -92,7 +92,7 @@ const Section = styled.section`
 `
 
 const SectionWrapper = styled.div`
-  ${tw`flex-col flex 2xl:container py-8 mx-auto xl:px-20 md:px-12 px-4 justify-center`}
+  ${tw`flex-col flex 2xl:container py-8 mx-auto xl:px-20 md:px-12 px-4 justify-center h-full`}
   
   &.big {
     ${tw`gap-y-20`}

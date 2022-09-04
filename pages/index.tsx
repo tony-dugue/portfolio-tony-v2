@@ -13,6 +13,7 @@ import Project from "../components/home/Project"
 import Quote from "../components/home/Quote"
 import Skill from "../components/home/Skill"
 import Collaboration from "../components/home/Collaboration";
+import Footer from '../components/common/footer/Footer'
 
 const Home: NextPage = () => {
 
@@ -21,7 +22,7 @@ const Home: NextPage = () => {
   useEffect(() => {
     isDesktop = (typeof window.orientation === 'undefined') && (navigator.userAgent.indexOf('IEMobile') === -1);
     window.scrollTo({top: 0});
-    setTimeout(() => window.scrollTo({ top: 0 }), 0);
+    window.history.scrollRestoration = 'manual'
   }, [isDesktop]);
 
   return (
@@ -40,6 +41,7 @@ const Home: NextPage = () => {
           <Quote />
           <Skill />
           <Collaboration />
+          <Footer />
         </Main>
 
       </Layout>
