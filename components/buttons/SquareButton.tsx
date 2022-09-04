@@ -30,7 +30,7 @@ const SquareButton: React.FunctionComponent<Props> = (props:Props) => {
 export default SquareButton;
 
 const ButtonLink = styled.a`
-  ${tw`py-2 px-7 font-medium rounded text-xl tracking-wide duration-300 flex items-center`}
+  ${tw`py-2 px-7 font-medium rounded text-base md:text-xl tracking-wide duration-300 flex items-center`}
   
   &.primary {
     color: white;

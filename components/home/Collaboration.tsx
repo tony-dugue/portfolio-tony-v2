@@ -47,7 +47,7 @@ const Collaboration = () => {
           {Array(5).fill(" React Next JavaScript Nest Sass ").reduce((str, el) => str.concat(el), '')}
         </p>
 
-        <h1 ref={quoteRef}>Intéressé par une<span className='text-strong'>&nbsp;collaboration</span>?</h1>
+        <h1 ref={quoteRef}>Intéressé par une<span className='text-strong'>&nbsp;collaboration</span> ?</h1>
 
         <p className='ui-right'>
           {Array(5).fill(' Développement frontend backend fullStack Design UI ').reduce((str, el) => str.concat(el), '')}
@@ -69,11 +69,11 @@ const Container = styled.div`
   ${tw`2xl:container py-48 mx-auto xl:px-20 md:px-12 px-4 flex flex-col gap-y-8`}
   
   .ui-left {
-    ${tw`opacity-20 tracking-wide text-7xl font-bold whitespace-nowrap `}
+    ${tw`opacity-20 text-7xl font-bold whitespace-nowrap `}
   }
   
   h1 {
-    ${tw`font-medium tracking-wide text-5xl text-center font-bold`}
+    ${tw`font-medium text-5xl text-center font-bold`}
 
     .text-strong {
       background: linear-gradient(
@@ -90,6 +90,6 @@ const Container = styled.div`
   }
   
   .ui-right {
-    ${tw`opacity-20 tracking-wide text-7xl font-bold whitespace-nowrap `}
+    ${tw`opacity-20 text-7xl font-bold whitespace-nowrap `}
   }
 `

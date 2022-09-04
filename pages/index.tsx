@@ -1,5 +1,5 @@
+import {useEffect, useState} from "react";
 import type { NextPage } from 'next'
-import {useEffect} from "react";
 import Head from 'next/head'
 import { METADATA } from "../constants";
 
@@ -17,12 +17,12 @@ import Footer from '../components/common/footer/Footer'
 
 const Home: NextPage = () => {
 
-  let isDesktop;
+  const [isDesktop, setisDesktop] = useState(true);
 
   useEffect(() => {
-    isDesktop = (typeof window.orientation === 'undefined') && (navigator.userAgent.indexOf('IEMobile') === -1);
-    window.scrollTo({top: 0});
-    window.history.scrollRestoration = 'manual'
+    const result = (typeof window.orientation === 'undefined') && (navigator.userAgent.indexOf('IEMobile') === -1);
+    window.history.scrollRestoration = 'manual';
+    setisDesktop(result);
   }, [isDesktop]);
 
   return (

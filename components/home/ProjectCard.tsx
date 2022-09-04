@@ -74,9 +74,16 @@ const ProjectCardWrapper = styled.div`
   }
   
   .project-img-second {
-    width: 16.8rem;
+    width: 16.8rem !important;
     transform: rotate(-22.5deg) translateZ(1.875rem);
-    ${tw`absolute top-0 right-8 rounded-xl shadow-xl z-0`}
+    height: unset !important;
+    min-width: unset !important;
+    max-height: unset !important;
+    object-fit: contain !important;
+    left: unset !important;
+    right: 2rem !important;
+    bottom: unset !important;
+    ${tw`absolute top-0 rounded-xl shadow-xl z-0`}
   }
 
   .tech-icons {

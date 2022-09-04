@@ -51,4 +51,4 @@ const ListContainer = styled.ul`${tw`list-none py-4 px-0 m-0 block max-h-screen`
 
 const NavItem = styled.li`${tw`p-0 m-6 text-2xl block`}`
 
-const NavLink = styled.a`${tw`relative inline font-bold tracking-wider text-2xl md:text-5xl duration-300 hover:no-underline hover:opacity-80`}`
+const NavLink = styled.a`${tw`relative inline font-bold text-2xl md:text-5xl duration-300 hover:no-underline hover:opacity-80`}`

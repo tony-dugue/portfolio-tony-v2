@@ -81,10 +81,10 @@ const Container = styled.div`
   }
   
   p, span {
-    ${tw`text-4xl`};
+    ${tw`text-xl sm:text-2xl md:text-4xl`};
 
     @media screen and (max-width: 768px) {
-      ${tw`text-2xl text-center`};
+      ${tw`text-center`};
     }
   }
 

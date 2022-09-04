@@ -196,6 +196,22 @@ const GlobalStyles = createGlobalStyle`
     -ms-overflow-style: scrollbar;
     scrollbar-color: black;
     scrollbar-width: thin;
+
+    @media (min-width: 768px) {
+      font-size: 14px;
+    }
+    @media (min-width: 1024px) {
+      font-size: 15px;
+    }
+    @media (min-width: 1536px) {
+      font-size: 18px;
+    }
+    @media (min-width: 1800px) {
+      font-size: 20px;
+    }
+    @media (min-width: 2000px) {
+      font-size: 22px;
+    }
   }
 
   ::-webkit-scrollbar {

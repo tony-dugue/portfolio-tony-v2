@@ -115,8 +115,7 @@ const Container = styled.div`
   }
 
   h2 {
-    width: 1000px;
-    ${tw`text-2xl`};
+    ${tw`text-2xl md:max-w-3xl w-full`};
 
     @media screen and (max-width: 768px) {
       width: 80%;

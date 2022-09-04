@@ -51,16 +51,16 @@ const Container = styled.div`
   ${tw`2xl:container mx-auto xl:px-20 md:px-12 px-4 flex-col flex h-full justify-end gap-y-8 z-10 items-center py-12`}
   
   h1 {
-    ${tw`font-medium tracking-wide text-4xl text-center`}
+    ${tw`font-medium text-3xl md:text-4xl text-center`}
   }
   
   p {
-    ${tw`text-center`}
+    ${tw`text-center text-sm sm:text-base`}
   }
 `
 
 const SocialContainer = styled.div`
-  ${tw`flex gap-4`}
+  ${tw`flex md:gap-4 sm:gap-3 gap-2`}
 `
 
 const SocialLink = styled.a`
