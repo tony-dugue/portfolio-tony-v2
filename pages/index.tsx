@@ -12,6 +12,7 @@ import HeroWithSvg from "../components/home/HeroWithSvg"
 import Project from "../components/home/Project"
 import Quote from "../components/home/Quote"
 import Skill from "../components/home/Skill"
+import Timeline from "../components/home/Timeline"
 import Collaboration from "../components/home/Collaboration";
 import Footer from '../components/common/footer/Footer'
 
@@ -43,6 +44,7 @@ const Home: NextPage = () => {
           <Project clientHeight={clientHeight} isDesktop={isDesktop} />
           <Quote clientHeight={clientHeight} />
           <Skill />
+          <Timeline />
           <Collaboration clientHeight={clientHeight} />
           <Footer />
         </Main>

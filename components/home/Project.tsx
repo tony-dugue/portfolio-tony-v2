@@ -21,9 +21,6 @@ const Project: React.FunctionComponent<Props> = (props:Props) => {
 
   useEffect(() => {
 
-
-
-
       const timeline = gsap.timeline({ defaults: { ease: Linear.easeNone } });
       const sidePadding = document.body.clientWidth - targetSection.current!.querySelector('.inner-container')!.clientWidth;
       const elementWidth = sidePadding + targetSection.current!.querySelector('.project-wrapper')!.clientWidth;
@@ -55,11 +52,11 @@ const Project: React.FunctionComponent<Props> = (props:Props) => {
       <SectionWrapper className={(clientHeight > 650 ? 'big' : 'small')}>
         <Container ref={sectionTitle} className="inner-container">
           <p>PROJETS</p>
-          <h1 className="text-gradient">Mes réalisations</h1>
+          <h1 className="text-gradient w-fit">Mes réalisations</h1>
           <h2>Passionné depuis toujours par les nouvelles technologies mais aussi par le design, je conçois et réalise des applications web intuitive et fonctionnelle mais toujours avec une dose de créativité.</h2>
         </Container>
 
-        <ProjectItems className="project-wrapper w-fit">
+        <ProjectItems className="project-wrapper">
           {PROJECTS.map(project => (
             <ProjectCard
               key={project.name}
@@ -119,12 +116,9 @@ const Container = styled.div`
 
 const ProjectItems = styled.div`
   width: fit-content;
-  ${tw`flex gap-x-16`}
+  ${tw`flex gap-x-16 w-fit`}
   
   &::-webkit-scrollbar {
     display: none;
-  }
-  .w-fit {
-    width: fit-content;
   }
 `

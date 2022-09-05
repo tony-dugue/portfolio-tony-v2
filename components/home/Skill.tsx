@@ -82,7 +82,7 @@ const Container = styled.div`
   ${tw`2xl:container mx-auto py-8 xl:px-20 md:px-12 px-4 flex flex-col justify-center gap-y-10`}
   
   .pattern-left {
-    ${tw`absolute left-0 -bottom-1/4 w-1/12 max-w-xs md:block hidden`}
+    ${tw`absolute left-0 -bottom-16 w-1/12 max-w-xs md:block hidden`}
   }
   .pattern-right {
     ${tw`absolute right-0 -bottom-1/3 w-1/5 max-w-xs md:block hidden`}
@@ -98,7 +98,7 @@ const SkillIntro = styled.div`
   } 
   
   h1 {
-    ${tw`text-5xl font-bold`}
+    ${tw`text-5xl font-bold w-fit`}
   }
   
   h2 {
