@@ -1,7 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyles = createGlobalStyle`
-
   @tailwind base;
   @tailwind components;
   @tailwind utilities;
@@ -17,7 +16,6 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 300;
     font-style: italic;
   }
-
   @font-face {
     font-family: 'DIN 2014';
     src: url('/fonts/DIN2014-Light.eot');
@@ -29,7 +27,6 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 300;
     font-style: normal;
   }
-
   @font-face {
     font-family: 'DIN 2014';
     src: url('/fonts/DIN2014-ExtraBoldItalic.eot');
@@ -41,7 +38,6 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 800;
     font-style: italic;
   }
-
   @font-face {
     font-family: 'DIN 2014';
     src: url('/fonts/DIN2014-ExtraLight.eot');
@@ -53,7 +49,6 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 200;
     font-style: normal;
   }
-
   @font-face {
     font-family: 'DIN 2014';
     src: url('/fonts/DIN2014-ExtraBold.eot');
@@ -65,7 +60,6 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 800;
     font-style: normal;
   }
-
   @font-face {
     font-family: 'DIN 2014';
     src: url('/fonts/DIN2014-ExtraLightItalic.eot');
@@ -77,7 +71,6 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 200;
     font-style: italic;
   }
-
   @font-face {
     font-family: 'DIN 2014';
     src: url('/fonts/DIN2014-Regular.eot');
@@ -89,7 +82,6 @@ const GlobalStyles = createGlobalStyle`
     font-weight: normal;
     font-style: normal;
   }
-
   @font-face {
     font-family: 'DIN 2014';
     src: url('/fonts/DIN2014-Italic.eot');
@@ -101,7 +93,6 @@ const GlobalStyles = createGlobalStyle`
     font-weight: normal;
     font-style: italic;
   }
-
   @font-face {
     font-family: 'DIN 2014';
     src: url('/fonts/DIN2014-Bold.eot');
@@ -113,7 +104,6 @@ const GlobalStyles = createGlobalStyle`
     font-weight: bold;
     font-style: normal;
   }
-
   @font-face {
     font-family: 'DIN 2014';
     src: url('/fonts/DIN2014-BoldItalic.eot');
@@ -125,7 +115,6 @@ const GlobalStyles = createGlobalStyle`
     font-weight: bold;
     font-style: italic;
   }
-
   @font-face {
     font-family: 'DIN 2014';
     src: url('/fonts/DIN2014-DemiBoldItalic.eot');
@@ -137,7 +126,6 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 600;
     font-style: italic;
   }
-
   @font-face {
     font-family: 'DIN 2014';
     src: url('/fonts/DIN2014-DemiBold.eot');
@@ -149,7 +137,6 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 600;
     font-style: normal;
   }
-
   @font-face {
     font-family: 'Latinka';
     src: url('/fonts/Latinka-ExtraBold.eot');
@@ -161,7 +148,6 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 700;
     font-style: normal;
   }
-
   @font-face {
     font-family: 'Latinka';
     src: url('/fonts/Latinka-Regular.eot');
@@ -173,7 +159,6 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 600;
     font-style: normal;
   }
-
   *, *::before, *::after {
     margin: 0;
     padding: 0;
@@ -197,7 +182,7 @@ const GlobalStyles = createGlobalStyle`
     scrollbar-color: black;
     scrollbar-width: thin;
     overflow-x: hidden;
-
+    
     @media (min-width: 768px) {
       font-size: 14px;
     }
@@ -214,7 +199,6 @@ const GlobalStyles = createGlobalStyle`
       font-size: 22px;
     }
   }
-
   ::-webkit-scrollbar {
     width: 0.375rem;
   }
@@ -226,7 +210,6 @@ const GlobalStyles = createGlobalStyle`
     //background: rgb(170, 170, 170);
     background: #0f3b56;
   }
-
   ::-moz-selection,
   ::selection {
     color: white;
@@ -257,7 +240,6 @@ const GlobalStyles = createGlobalStyle`
       color:inherit;
     }
   }
-
   a,
   input[type="checkbox"] {
     cursor: none !important;
@@ -271,26 +253,6 @@ const GlobalStyles = createGlobalStyle`
   ul {
     list-style: none;
     padding: 0;
-
-    //li {
-    //  a {
-    //    background: linear-gradient(
-    //            90deg,
-    //            #ffffff 0%,
-    //            #ffffff 50%,
-    //            #6dd5ed 51%,
-    //            #2193b0 100%
-    //    );
-    //    background-size: 200% 100%;
-    //    -webkit-background-clip: text;
-    //    -webkit-text-fill-color: transparent;
-    //
-    //
-    //    &:hover {
-    //      background-position: 100% 0;
-    //    }
-    //  }
-    //}
   }
   
   img {
@@ -317,7 +279,6 @@ const GlobalStyles = createGlobalStyle`
     padding: 4px 5px;
     border-radius: 6px;
   }
-
   .text-gradient {
     background: linear-gradient(90deg, #0f3b56 0%, #2193b0 100%);
     -webkit-background-clip: text;

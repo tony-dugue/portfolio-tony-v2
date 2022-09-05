@@ -1,22 +1,48 @@
+import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { NAVLINKS, SKILLS } from '../../constants';
 import styled from "styled-components";
 import tw from "twin.macro";
 
+import { gsap, Linear } from 'gsap'
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+
 const Skills = () => {
+
+  const targetSection = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+
+    const revealTl = gsap.timeline({ defaults: { ease: Linear.easeNone } });
+    revealTl
+      .from(targetSection.current!.querySelectorAll('.seq'), { opacity: 0, duration: 0.5, stagger: 0.5 }, '<');
+
+    ScrollTrigger.create({
+      trigger: targetSection.current,
+      start: 'top bottom',
+      end: 'bottom bottom',
+      animation: revealTl,
+      onEnter: (e) => revealTl.restart()
+    });
+
+  }, [targetSection])
+
   return (
-    <Section id={NAVLINKS[2].ref}>
+    <Section id={NAVLINKS[2].ref} ref={targetSection}>
       <Container>
 
+        <img src='/svgs/pattern-right.svg' className='pattern-right' loading='lazy' height={700} width={320} />
+        <img src='/svgs/pattern-left.svg' className='pattern-left' loading='lazy' height={335} width={140} />
+
         <SkillIntro>
-          <p>Compétences</p>
-          <h1 className="text-gradient">Mes compétences</h1>
-          <h2>J'aime concevoir et créer des expériences utilisateur optimisées en utilisant une architecture front moderne. </h2>
+          <p className="seq">Compétences</p>
+          <h1 className="text-gradient seq">Mes compétences</h1>
+          <h2 className="seq">J'aime concevoir et créer des expériences utilisateur optimisées en utilisant une architecture front moderne. </h2>
         </SkillIntro>
 
         <SkillItems>
-          <h3>Développement Frontend</h3>
-          <div>
+          <h3 className="seq">Développement Frontend</h3>
+          <div className="seq">
             {SKILLS.frontend.map(skill => (
               <Image key={skill} src={`/svgs/skills/${skill}.svg`} alt={skill} width={60} height={60} />
             ))}
@@ -24,8 +50,8 @@ const Skills = () => {
         </SkillItems>
 
         <SkillItems>
-          <h3>Interface utilisateur, Design d'expérience utilisateur</h3>
-          <div>
+          <h3 className="seq">Interface utilisateur, Design d'expérience utilisateur</h3>
+          <div className="seq">
             {SKILLS.userInterface.map(skill => (
               <Image key={skill} src={`/svgs/skills/${skill}.svg`} alt={skill} width={60} height={60} />
             ))}
@@ -33,8 +59,8 @@ const Skills = () => {
         </SkillItems>
 
         <SkillItems>
-          <h3>Autres compétences</h3>
-          <div>
+          <h3 className="seq">Autres compétences</h3>
+          <div className="seq">
             {SKILLS.other.map(skill => (
               <Image key={skill} src={`/svgs/skills/${skill}.svg`} alt={skill} width={60} height={60} />
             ))}
@@ -49,11 +75,18 @@ const Skills = () => {
 export default Skills;
 
 const Section = styled.section`
-  ${tw`w-full relative select-none min-h-screen 2xl:container mx-auto py-8  xl:px-20 md:px-12 px-4`}
+  ${tw`w-full relative select-none min-h-screen`}
 `
 
 const Container = styled.div`
-  ${tw`flex flex-col justify-center gap-y-8`}
+  ${tw`2xl:container mx-auto py-8 xl:px-20 md:px-12 px-4 flex flex-col justify-center gap-y-10`}
+  
+  .pattern-left {
+    ${tw`absolute left-0 -bottom-1/4 w-1/12 max-w-xs md:block hidden`}
+  }
+  .pattern-right {
+    ${tw`absolute right-0 -bottom-1/3 w-1/5 max-w-xs md:block hidden`}
+  }
 `
 
 const SkillIntro = styled.div`

@@ -33,5 +33,7 @@ const ProgressBar = styled.div`
   ${tw`w-full`}
   height: 0.2rem;
   transform-origin: left;
+  will-change: transform;
+  transform: scaleX(0);
   background-color: ${props => props.theme.colorPrimary};
 `

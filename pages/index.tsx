@@ -18,13 +18,13 @@ import Footer from '../components/common/footer/Footer'
 const Home: NextPage = () => {
 
   const [isDesktop, setIsDesktop] = useState(true);
-  const [clientHeight, setHeight] = useState(0);
+  const [clientHeight, setClientHeight] = useState(0);
 
   useEffect(() => {
     const result = (typeof window.orientation === 'undefined') && (navigator.userAgent.indexOf('IEMobile') === -1);
     window.history.scrollRestoration = 'manual';
     setIsDesktop(result);
-    setHeight(window.innerHeight);
+    setClientHeight(window.innerHeight);
 
   }, [isDesktop, clientHeight]);
 
@@ -40,7 +40,7 @@ const Home: NextPage = () => {
           <Wrapper />
           <HeroWithSvg />
           {/*<Hero />*/}
-          <Project isDesktop={isDesktop} clientHeight={clientHeight} />
+          <Project clientHeight={clientHeight} isDesktop={isDesktop} />
           <Quote clientHeight={clientHeight} />
           <Skill />
           <Collaboration clientHeight={clientHeight} />

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import React, {useEffect, useRef} from "react";
 import tw from "twin.macro";
 import { NAVLINKS, PROJECTS } from '../../constants';
-import { gsap, Power0 } from 'gsap'
+import { gsap, Linear } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
 import ProjectCard from './ProjectCard'
@@ -16,21 +16,21 @@ const Project: React.FunctionComponent<Props> = (props:Props) => {
 
   const { isDesktop, clientHeight } = props
 
-
   const targetSection = useRef<HTMLDivElement>(null);
   const sectionTitle = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
 
-    if (isDesktop && targetSection.current && document.body.clientWidth > 767) {
 
-      const timeline = gsap.timeline({ defaults: { ease: Power0.easeNone } });
-      const sidePadding = document.body.clientWidth - targetSection.current.querySelector('.inner-container')!.clientWidth;
-      const elementWidth = sidePadding + targetSection.current.querySelector('.project-wrapper')!.clientWidth;
-      targetSection.current.style.width = `${elementWidth}px`;
+
+
+      const timeline = gsap.timeline({ defaults: { ease: Linear.easeNone } });
+      const sidePadding = document.body.clientWidth - targetSection.current!.querySelector('.inner-container')!.clientWidth;
+      const elementWidth = sidePadding + targetSection.current!.querySelector('.project-wrapper')!.clientWidth;
+      targetSection.current!.style.width = `${elementWidth}px`;
       const width = window.innerWidth - elementWidth;
       const duration = `${(elementWidth / window.innerHeight * 100)}%`;
+
       timeline
         .to(targetSection.current, { x: width })
         .to(sectionTitle.current, { x: -width }, '<');
@@ -45,9 +45,7 @@ const Project: React.FunctionComponent<Props> = (props:Props) => {
         pinSpacing: 'margin'
       });
 
-    } else {
-      targetSection.current!.querySelector('.project-wrapper')!.classList.add('overflow-y-scroll')
-    }
+
 
   }, [targetSection, PROJECTS, sectionTitle])
 
@@ -61,7 +59,7 @@ const Project: React.FunctionComponent<Props> = (props:Props) => {
           <h2>Passionné depuis toujours par les nouvelles technologies mais aussi par le design, je conçois et réalise des applications web intuitive et fonctionnelle mais toujours avec une dose de créativité.</h2>
         </Container>
 
-        <ProjectItems className="project-wrapper">
+        <ProjectItems className="project-wrapper w-fit">
           {PROJECTS.map(project => (
             <ProjectCard
               key={project.name}
@@ -78,7 +76,7 @@ const Project: React.FunctionComponent<Props> = (props:Props) => {
 export default Project;
 
 const Section = styled.section`
-  ${tw`w-full min-h-screen relative select-none 2xl:container mx-auto`}
+  ${tw`w-full min-h-screen relative select-none 2xl:container mx-auto transform-gpu`}
 `
 
 const SectionWrapper = styled.div`
@@ -93,7 +91,7 @@ const SectionWrapper = styled.div`
 `
 
 const Container = styled.div`
-  ${tw`flex flex-col gap-2`}
+  ${tw`flex flex-col  transform-gpu`}
   
   p {
     color: ${props => props.theme.colorPrimary};
@@ -101,23 +99,32 @@ const Container = styled.div`
   }
   
   h1 {
-    ${tw`text-5xl font-bold mb-2`}
-  }
-
-  h2 {
-    ${tw`text-2xl md:max-w-3xl w-full`};
+    ${tw`text-5xl font-bold mb-2`};
 
     @media screen and (max-width: 768px) {
-      width: 80%;
+      font-size: 2rem;
+    }
   }
+  h2 {
+    ${tw`text-2xl w-full`};
+    width: 50vw;
+    
+    @media screen and (max-width: 768px) {
+      font-size: 1.2rem;
+      width: 80vw;
+      line-height: 1.3em;
+    }
   }
 `
 
 const ProjectItems = styled.div`
   width: fit-content;
   ${tw`flex gap-x-16`}
-
+  
   &::-webkit-scrollbar {
     display: none;
+  }
+  .w-fit {
+    width: fit-content;
   }
 `

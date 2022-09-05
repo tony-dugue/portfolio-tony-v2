@@ -2,6 +2,9 @@ import { useEffect, useRef } from "react";
 import {SOCIAL_LINKS, EMAIL, TYPED_STRINGS, NAVLINKS} from "../../constants";
 import Typed from 'typed.js';
 
+import { gsap, Linear } from 'gsap'
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+
 import styled from "styled-components";
 import tw from "twin.macro";
 
@@ -9,7 +12,10 @@ import SquareButton from "../buttons/SquareButton"
 
 const HeroWithSvg = () => {
 
+  gsap.registerPlugin(ScrollTrigger);
+
   const typedElRef = useRef<HTMLDivElement>(null);
+  const targetSectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const typed = new Typed(typedElRef.current as Element, {
@@ -20,23 +26,28 @@ const HeroWithSvg = () => {
       loop: true
     });
 
+    const revealTl = gsap.timeline({ defaults: { ease: Linear.easeNone } });
+    revealTl
+      .to(targetSectionRef.current, { opacity: 1, duration: 2 })
+      .from(targetSectionRef.current!.querySelectorAll('.seq'), { opacity: 0, duration: 0.5, stagger: 0.5 }, '<');
+
     return () => typed.destroy();
-  }, [typedElRef]);
+  }, [typedElRef, targetSectionRef]);
 
   return (
-    <Section id={NAVLINKS[0].ref}>
+    <Section id={NAVLINKS[0].ref} ref={targetSectionRef}>
       <Container>
 
         <div>
-          <p>Hello 👋🏻</p>
-          <h1>Je suis Tony Dugué</h1>
+          <p className="seq">Hello 👋🏻</p>
+          <h1 className="seq">Je suis Tony Dugué</h1>
         </div>
 
         <p>
-          <span ref={typedElRef}></span>
+          <span ref={typedElRef} className="seq"></span>
         </p>
 
-        <SocialContainer>
+        <SocialContainer className="seq">
           {SOCIAL_LINKS.map(link => (
             <SocialLink href={link.url} className="link" key={link.name} rel='noreferrer' target='_blank'>
               <img src={`/svgs/social/${link.name}.svg`} alt={link.name} width={40} height={40} />
@@ -44,14 +55,14 @@ const HeroWithSvg = () => {
           ))}
         </SocialContainer>
 
-        <Cta>
+        <Cta className="seq">
           <SquareButton type='outline' name='Resume' newTab={true} href='/tony-dugue-cv.pdf'></SquareButton>
           <SquareButton type='primary' newTab={false} name='Contact' href={'mailto:'+EMAIL}></SquareButton>
         </Cta>
 
       </Container>
 
-      <ImageCtr>
+      <ImageCtr className="hero-bg">
         <img src='/svgs/illustration-bg.svg' alt='Illustration' width={1021} height={650} />
       </ImageCtr>
 
@@ -62,6 +73,7 @@ const HeroWithSvg = () => {
 export default HeroWithSvg;
 
 const Section = styled.div`
+  opacity: 0;
   ${tw`w-full flex md:items-center py-8 2xl:container mx-auto xl:px-20 md:px-12 px-4 min-h-screen relative`};
 
   @media screen and (max-width: 768px) {
@@ -98,7 +110,7 @@ const Container = styled.div`
 `
 
 const SocialContainer = styled.div`
-  ${tw`flex gap-4`}
+  ${tw`flex md:gap-4 sm:gap-3 gap-2`}
 `
 
 const SocialLink = styled.a`
@@ -110,6 +122,6 @@ const Cta = styled.div`
 `
 
 const ImageCtr = styled.div`
-  ${tw`absolute right-0 bottom-0 -z-1 md:w-3/4 w-full`};
+  ${tw`absolute right-0 bottom-0 -z-1 md:w-3/4 w-full scale-125 sm:scale-100 transform-gpu`};
 }
 `

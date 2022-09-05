@@ -2,8 +2,8 @@ import React from "react";
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import { METADATA } from '../../../constants'
-import { AnimatePresence } from 'framer-motion'
 
+// @ts-ignore
 const Cursor = dynamic(() => import("../elements/Cursor"), { ssr: false })
 const ProgressIndicator = dynamic(() => import("../elements/ProgressIndicator"), { ssr: false })
 
@@ -37,17 +37,15 @@ const Layout: React.FunctionComponent<Props> = (props:Props) => {
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
       </Head>
 
-      <AnimatePresence>
+      <Header>
+        <NavigationMenu />
+      </Header>
 
-        <Header>
-          <NavigationMenu />
-        </Header>
+      <ProgressIndicator />
+      <Cursor isDesktop={props.isDesktop} />
 
-        <ProgressIndicator />
-        <Cursor isDesktop={props.isDesktop} />
+      {props.children}
 
-        {props.children}
-      </AnimatePresence>
     </>
   )
 }

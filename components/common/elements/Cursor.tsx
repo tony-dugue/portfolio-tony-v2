@@ -6,7 +6,7 @@ interface Props {
   isDesktop: React.ReactNode
 }
 
-const Cursor: (props: Props) => "" | 0 | null | undefined | false | JSX.Element = (props:Props) => {
+const Cursor = (props:Props) => {
 
   const { isDesktop } = props
 

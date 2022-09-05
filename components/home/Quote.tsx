@@ -51,7 +51,7 @@ const Container = styled.div`
   ${tw`2xl:container py-60 mx-auto xl:px-20 md:px-12 px-4`}
   
   h1 {
-    ${tw`font-medium text-4xl md:text-5xl text-center`}
+    ${tw`font-medium text-3xl md:text-5xl text-center`}
 
     .text-strong {
       font-weight: bold;

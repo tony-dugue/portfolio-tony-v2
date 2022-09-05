@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <FooterSection id={NAVLINKS[4].ref}>
 
-      <FooterImg src="/svgs/footer-curve.svg" alt="Footer" className='w-full' />
+      <FooterImg src="/svgs/footer-curve.svg" alt="Footer" className='w-full' loading='lazy' height={290} width={1440} />
 
       <Wrapper>
         <Container>

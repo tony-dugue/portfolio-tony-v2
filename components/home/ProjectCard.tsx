@@ -23,7 +23,8 @@ const ProjectCard: React.FunctionComponent<Props> = (props:Props) => {
       max: 5,
       speed: 400,
       glare: true,
-      'max-glare': 0.2
+      'max-glare': 0.2,
+      gyroscope: false
     });
   }, [projectCard]);
 
@@ -58,7 +59,9 @@ const ProjectCard: React.FunctionComponent<Props> = (props:Props) => {
 export default ProjectCard;
 
 const ProjectCardLink = styled.a`
-  ${tw`max-w-full overflow-hidden rounded-3xl`}
+  max-width: calc(100vw - 2rem);
+  flex: 1 0 auto;
+  ${tw`overflow-hidden rounded-3xl`}
 `
 
 const ProjectCardWrapper = styled.div`
@@ -67,6 +70,7 @@ const ProjectCardWrapper = styled.div`
   background: black;
   transform-style: preserve-3d;
   transform: perspective(1000px);
+
   ${tw`rounded-3xl relative p-6 flex-col flex justify-between`};
 
   @media screen and (max-width: 768px) {
@@ -96,6 +100,7 @@ const ProjectCardWrapper = styled.div`
 
   .tech-icons {
     transform: rotate(-22.5deg) translateZ(2rem);
+
     ${tw`w-1/2 h-full absolute left-24 top-0 sm:flex items-center hidden`}
     
     &-item {
@@ -117,12 +122,12 @@ const ProjectCardWrapper = styled.div`
   
   .tech-name {
     transform: translateZ(3rem);
-    ${tw`text-3xl sm:text-4xl z-10 pl-2`}
+    ${tw`text-3xl sm:text-4xl z-10 pl-2 transform-gpu`}
   }
   
   .tech-desc {
     color: ${props => props.theme.colorWhite};
     transform: translateZ(0.8rem);
-    ${tw`text-xl z-10 tracking-wide font-medium`}
+    ${tw`text-xl z-10 tracking-wide font-medium transform-gpu`}
   }
 `
