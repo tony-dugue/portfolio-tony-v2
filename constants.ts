@@ -91,9 +91,9 @@ export const TIMELINE: TimelineNode[] = [
   },
   {
     content: {
-      title: 'UI Engineer (freelance)',
-      description: 'Building solutions for employee engagement, productivity and performance 🎯',
-      logo: 'huminos'
+      title: 'title ...',
+      description: 'Description ...',
+      logo: ''
     },
     branch: 2,
     type: 'checkpoint',
@@ -101,9 +101,9 @@ export const TIMELINE: TimelineNode[] = [
   },
   {
     content: {
-      title: 'Motion Graphics (freelance)',
-      description: 'Motion Graphics content for Product Launch 🚀',
-      logo: 'octanner'
+      title: 'title ...',
+      description: 'Description ...',
+      logo: ''
     },
     branch: 2,
     type: 'checkpoint',
@@ -116,31 +116,30 @@ export const TIMELINE: TimelineNode[] = [
   },
   {
     content: {
-      title: 'UI Engineer',
-      description: 'Working on enterprise blockchain solutions for web. Transforming UI/UX and frontend framework. Building a design system.',
-      logo: 'dltlabs'
+      title: 'title ...',
+      description: 'Description ...',
+      logo: ''
     },
     branch: 1,
     type: 'checkpoint'
   },
   {
     content: {
-      title: 'UX Engineer (freelance)',
-      description: 'Product design and development for employee engagement chatbot suite for workplace by facebook',
-      logo: 'huminos'
+      title: 'title ...',
+      description: 'Description ...',
+      logo: ''
     },
     branch: 1,
     type: 'checkpoint'
   },
   {
     content: {
-      title: 'Graduated from College 🎓',
-      description: 'Spent 4 years laying the foundation of Frontend Engineering, UI/UX, and Fitness!',
-      logo: 'akgec'
+      title: 'title ...',
+      description: 'Description ...',
+      logo: ''
     },
     branch: 1,
-    type: 'checkpoint',
-    diverge: true
+    type: 'checkpoint'
   },
   {
     content: '2018',
@@ -149,20 +148,22 @@ export const TIMELINE: TimelineNode[] = [
   },
   {
     content: {
-      title: 'Student lead at SDC-SI',
-      description: 'Represented a team of 39 talented developers. Served different roles of leadership, project management and delivery.',
-      logo: 'si'
+      title: 'title ...',
+      description: 'Description ...',
+      logo: ''
     },
     branch: 1,
-    type: 'checkpoint'
+    type: 'checkpoint',
+    diverge: true
   },
   {
     content: {
-      title: 'Lecture on SVG animations',
-      description: 'Guided 200 students to create their first animated SVG using CSS/SMIL at PHP Workshop, SDC-SI'
+      title: 'title ...',
+      description: 'Description ...',
     },
     branch: 1,
-    type: 'checkpoint'
+    type: 'checkpoint',
+    parallel: 2
   },
   {
     content: '2017',
@@ -171,35 +172,39 @@ export const TIMELINE: TimelineNode[] = [
   },
   {
     content: {
-      title: '1st position in Web Designing, IMSU',
-      description: 'Competed against 20+ teams for design and development of web project from scratch'
+      title: 'title ...',
+      description: 'Description ...',
     },
     branch: 2,
-    type: 'checkpoint'
+    type: 'checkpoint',
+    parallel: 1
   },
   {
     content: {
-      title: 'Lecture on Javascript',
-      description: 'Guided 200 students for javascript fundamentals at Game Development workshop, SDC-SI'
+      title: 'title ...',
+      description: 'Description ...',
     },
     branch: 1,
-    type: 'checkpoint'
+    type: 'checkpoint',
+    parallel: 2
   },
   {
     content: {
-      title: '1st position in Web Design, ABES ACM',
-      description: 'Competed in web and graphic design challenge with 100+ participants.'
+      title: 'title ...',
+      description: 'Description ...',
     },
     branch: 2,
-    type: 'checkpoint'
+    type: 'checkpoint',
+    parallel: 1
   },
   {
     content: {
-      title: 'Lecture on Web Technologies',
-      description: 'Guided 300+ students on getting started with web technologies like HTML/CSS and JS'
+      title: 'title ...',
+      description: 'Description ...',
     },
     branch: 1,
-    type: 'checkpoint'
+    type: 'checkpoint',
+    parallel: 2
   },
   {
     content: '2016',
@@ -208,18 +213,23 @@ export const TIMELINE: TimelineNode[] = [
   },
   {
     content: {
-      title: '1st position in Web Designing, IMSU',
-      description: 'Secured 1st prize in Web design challenge against 50+ teams'
+      title: 'title ...',
+      description: 'Description ...',
     },
     branch: 2,
     type: 'checkpoint',
     converge: true
   },
   {
+    content: '',
+    branch: 1,
+    type: 'year'
+  },
+  {
     content: {
-      title: 'UI/UX, Frontend Engineer',
-      description: 'Started journey in SDC-SI, where I got to work on 10+ web projects. Learnt the fundamentals of Frontend, UI/UX,  Graphic design and more...',
-      logo: 'si'
+      title: 'title ...',
+      description: 'Description ...',
+      logo: ''
     },
     branch: 1,
     type: 'checkpoint'
@@ -231,9 +241,9 @@ export const TIMELINE: TimelineNode[] = [
   },
   {
     content: {
-      title: 'Recognized Themer',
-      description: 'Awarded as recognized themer,  Developed themes and ROMs for Xperia 2011 devices lineup with over 15k+ downloads. Featured on xda portal twice.',
-      logo: 'xda'
+      title: 'title ...',
+      description: 'Description ...',
+      logo: ''
 
     },
     branch: 1,
@@ -246,10 +256,11 @@ export interface TimelineNode {
   branch: 1 | 2,
   type: 'year' | 'checkpoint',
   converge?: boolean,
-  diverge?: boolean
+  diverge?: boolean,
+  parallel?: 1 | 2
 }
 
-interface TimelineContent {
+export interface TimelineContent {
   title: string,
   description: string,
   logo?: string

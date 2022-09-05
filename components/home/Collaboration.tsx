@@ -50,7 +50,7 @@ const Collaboration: React.FunctionComponent<Props> = (props:Props) => {
   return (
     <Section ref={targetSection}>
 
-      <Container style={ clientHeight > 650 ? { paddingTop: '36px', paddingBottom: '36px' } : { paddingTop: '48px', paddingBottom: '48px' } }>
+      <Container style={ clientHeight > 650 ? { paddingTop: '24px', paddingBottom: '36px' } : { paddingTop: '36px', paddingBottom: '48px' } }>
         <p className='ui-left'>
           {Array(5).fill(" React Next JavaScript Nest Sass ").reduce((str, el) => str.concat(el), '')}
         </p>
