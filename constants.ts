@@ -93,7 +93,7 @@ export const TIMELINE: TimelineNode[] = [
     content: {
       title: 'title ...',
       description: 'Description ...',
-      logo: ''
+      logo: 'logo-marine.jpg'
     },
     branch: 2,
     type: 'checkpoint',
@@ -103,7 +103,7 @@ export const TIMELINE: TimelineNode[] = [
     content: {
       title: 'title ...',
       description: 'Description ...',
-      logo: ''
+      logo: 'logo-marine.jpg'
     },
     branch: 2,
     type: 'checkpoint',
@@ -118,7 +118,7 @@ export const TIMELINE: TimelineNode[] = [
     content: {
       title: 'title ...',
       description: 'Description ...',
-      logo: ''
+      logo: 'logo-marine.jpg'
     },
     branch: 1,
     type: 'checkpoint'
@@ -127,7 +127,7 @@ export const TIMELINE: TimelineNode[] = [
     content: {
       title: 'title ...',
       description: 'Description ...',
-      logo: ''
+      logo: 'logo-marine.jpg'
     },
     branch: 1,
     type: 'checkpoint'
@@ -136,7 +136,7 @@ export const TIMELINE: TimelineNode[] = [
     content: {
       title: 'title ...',
       description: 'Description ...',
-      logo: ''
+      logo: 'logo-marine.jpg'
     },
     branch: 1,
     type: 'checkpoint'
@@ -150,7 +150,7 @@ export const TIMELINE: TimelineNode[] = [
     content: {
       title: 'title ...',
       description: 'Description ...',
-      logo: ''
+      logo: 'logo-marine.jpg'
     },
     branch: 1,
     type: 'checkpoint',
@@ -229,7 +229,7 @@ export const TIMELINE: TimelineNode[] = [
     content: {
       title: 'title ...',
       description: 'Description ...',
-      logo: ''
+      logo: 'logo-marine.jpg'
     },
     branch: 1,
     type: 'checkpoint'
@@ -243,7 +243,7 @@ export const TIMELINE: TimelineNode[] = [
     content: {
       title: 'title ...',
       description: 'Description ...',
-      logo: ''
+      logo: 'logo-marine.jpg'
 
     },
     branch: 1,

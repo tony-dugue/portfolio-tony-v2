@@ -44,7 +44,7 @@ const Home: NextPage = () => {
           <Project clientHeight={clientHeight} isDesktop={isDesktop} />
           <Quote clientHeight={clientHeight} />
           <Skill />
-          <Timeline />
+          <Timeline isDesktop={isDesktop} />
           <Collaboration clientHeight={clientHeight} />
           <Footer />
         </Main>
