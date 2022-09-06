@@ -15,6 +15,7 @@ import Skill from "../components/home/Skill"
 import Timeline from "../components/home/Timeline"
 import Collaboration from "../components/home/Collaboration";
 import Footer from '../components/common/footer/Footer'
+import Scripts from "../components/common/scripts";
 
 const Home: NextPage = () => {
 
@@ -48,6 +49,8 @@ const Home: NextPage = () => {
           <Collaboration clientHeight={clientHeight} />
           <Footer />
         </Main>
+
+        <Scripts />
 
       </Layout>
     </>

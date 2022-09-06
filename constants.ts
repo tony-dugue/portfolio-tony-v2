@@ -265,3 +265,5 @@ export interface TimelineContent {
   description: string,
   logo?: string
 }
+
+export const GTAG = ''
