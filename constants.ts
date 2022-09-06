@@ -267,3 +267,4 @@ export interface TimelineContent {
 }
 
 export const GTAG = ''
+export const CHAPORT_APP_ID = ''
