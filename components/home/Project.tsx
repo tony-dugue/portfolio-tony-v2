@@ -8,13 +8,12 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import ProjectCard from './ProjectCard'
 
 interface Props {
-  isDesktop: boolean,
   clientHeight: number
 }
 
 const Project: React.FunctionComponent<Props> = (props:Props) => {
 
-  const { isDesktop, clientHeight } = props
+  const { clientHeight } = props
 
   const targetSection = useRef<HTMLDivElement>(null);
   const sectionTitle = useRef<HTMLDivElement>(null);
@@ -44,7 +43,7 @@ const Project: React.FunctionComponent<Props> = (props:Props) => {
 
 
 
-  }, [targetSection, PROJECTS, sectionTitle])
+  }, [targetSection, sectionTitle])
 
   return (
     <Section ref={targetSection} id={NAVLINKS[1].ref}>

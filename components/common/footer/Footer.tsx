@@ -1,4 +1,5 @@
 import { EMAIL, NAVLINKS, SOCIAL_LINKS } from '../../../constants';
+import Image from 'next/image';
 import SquareButton from '../../buttons/SquareButton';
 import styled from "styled-components";
 import tw from "twin.macro";
@@ -12,12 +13,12 @@ const Footer = () => {
       <Wrapper>
         <Container>
 
-          <h1>Je recherche des défis ! N'hésitez pas à me contacter.</h1>
+          <h1>Je recherche des défis ! N&lsquo;hésitez pas à me contacter.</h1>
 
           <SocialContainer>
             {SOCIAL_LINKS.map(link => (
               <SocialLink href={link.url} className="link" key={link.name} rel='noreferrer' target='_blank'>
-                <img src={`/svgs/social/${link.name}.svg`} alt={link.name} width={40} height={40} />
+                <Image src={`/svgs/social/${link.name}.svg`} alt={link.name} width={40} height={40} />
               </SocialLink>
             ))}
           </SocialContainer>

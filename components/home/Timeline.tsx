@@ -41,7 +41,7 @@ const Timeline: React.FunctionComponent<Props> = (props:Props) => {
     if (timelineNode.converge) {
       y = y + curveLength - 6 * dotSize;
     }
-    const str = addText(timelineNode, y) + `<rect class='dot' width=${dotSize} height=${dotSize} fill='#111827' x=${x - dotSize / 2} y=${y - dotSize / 2} ></rect><circle cx=${x} cy=${y} r='7' stroke=${svgColor} class='str dot' ></circle>`;
+    const str = addText(timelineNode, y) + `<rect class='dot' width=${dotSize} height=${dotSize} fill='#111827' x=${x - dotSize / 2} y=${y - dotSize / 2} ></rect><circle cx=${x} cy=${y} r='7' stroke=${svgColor} class='dot' ></circle>`;
 
     return str;
   };
@@ -80,7 +80,7 @@ const Timeline: React.FunctionComponent<Props> = (props:Props) => {
       const { description, title, logo } = timelineNode.content as TimelineContent;
       let logoStr = '';
       if (logo) {
-        logoStr = `<img src='/images/logos/${logo}' class="timeline-logo" loading='lazy' height='32' />`
+        logoStr = `<img src='/images/logos/${logo}' class='h-8 mb-2' loading='lazy' width='100' height='32' alt='${logo}' />`
       }
       return `<foreignObject x=${dotSize / 2 + 10 + offset} y=${y - dotSize / 2} width=${svgWidth - (dotSize / 2 + 10 + offset)} height=${separation}>${logoStr}<p class='timeline-title'>${title}</p><p class='timeline-description'>${description}</p></foreignObject>`
     }
@@ -89,7 +89,7 @@ const Timeline: React.FunctionComponent<Props> = (props:Props) => {
   const createSvg = (timeline: TimelineNode[]) => {
     let idx = 0;
     let y = dotSize / 2;
-    let result = `<style>.str{stroke-width: ${strokeWidth}px}</style>`;
+    let result = `<style>.str, .dot{stroke-width: ${strokeWidth}px}</style>`;
 
     for (let node of timeline) {
       if (idx === 0) {

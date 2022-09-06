@@ -128,7 +128,10 @@ const OuterMenu = styled.div`
       ~ {
         .menu {
           pointer-events: auto;
-          visibility: visible;
+          visibility: visible !important;
+          backdrop-filter: blur(0.625rem);
+          -webkit-backdrop-filter: blur(0.625rem);
+          
           > div {
             transform: scale(1);
             transition-duration: 0.75s;
@@ -178,15 +181,15 @@ const OuterMenu = styled.div`
   .menu {
     backface-visibility: hidden;
     outline: 0.0625rem solid transparent;
+    
     > div {
       width: 250vw;
       height: 250vw;
       transform: scale(0);
+      will-change: transform;
       border-radius: 50%;
       transition: all 0.4s ease;
       backface-visibility: hidden;
-      backdrop-filter: blur(0.625rem);
-      -webkit-backdrop-filter: blur(0.625rem);
       background: rgba(0, 0, 0, 0.5);
       @supports not (backdrop-filter: blur(0.625rem)) {
         background: rgba(0, 0, 0, 0.8);

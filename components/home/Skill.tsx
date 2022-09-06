@@ -39,14 +39,14 @@ const Skills = () => {
           <SkillIntro className='flex flex-col gap-2'>
             <p className="seq">Compétences</p>
             <h1 className="text-gradient seq">Mes compétences</h1>
-            <h2 className="seq">J'aime concevoir et créer des expériences utilisateur optimisées en utilisant une architecture front moderne. </h2>
+            <h2 className="seq">J&lsquo;aime concevoir et créer des expériences utilisateur optimisées en utilisant une architecture front moderne. </h2>
           </SkillIntro>
 
           <SkillTop>
             <h3 className='seq'>Développement Frontend</h3>
             <div className='seq'>
               {SKILLS.frontend.map(skill => (
-                <Image key={skill} src={`/svgs/skills/${skill}.svg`} alt={skill} width={60} height={60} />
+                <Image key={skill} src={`/svgs/skills/${skill}.svg`} alt={skill} width={64} height={64} />
               ))}
             </div>
           </SkillTop>
@@ -56,7 +56,7 @@ const Skills = () => {
               <h3 className='seq'>UI, Design UX</h3>
               <div className='skill-icons seq'>
                 {SKILLS.userInterface.map(skill => (
-                  <Image key={skill} src={`/svgs/skills/${skill}.svg`} alt={skill} width={60} height={60} />
+                  <Image key={skill} src={`/svgs/skills/${skill}.svg`} alt={skill} width={64} height={64} />
                 ))}
               </div>
             </div>
@@ -65,7 +65,7 @@ const Skills = () => {
               <h3 className='seq'>Autres compétences</h3>
               <div className='skill-icons seq'>
                 {SKILLS.other.map(skill => (
-                  <Image key={skill} src={`/svgs/skills/${skill}.svg`} alt={skill} width={60} height={60} />
+                  <Image key={skill} src={`/svgs/skills/${skill}.svg`} alt={skill} width={64} height={64} />
                 ))}
               </div>
             </div>
@@ -81,17 +81,17 @@ const Skills = () => {
 export default Skills;
 
 const Section = styled.section`
-  ${tw`w-full relative select-none min-h-screen`}
+  ${tw`w-full relative select-none`}
 `
 
 const Container = styled.div`
-  ${tw`2xl:container mx-auto py-8 xl:px-20 md:px-12 px-4 flex flex-col justify-center`}
+  ${tw`2xl:container mx-auto py-12 xl:px-20 md:px-12 px-4 flex flex-col justify-center`}
   
   .pattern-left {
-    ${tw`absolute left-0 -bottom-16 w-1/12 max-w-xs md:block hidden`}
+    ${tw`absolute left-0 -bottom-1/3 w-1/12 max-w-xs md:block hidden`}
   }
   .pattern-right {
-    ${tw`absolute right-0 -bottom-1/3 w-1/5 max-w-xs md:block hidden`}
+    ${tw`absolute right-0 -bottom-2/3 w-1/5 max-w-xs md:block hidden`}
   }
 `
 
