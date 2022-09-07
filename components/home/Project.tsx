@@ -35,7 +35,7 @@ const Project: React.FunctionComponent<Props> = (props:Props) => {
         trigger: targetSection.current,
         start: 'top top',
         end: duration,
-        scrub: 0,
+        scrub: 0.3,
         pin: true,
         animation: timeline,
         pinSpacing: 'margin'
