@@ -8,7 +8,7 @@ interface Props {
   clientHeight: number;
 }
 
-const Quote: React.FunctionComponent<Props> = (props:Props) => {
+const QuoteSection: React.FunctionComponent<Props> = (props:Props) => {
 
   const { clientHeight } = props
 
@@ -41,7 +41,7 @@ const Quote: React.FunctionComponent<Props> = (props:Props) => {
   )
 }
 
-export default Quote;
+export default QuoteSection;
 
 const Section = styled.section`
   ${tw`w-full relative select-none`}

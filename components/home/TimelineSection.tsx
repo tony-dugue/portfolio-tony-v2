@@ -18,7 +18,13 @@ interface Props {
   isDesktop: boolean
 }
 
-const Timeline: React.FunctionComponent<Props> = (props:Props) => {
+interface TimelineContent {
+  description: string,
+  title: string,
+  logo: string
+}
+
+const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
 
   const { isDesktop } = props
 
@@ -27,7 +33,7 @@ const Timeline: React.FunctionComponent<Props> = (props:Props) => {
 
   const svgLength = TIMELINE.filter(el => el.type !== 'year')?.length * separation;
 
-  const timelineSvg = useRef<HTMLDivElement>(null);
+  const timelineSvg = useRef<SVGSVGElement>(null);
   const svgContainer = useRef<HTMLDivElement>(null);
   const screenContainer = useRef<HTMLDivElement>(null);
 
@@ -130,6 +136,7 @@ const Timeline: React.FunctionComponent<Props> = (props:Props) => {
   }
 
   useEffect(() => {
+
     const width = svgContainer.current!.clientWidth;
     setSvgWidth(width);
 
@@ -298,7 +305,7 @@ const Timeline: React.FunctionComponent<Props> = (props:Props) => {
   )
 }
 
-export default Timeline;
+export default TimelineSection;
 
 const Section = styled.section`
   ${tw`w-full relative select-none min-h-screen 2xl:container mx-auto py-8 xl:px-20 md:px-12 px-4 flex flex-col justify-center mt-40`}

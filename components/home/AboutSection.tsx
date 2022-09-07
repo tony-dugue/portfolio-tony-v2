@@ -1,5 +1,5 @@
 import { gsap, Linear } from "gsap";
-import React, { MutableRefObject, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import styled from "styled-components";
 import tw from "twin.macro";
@@ -8,7 +8,7 @@ interface Props {
   clientHeight: number
 }
 
-const About: React.FunctionComponent<Props> = (props:Props) => {
+const AboutSection: React.FunctionComponent<Props> = (props:Props) => {
 
   const { clientHeight } = props
 
@@ -66,7 +66,7 @@ const About: React.FunctionComponent<Props> = (props:Props) => {
   );
 };
 
-export default About;
+export default AboutSection;
 
 const Section = styled.section`
   ${tw`w-full relative select-none`}

@@ -1,24 +1,27 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { METADATA } from "../constants";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { gsap } from "gsap";
 
 import styled from "styled-components";
 import tw from "twin.macro";
 
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { gsap } from "gsap";
+
 import Layout from "../components/common/layout/Layout"
 //import Hero from "../components/home/Hero"
-import HeroWithSvg from "../components/home/HeroWithSvg"
-import About from "../components/home/About"
-import Project from "../components/home/Project"
-import Quote from "../components/home/Quote"
-import Skill from "../components/home/Skill"
-import Timeline from "../components/home/Timeline"
-import Collaboration from "../components/home/Collaboration"
+import HeroSection from "../components/home/HeroSection"
+import AboutSection from "../components/home/AboutSection"
+import ProjectSection from "../components/home/ProjectSection"
+import QuoteSection from "../components/home/QuoteSection"
+import Skill from "../components/home/SkillSection"
+import TimelineSection from "../components/home/TimelineSection"
+import CollaborationSection from "../components/home/CollaborationSection"
 import Footer from "../components/common/footer/Footer"
 import Scripts from "../components/common/scripts"
+
+const DEBOUNCE_TIME = 100;
 
 const Home: NextPage = () => {
 
@@ -28,24 +31,32 @@ const Home: NextPage = () => {
   const [isDesktop, setIsDesktop] = useState(true);
   const [clientHeight, setClientHeight] = useState(0);
 
-  useEffect(() => {
-    let timer: any = null;
-    const callback = () => {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        const result = typeof window.orientation === "undefined" && navigator.userAgent.indexOf("IEMobile") === -1;
-        window.history.scrollRestoration = "manual";
-        setIsDesktop(result);
-        setClientHeight(window.innerHeight);
-      }, 100);
-    };
-    callback();
+  let timer: any = null;
 
-    window.addEventListener("resize", callback);
-    return () => {
-      window.removeEventListener("resize", callback);
-    };
-  }, []);
+  const debouncedDimensionCalculator = () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      const isDesktopResult =
+        typeof window.orientation === "undefined" &&
+        navigator.userAgent.indexOf("IEMobile") === -1;
+
+      window.history.scrollRestoration = "manual";
+
+      setIsDesktop(isDesktopResult);
+      setClientHeight(window.innerHeight);
+    }, DEBOUNCE_TIME);
+  };
+
+  useEffect(() => {
+    debouncedDimensionCalculator();
+    window.addEventListener("resize", debouncedDimensionCalculator);
+    return () =>
+      window.removeEventListener("resize", debouncedDimensionCalculator);
+  }, [timer]);
+
+  const renderBackdrop = (): React.ReactNode => (
+    <Wrapper className="fixed top-0 left-0 h-screen w-screen bg-gray-900 -z-1" />
+  );
 
   return (
     <>
@@ -56,15 +67,15 @@ const Home: NextPage = () => {
       <Layout isDesktop={isDesktop}>
 
         <Main>
-          <Wrapper />
-          <HeroWithSvg />
+          {renderBackdrop()}
+          <HeroSection />
           {/*<Hero />*/}
-          <About clientHeight={clientHeight} />
-          <Project clientHeight={clientHeight} isDesktop={isDesktop} />
-          <Quote clientHeight={clientHeight} />
+          <AboutSection clientHeight={clientHeight} />
+          <ProjectSection clientHeight={clientHeight} isDesktop={isDesktop} />
+          <QuoteSection clientHeight={clientHeight} />
           <Skill />
-          <Timeline isDesktop={isDesktop} />
-          <Collaboration clientHeight={clientHeight} />
+          <TimelineSection isDesktop={isDesktop} />
+          <CollaborationSection clientHeight={clientHeight} />
           <Footer />
         </Main>
 

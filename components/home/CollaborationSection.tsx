@@ -8,7 +8,7 @@ interface Props {
   clientHeight: number;
 }
 
-const Collaboration: React.FunctionComponent<Props> = (props:Props) => {
+const CollaborationSection: React.FunctionComponent<Props> = (props:Props) => {
 
   const { clientHeight } = props
 
@@ -66,7 +66,7 @@ const Collaboration: React.FunctionComponent<Props> = (props:Props) => {
   )
 }
 
-export default Collaboration;
+export default CollaborationSection;
 
 const Section = styled.section`
   ${tw`w-full relative select-none`}

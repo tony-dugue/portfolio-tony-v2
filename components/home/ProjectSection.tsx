@@ -4,7 +4,6 @@ import tw from "twin.macro";
 import { NAVLINKS, PROJECTS } from '../../constants';
 import { gsap, Linear } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import { Draggable } from "gsap/dist/Draggable";
 
 import ProjectCard from './ProjectCard'
 
@@ -13,7 +12,7 @@ interface Props {
   isDesktop: boolean
 }
 
-const Project: React.FunctionComponent<Props> = (props:Props) => {
+const ProjectSection: React.FunctionComponent<Props> = (props:Props) => {
 
   const { clientHeight, isDesktop } = props
 
@@ -114,7 +113,7 @@ const Project: React.FunctionComponent<Props> = (props:Props) => {
   )
 }
 
-export default Project;
+export default ProjectSection;
 
 const Section = styled.section`
   ${tw`w-full relative select-none transform-gpu`}

@@ -9,8 +9,9 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 import SquareButton from "../buttons/SquareButton"
+import HeroIllustration from "./HeroIllustration"
 
-const HeroWithSvg = () => {
+const HeroSection = () => {
 
   gsap.registerPlugin(ScrollTrigger);
 
@@ -63,22 +64,22 @@ const HeroWithSvg = () => {
       </Container>
 
       <ImageCtr className="hero-bg">
-        <img src='/svgs/illustration-bg.svg' alt='Illustration' width={1021} height={650} />
+        <HeroIllustration />
       </ImageCtr>
 
     </Section>
   )
 }
 
-export default HeroWithSvg;
+export default HeroSection;
 
 const Section = styled.div`
   opacity: 0;
   ${tw`w-full flex md:items-center py-8 2xl:container mx-auto xl:px-20 md:px-12 px-4 min-h-screen relative mb-24`};
 
   @media screen and (max-width: 768px) {
-  ${tw`flex-col`};
-}
+    ${tw`flex-col justify-center`};
+  }
 `
 
 const Container = styled.div`
@@ -135,5 +136,9 @@ const Cta = styled.div`
 
 const ImageCtr = styled.div`
   ${tw`absolute right-0 bottom-0 -z-1 md:w-3/4 w-full scale-125 sm:scale-100 transform-gpu`};
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 }
 `
