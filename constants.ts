@@ -46,6 +46,7 @@ export const PROJECTS = [
   {
     name: 'Firmain',
     image: '/images/projects/firmain.png',
+    blurImage: '/images/projects/firmain-blur.png',
     description: 'Plateforme numérique pour gérer avec simplicité les process RH de gestion des formations internes ou externes et des compétences',
     gradient: ['#172839', '#334659'],
     url: 'https://app.escaledescompetences.fr/',
@@ -54,6 +55,7 @@ export const PROJECTS = [
   {
     name: 'MotooPlanner',
     image: '/images/projects/motooplanner.png',
+    blurImage: '/images/projects/motooplanner-blur.png',
     description: 'Application web pour faciliter la planification de road trip en moto en groupe',
     gradient: ['#00765F', '#238975'],
     url: 'https://motooplanner.tonydugue.fr/',
@@ -62,6 +64,7 @@ export const PROJECTS = [
   {
     name: 'Lemona Food Truck',
     image: '/images/projects/lemona.jpg',
+    blurImage: '/images/projects/lemona-blur.png',
     description: 'Site vitrine présentant l\'activité d\'une chaine de Food Truck vintage spécialisé dans les produits à base de Citron.',
     gradient: ["#17007B", "#3A2C79"],
     url: '#',
@@ -70,6 +73,7 @@ export const PROJECTS = [
   {
     name: 'Airmdrone',
     image: '/images/projects/airmdrone.png',
+    blurImage: '/images/projects/airmdrone-blur.png',
     description: 'Site vitrine pour améliorer la visibilité d\'un pilote de drone professionnel',
     gradient: ['rgba(15,44,109, 0.5)', 'rgb(15,44,109)'],
     url: 'https://www.airmdrone.com/',

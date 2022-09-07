@@ -25,7 +25,7 @@ const Header: React.FunctionComponent<Props> = (props:Props) => {
           </ButtonWrapper>
 
           <OuterMenu>
-            <HamburgerInput className='checkbox-toggle link' type='checkbox' />
+            <HamburgerInput aria-labelledby='menu' className='checkbox-toggle link' type='checkbox' />
             <HamburgerCtr className='hamburger'>
               <HamburgerItem></HamburgerItem>
             </HamburgerCtr>

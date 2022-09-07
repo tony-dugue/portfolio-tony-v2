@@ -14,7 +14,7 @@ const NavigationMenu = () => {
       const checkbox: HTMLInputElement | null = document.querySelector('.checkbox-toggle');
       el.addEventListener('click', () => checkbox!.checked = false )
     })
-  });
+  }, []);
 
   return (
     <Wrapper className="menu">

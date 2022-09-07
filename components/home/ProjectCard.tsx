@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import Image from 'next/image';
 import VanillaTilt from 'vanilla-tilt';
 import styled from "styled-components";
 import tw from "twin.macro";
@@ -6,6 +7,7 @@ import tw from "twin.macro";
 interface Props {
   name: string,
   image: string,
+  blurImage: string,
   description: string,
   gradient: string[],
   url: string,
@@ -14,7 +16,7 @@ interface Props {
 
 const ProjectCard: React.FunctionComponent<Props> = (props:Props) => {
 
-  const { name, image, description, gradient, url, tech} = props
+  const { name, image, blurImage, description, gradient, url, tech} = props
 
   const projectCard = useRef<HTMLDivElement>(null);
 
@@ -34,7 +36,7 @@ const ProjectCard: React.FunctionComponent<Props> = (props:Props) => {
       <ProjectCardWrapper ref={projectCard} style={{ background: `linear-gradient(90deg, ${gradient[0]} 0%, ${gradient[1]} 100%)` }}>
 
         <img src='/svgs/project-bg.svg' alt='Project' className="project-img-first" />
-        <img src={image} alt={name} className="project-img-second" />
+        <Image placeholder='blur' blurDataURL={blurImage} src={image} alt={name} layout='fill' className="project-img-second" />
 
         <div className="tech-ctr-first" style={{ background: `linear-gradient(180deg, ${gradient[0]} 0%, rgba(0,0,0,0) 100%)` }}></div>
         <div className="tech-ctr-second" style={{ background: `linear-gradient(0deg, ${gradient[0]} 10%, rgba(0,0,0,0) 100%)` }}></div>
