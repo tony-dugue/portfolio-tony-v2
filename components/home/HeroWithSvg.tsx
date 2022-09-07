@@ -38,12 +38,12 @@ const HeroWithSvg = () => {
     <Section id={NAVLINKS[0].ref} ref={targetSectionRef}>
       <Container>
 
-        <div>
+        <div className="hero-desc">
           <p className="seq">Hello 👋🏻</p>
           <h1 className="seq">Je suis Tony Dugué</h1>
         </div>
 
-        <p>
+        <p className="hero-typed">
           <span ref={typedElRef} className="seq"></span>
         </p>
 
@@ -74,7 +74,7 @@ export default HeroWithSvg;
 
 const Section = styled.div`
   opacity: 0;
-  ${tw`w-full flex md:items-center py-8 2xl:container mx-auto xl:px-20 md:px-12 px-4 min-h-screen relative`};
+  ${tw`w-full flex md:items-center py-8 2xl:container mx-auto xl:px-20 md:px-12 px-4 min-h-screen relative mb-24`};
 
   @media screen and (max-width: 768px) {
   ${tw`flex-col`};
@@ -86,6 +86,14 @@ const Container = styled.div`
 
   @media screen and (max-width: 768px) {
     ${tw`justify-center items-center gap-2`};
+  }
+  
+  .hero-desc {
+    ${tw`mb-5`};
+  }
+  
+  .hero-typed {
+    ${tw`mb-5`};
   }
 
   h1 {
@@ -110,15 +118,19 @@ const Container = styled.div`
 `
 
 const SocialContainer = styled.div`
-  ${tw`flex md:gap-4 sm:gap-3 gap-2`}
+  ${tw`flex mb-5`}
 `
 
 const SocialLink = styled.a`
-  ${tw`hover:opacity-80 duration-300`}
+  ${tw`hover:opacity-80 duration-300 md:px-2 px-1`}
 `
 
 const Cta = styled.div`
   ${tw`flex gap-5`}
+
+  a {
+    ${tw`mx-3`}
+  }
 `
 
 const ImageCtr = styled.div`

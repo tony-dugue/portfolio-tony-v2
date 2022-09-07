@@ -48,15 +48,15 @@ const Project: React.FunctionComponent<Props> = (props:Props) => {
   return (
     <Section ref={targetSection} id={NAVLINKS[1].ref}>
 
-      <SectionWrapper className={(clientHeight > 650 ? 'big' : 'small')}>
+      <SectionWrapper>
         <Container ref={sectionTitle} className="inner-container">
           <p>PROJETS</p>
           <h1 className="text-gradient w-fit">Mes réalisations</h1>
           <h2>Passionné depuis toujours par les nouvelles technologies mais aussi par le design, je conçois et réalise des applications web intuitive et fonctionnelle mais toujours avec une dose de créativité.</h2>
         </Container>
 
-        <ProjectItems className="project-wrapper">
-          {PROJECTS.map(project => (
+        <ProjectItems className={`project-wrapper ${(clientHeight > 650 ? 'big' : 'small')}`}>
+          {PROJECTS.map( (project, index) => (
             <ProjectCard
               key={project.name}
               {...project}
@@ -77,13 +77,6 @@ const Section = styled.section`
 
 const SectionWrapper = styled.div`
   ${tw`flex-col flex py-8 xl:px-20 md:px-12 px-4 justify-center h-full`}
-  
-  &.big {
-    ${tw`gap-y-20`}
-  }
-  &.small {
-    ${tw`gap-y-10`}
-  }
 `
 
 const Container = styled.div`
@@ -95,14 +88,14 @@ const Container = styled.div`
   }
   
   h1 {
-    ${tw`text-5xl font-bold mb-2`};
+    ${tw`text-5xl font-bold mt-2`};
 
     @media screen and (max-width: 768px) {
       font-size: 2rem;
     }
   }
   h2 {
-    ${tw`text-2xl w-full`};
+    ${tw`text-2xl md:max-w-3xl w-full max-w-sm mt-2`};
     width: 50vw;
     
     @media screen and (max-width: 768px) {
@@ -115,7 +108,22 @@ const Container = styled.div`
 
 const ProjectItems = styled.div`
   width: fit-content;
-  ${tw`flex gap-x-16 w-fit`}
+  ${tw`flex w-fit`}
+  
+  a {
+    ${tw`mr-16`}
+    
+    &:last-child {
+      ${tw`mr-0`}
+    }
+  }
+  
+  &.big {
+    ${tw`mt-20`}
+  }
+  &.small {
+    ${tw`mt-10`}
+  }
   
   &::-webkit-scrollbar {
     display: none;

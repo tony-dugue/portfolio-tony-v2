@@ -67,10 +67,6 @@ const ImageWrapper = styled.div`
     transform: scale(1.1);
   }
   
-  a {
-    ${tw`flex gap-3 items-center`}
-  }
-  
   img {
     width: 120px;
     transform: rotate(180deg);

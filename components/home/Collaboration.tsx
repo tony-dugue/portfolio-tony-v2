@@ -74,14 +74,14 @@ const Section = styled.section`
 
 const Container = styled.div`
 
-  ${tw`2xl:container mx-auto xl:px-20 md:px-12 px-4 flex flex-col gap-y-8`}
+  ${tw`2xl:container mx-auto xl:px-20 md:px-12 px-4 flex flex-col`}
   
   .ui-left {
     ${tw`opacity-20 text-5xl md:text-7xl font-bold whitespace-nowrap transform-gpu`}
   }
   
   h1 {
-    ${tw`font-medium text-4xl md:text-5xl text-center font-bold`}
+    ${tw`mt-6 md:mt-8 font-medium text-4xl md:text-5xl text-center font-bold`}
 
     .text-strong {
       background: linear-gradient(
@@ -98,6 +98,6 @@ const Container = styled.div`
   }
   
   .ui-right {
-    ${tw`opacity-20 text-5xl md:text-7xl font-bold whitespace-nowrap transform-gpu`}
+    ${tw`mt-6 md:mt-8 opacity-20 text-5xl md:text-7xl font-bold whitespace-nowrap transform-gpu`}
   }
 `

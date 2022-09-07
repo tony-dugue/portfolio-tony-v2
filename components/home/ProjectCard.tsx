@@ -104,10 +104,10 @@ const ProjectCardWrapper = styled.div`
     ${tw`w-1/2 h-full absolute left-24 top-0 sm:flex items-center hidden`}
     
     &-item {
-      ${tw`flex flex-col gap-4 pb-8`}
+      ${tw`flex flex-col pb-8`}
       
       &-img {
-        ${tw`ml-16`}
+        ${tw`ml-16 mb-4`}
       }
     }
   }

@@ -60,7 +60,7 @@ const Home: NextPage = () => {
 export default Home
 
 const Main = styled.main`
-  ${tw`flex-col flex gap-y-28`}
+  ${tw`flex-col flex`}
 `
 
 const Wrapper = styled.div`

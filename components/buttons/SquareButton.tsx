@@ -1,22 +1,22 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 import styled from "styled-components";
 import tw from "twin.macro";
 
 interface Props {
   type: string,
-  //onClick: void,
   name: string,
-  href: string,
-  newTab: boolean
+  href: string | undefined,
+  newTab: boolean | undefined
 }
 
 const SquareButton: React.FunctionComponent<Props> = (props:Props) => {
 
   const { type, name, href, newTab } = props
+
   return (
     <ButtonLink
-      //onClick={onClick}
       href={href}
       target={newTab ? '_blank' : ''}
       rel={newTab ? 'noreferrer' : ''}
@@ -25,6 +25,13 @@ const SquareButton: React.FunctionComponent<Props> = (props:Props) => {
       {name}
     </ButtonLink>
   )
+}
+
+SquareButton.propTypes = {
+  type: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  href: PropTypes.string,
+  newTab: PropTypes.bool
 }
 
 export default SquareButton;

@@ -301,11 +301,11 @@ const Timeline: React.FunctionComponent<Props> = (props:Props) => {
 export default Timeline;
 
 const Section = styled.section`
-  ${tw`w-full relative select-none min-h-screen 2xl:container mx-auto py-8 xl:px-20 md:px-12 px-4 flex flex-col justify-center gap-y-20`}
+  ${tw`w-full relative select-none min-h-screen 2xl:container mx-auto py-8 xl:px-20 md:px-12 px-4 flex flex-col justify-center`}
 `
 
 const TimelineIntro = styled.div`
-  ${tw`flex flex-col gap-2`}
+  ${tw`flex flex-col`}
 
   p {
     color: ${props => props.theme.colorPrimary};
@@ -313,14 +313,14 @@ const TimelineIntro = styled.div`
   }
 
   h1 {
-    ${tw`text-5xl font-bold w-fit`};
+    ${tw`text-5xl font-bold w-fit mt-2`};
 
     @media screen and (max-width: 768px) {
       font-size: 2rem;
     }
   }
   h2 {
-    ${tw`text-2xl md:max-w-2xl w-full`};
+    ${tw`text-2xl md:max-w-2xl w-full mt-2`};
 
     @media screen and (max-width: 768px) {
       font-size: 1.2rem;
@@ -330,7 +330,7 @@ const TimelineIntro = styled.div`
 `
 
 const TimelineContent = styled.div`
-  ${tw`grid grid-cols-12 gap-4`}
+  ${tw`grid grid-cols-12 gap-4 mt-20`}
   
   .timeline-logo {
     width: 60px;

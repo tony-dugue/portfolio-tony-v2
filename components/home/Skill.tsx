@@ -36,7 +36,7 @@ const Skills = () => {
 
         <SkillWrapper className="skills-wrapper">
 
-          <SkillIntro className='flex flex-col gap-2'>
+          <SkillIntro>
             <p className="seq">Compétences</p>
             <h1 className="text-gradient seq">Mes compétences</h1>
             <h2 className="seq">J&lsquo;aime concevoir et créer des expériences utilisateur optimisées en utilisant une architecture front moderne. </h2>
@@ -44,19 +44,19 @@ const Skills = () => {
 
           <SkillTop>
             <h3 className='seq'>Développement Frontend</h3>
-            <div className='seq'>
+            <div className='skill-icons seq'>
               {SKILLS.frontend.map(skill => (
-                <Image key={skill} src={`/svgs/skills/${skill}.svg`} alt={skill} width={64} height={64} />
+                <Image key={skill} src={`/svgs/skills/${skill}.svg`} alt={skill} width={76} height={76} className="skill-icon" />
               ))}
             </div>
           </SkillTop>
 
           <SkillBottom>
-            <div>
+            <div className="top">
               <h3 className='seq'>UI, Design UX</h3>
               <div className='skill-icons seq'>
                 {SKILLS.userInterface.map(skill => (
-                  <Image key={skill} src={`/svgs/skills/${skill}.svg`} alt={skill} width={64} height={64} />
+                  <Image key={skill} src={`/svgs/skills/${skill}.svg`} alt={skill} width={76} height={76} className="skill-icon" />
                 ))}
               </div>
             </div>
@@ -65,7 +65,7 @@ const Skills = () => {
               <h3 className='seq'>Autres compétences</h3>
               <div className='skill-icons seq'>
                 {SKILLS.other.map(skill => (
-                  <Image key={skill} src={`/svgs/skills/${skill}.svg`} alt={skill} width={64} height={64} />
+                  <Image key={skill} src={`/svgs/skills/${skill}.svg`} alt={skill} width={76} height={76} className="skill-icon" />
                 ))}
               </div>
             </div>
@@ -93,10 +93,19 @@ const Container = styled.div`
   .pattern-right {
     ${tw`absolute right-0 -bottom-2/3 w-1/5 max-w-xs md:block hidden`}
   }
+
+  .skill-icons {
+    ${tw`flex flex-wrap`}
+  }
+
+  .skill-icon {
+    padding-right: 1.25rem !important;
+    padding-bottom: 1.25rem !important;
+  }
 `
 
 const SkillIntro = styled.div`
-  ${tw`flex flex-col gap-2`}
+  ${tw`flex flex-col`}
 
   .intro-container {
     ${tw`flex flex-col gap-2`}
@@ -108,38 +117,34 @@ const SkillIntro = styled.div`
   } 
   
   h1 {
-    ${tw`text-5xl font-bold w-fit`}
+    ${tw`text-5xl font-bold w-fit mt-2`}
   }
   
   h2 {
-    ${tw`text-2xl md:max-w-2xl w-full`}
+    ${tw`text-2xl md:max-w-2xl w-full mt-2`}
   }
 `
 
 const SkillWrapper = styled.div`
-  ${tw`gap-y-10 flex flex-col`}
+  ${tw`flex flex-col`}
 `
 
 const SkillTop = styled.div`
-  ${tw`flex flex-col mb-2`}
+  ${tw`flex flex-col mb-2 mt-10`}
   
   h3 {
-    ${tw`uppercase tracking-widest text-gray-200 text-sm mb-6`}
-  }
-  
-  div {
-    ${tw`flex gap-5 flex-wrap`}
+    ${tw`uppercase tracking-widest text-gray-200 text-sm mb-4`}
   }
 `
 
 const SkillBottom = styled.div`
-  ${tw`flex gap-10 flex-wrap`}
+  ${tw`flex flex-wrap mt-5`}
   
-  h3 {
-    ${tw`uppercase tracking-widest text-gray-200 text-sm mb-6`}
+  .top {
+    ${tw`mr-6 mb-6`}
   }
   
-  .skill-icons {
-    ${tw`flex gap-5 flex-wrap`}
+  h3 {
+    ${tw`uppercase tracking-widest text-gray-200 text-sm mb-4`}
   }
 `

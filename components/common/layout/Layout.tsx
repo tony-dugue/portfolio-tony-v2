@@ -30,7 +30,7 @@ const Layout: React.FunctionComponent<Props> = (props:Props) => {
         <meta property="og:description" content={METADATA.description} />
         <meta property="og:url" content={METADATA.siteUrl} />
         <meta property="og:site_name" content={METADATA.title} />
-        <meta property="og:image" content="/preview.png" />
+        <meta property="og:image" content="https://www.tonydugue.fr/preview.png" />
         <meta property="og:image:secure_url" content={METADATA.siteUrl} />
         <meta property="og:image:width" content="1440" />
         <meta property="og:image:height" content="800" />

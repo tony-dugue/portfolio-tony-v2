@@ -53,25 +53,29 @@ const Wrapper = styled.div`
 `
 
 const Container = styled.div`
-  ${tw`2xl:container mx-auto xl:px-20 md:px-12 px-4 flex-col flex h-full justify-end gap-y-8 z-10 items-center py-12`}
+  ${tw`2xl:container mx-auto xl:px-20 md:px-12 px-4 flex-col flex h-full justify-end z-10 items-center py-12`}
   
   h1 {
     ${tw`font-medium text-3xl md:text-4xl text-center`}
   }
   
   p {
-    ${tw`text-center text-sm sm:text-base`}
+    ${tw`text-center text-sm sm:text-base mt-8`}
   }
 `
 
 const SocialContainer = styled.div`
-  ${tw`flex md:gap-4 sm:gap-3 gap-2`}
+  ${tw`flex mt-8`}
 `
 
 const SocialLink = styled.a`
-  ${tw`hover:opacity-80 duration-300`}
+  ${tw`hover:opacity-80 duration-300 md:px-2 px-1`}
 `
 
 const Cta = styled.div`
-  ${tw`flex gap-5`}
+  ${tw`flex mt-8`}
+  
+  a {
+    ${tw`mx-3`}
+  }
 `
