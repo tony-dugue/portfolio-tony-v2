@@ -11,7 +11,7 @@ const Footer = () => {
       <FooterImg src="/svgs/footer-curve.svg" alt="Footer" className='w-full' loading='lazy' height={290} width={1440} />
 
       <Wrapper>
-        <Container>
+        <Container className="section-container">
 
           <h1>Je recherche des défis ! N&lsquo;hésitez pas à me contacter.</h1>
 
@@ -53,7 +53,7 @@ const Wrapper = styled.div`
 `
 
 const Container = styled.div`
-  ${tw`2xl:container mx-auto xl:px-20 md:px-12 px-4 flex-col flex h-full justify-end z-10 items-center py-12`}
+  ${tw`flex-col flex h-full justify-end z-10 items-center py-12`}
   
   h1 {
     ${tw`font-medium text-3xl md:text-4xl text-center`}

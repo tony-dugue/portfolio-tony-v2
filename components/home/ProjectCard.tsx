@@ -125,12 +125,12 @@ const ProjectCardWrapper = styled.div`
   
   .tech-name {
     transform: translateZ(3rem);
-    ${tw`text-3xl sm:text-4xl z-10 pl-2 transform-gpu`}
+    ${tw`text-2xl sm:text-3xl z-10 pl-2 transform-gpu`}
   }
   
   .tech-desc {
     color: ${props => props.theme.colorWhite};
     transform: translateZ(0.8rem);
-    ${tw`text-xl z-10 tracking-wide font-medium transform-gpu`}
+    ${tw`text-lg z-10 tracking-wide font-medium transform-gpu`}
   }
 `

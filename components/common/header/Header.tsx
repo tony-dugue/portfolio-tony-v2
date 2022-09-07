@@ -9,7 +9,7 @@ interface Props {
 
 const Header: React.FunctionComponent<Props> = (props:Props) => {
   return (
-    <Wrapper>
+    <NavWrapper>
       <Container>
 
         <ImageWrapper>
@@ -34,13 +34,13 @@ const Header: React.FunctionComponent<Props> = (props:Props) => {
         </RightContent>
 
       </Container>
-    </Wrapper>
+    </NavWrapper>
   )
 }
 
 export default Header;
 
-const Wrapper = styled.nav`
+const NavWrapper = styled.nav`
   ${tw`w-full fixed top-0 left-0 right-0 2xl:container mx-auto xl:px-20 md:px-12 px-4 select-none z-50 bg-gradient-to-b from-gray-200 to-transparent`}
 `
 

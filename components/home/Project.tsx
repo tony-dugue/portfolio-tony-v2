@@ -4,6 +4,7 @@ import tw from "twin.macro";
 import { NAVLINKS, PROJECTS } from '../../constants';
 import { gsap, Linear } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { Draggable } from "gsap/dist/Draggable";
 
 import ProjectCard from './ProjectCard'
 
@@ -20,6 +21,8 @@ const Project: React.FunctionComponent<Props> = (props:Props) => {
 
   useEffect(() => {
 
+    gsap.registerPlugin(Draggable);
+
       const timeline = gsap.timeline({ defaults: { ease: Linear.easeNone } });
       const sidePadding = document.body.clientWidth - targetSection.current!.querySelector('.inner-container')!.clientWidth;
       const elementWidth = sidePadding + targetSection.current!.querySelector('.project-wrapper')!.clientWidth;
@@ -31,7 +34,7 @@ const Project: React.FunctionComponent<Props> = (props:Props) => {
         .to(targetSection.current, { x: width })
         .to(sectionTitle.current, { x: -width }, '<');
 
-      ScrollTrigger.create({
+    let projectScrollTrigger = ScrollTrigger.create({
         trigger: targetSection.current,
         start: 'top top',
         end: duration,
@@ -40,6 +43,46 @@ const Project: React.FunctionComponent<Props> = (props:Props) => {
         animation: timeline,
         pinSpacing: 'margin'
       });
+
+    let proxy = document.createElement("div");
+
+    function updateProxy() {
+      if (projectScrollTrigger) {
+        gsap.set(proxy, {
+          x: -projectScrollTrigger.scroll(),
+          overwrite: "auto",
+        });
+      }
+    }
+
+    Draggable.create(proxy, {
+      trigger: targetSection.current,
+      type: "x",
+      throwProps: true,
+      onThrowUpdate: function () {
+        projectScrollTrigger.scroll(-this.x);
+      },
+      onDrag: function () {
+        projectScrollTrigger.scroll(-this.x);
+      },
+    });
+
+    window.addEventListener("wheel", updateProxy);
+
+    const revealTl = gsap.timeline({ defaults: { ease: Linear.easeNone } });
+    revealTl.from(
+      targetSection.current!.querySelectorAll(".seq"),
+      { opacity: 0, duration: 0.5, stagger: 0.5 },
+      "<"
+    );
+
+    ScrollTrigger.create({
+      trigger: targetSection.current,
+      start: "top bottom",
+      end: "bottom bottom",
+      scrub: 0,
+      animation: revealTl,
+    });
 
 
 
@@ -88,7 +131,7 @@ const Container = styled.div`
   }
   
   h1 {
-    ${tw`text-5xl font-bold mt-2`};
+    ${tw`md:text-5xl text-4xl font-bold mt-2`};
 
     @media screen and (max-width: 768px) {
       font-size: 2rem;
@@ -111,7 +154,7 @@ const ProjectItems = styled.div`
   ${tw`flex w-fit`}
   
   a {
-    ${tw`mr-16`}
+    ${tw`mr-10`}
     
     &:last-child {
       ${tw`mr-0`}
@@ -119,10 +162,10 @@ const ProjectItems = styled.div`
   }
   
   &.big {
-    ${tw`mt-20`}
+    ${tw`mt-12`}
   }
   &.small {
-    ${tw`mt-10`}
+    ${tw`mt-6`}
   }
   
   &::-webkit-scrollbar {

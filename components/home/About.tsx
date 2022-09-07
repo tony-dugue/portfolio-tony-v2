@@ -32,8 +32,8 @@ const About: React.FunctionComponent<Props> = (props:Props) => {
 
     ScrollTrigger.create({
       trigger: targetSection.current,
-      start: "center bottom",
-      end: "center 25%",
+      start: "center 80%",
+      end: "center top",
       scrub: 0,
       animation: timeline,
     });
@@ -76,13 +76,17 @@ const Container = styled.div`
   ${tw`2xl:container mx-auto xl:px-20 md:px-12 px-4`}
   
   &.big-height {
-    ${tw`pt-40 pb-16`}
+    ${tw`pt-20 pb-16`}
   }
   &.small-height {
-    ${tw`pt-48 pb-24`}
+    ${tw`pt-40 pb-24`}
   }
 
   h1 {
     ${tw`font-medium text-xl sm:text-3xl md:text-5xl`}
+  }
+  
+  .leading-tight {
+    ${tw`leading-tight`}
   }
 `

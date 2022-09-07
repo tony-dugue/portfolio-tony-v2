@@ -117,7 +117,7 @@ const SkillIntro = styled.div`
   } 
   
   h1 {
-    ${tw`text-5xl font-bold w-fit mt-2`}
+    ${tw`md:text-5xl text-4xl font-bold w-fit mt-2`}
   }
   
   h2 {
