@@ -11,6 +11,7 @@ import tw from "twin.macro";
 import Layout from "../components/common/layout/Layout"
 //import Hero from "../components/home/Hero"
 import HeroWithSvg from "../components/home/HeroWithSvg"
+import About from "../components/home/About"
 import Project from "../components/home/Project"
 import Quote from "../components/home/Quote"
 import Skill from "../components/home/Skill"
@@ -58,6 +59,7 @@ const Home: NextPage = () => {
           <Wrapper />
           <HeroWithSvg />
           {/*<Hero />*/}
+          <About clientHeight={clientHeight} />
           <Project clientHeight={clientHeight} />
           <Quote clientHeight={clientHeight} />
           <Skill />
