@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { gsap, Linear } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
-const svgColor = '#D0D6DF';
+const svgColor = '#9CA3AF';
 const animColor = '#FA5457';
 const separation = 450;
 const strokeWidth = 2;
@@ -42,7 +42,7 @@ const Timeline: React.FunctionComponent<Props> = (props:Props) => {
     if (timelineNode.converge) {
       y = y + curveLength - 6 * dotSize;
     }
-    const str = addText(timelineNode, y) + `<rect class='dot' width=${dotSize} height=${dotSize} fill='#111827' x=${x - dotSize / 2} y=${y - dotSize / 2} ></rect><circle cx=${x} cy=${y} r='7' stroke=${svgColor} class='dot' ></circle>`;
+    const str = addText(timelineNode, y) + `<rect class='dot' width=${dotSize} height=${dotSize} fill='#fafafa' x=${x - dotSize / 2} y=${y - dotSize / 2} ></rect><circle cx=${x} cy=${y} r='7' stroke=${animColor} class='dot' ></circle>`;
 
     return str;
   };
@@ -248,7 +248,7 @@ const Timeline: React.FunctionComponent<Props> = (props:Props) => {
 
       .from(svgContainer.current!.querySelectorAll('.line-13'), { scaleY: 0, duration: duration }, `start+=${12 * duration}`)
 
-      .from(svgContainer.current!.querySelectorAll('.line-14'), { scaleY: 0, duration: duration }, `start+=${13 * duration}`);
+      .from(svgContainer.current!.querySelectorAll('.line-14'), { scaleY: 0, duration: duration }, `start+=${13 * duration - 1}`);
 
   }, [timelineSvg, svgContainer, svgWidth, branch2X, screenContainer])
 
@@ -301,7 +301,7 @@ const Timeline: React.FunctionComponent<Props> = (props:Props) => {
 export default Timeline;
 
 const Section = styled.section`
-  ${tw`w-full relative select-none min-h-screen 2xl:container mx-auto py-8 xl:px-20 md:px-12 px-4 flex flex-col justify-center`}
+  ${tw`w-full relative select-none min-h-screen 2xl:container mx-auto py-8 xl:px-20 md:px-12 px-4 flex flex-col justify-center mt-40`}
 `
 
 const TimelineIntro = styled.div`

@@ -33,7 +33,7 @@ const Quote: React.FunctionComponent<Props> = (props:Props) => {
 
   return (
     <Section ref={targetSection}>
-      <Container style={ clientHeight > 650 ? { paddingTop: '40px', paddingBottom: '40px' } : { paddingTop: '60px', paddingBottom: '60px' } }>
+      <Container style={ clientHeight > 650 ? { paddingTop: '60px', paddingBottom: '60px' } : { paddingTop: '72px', paddingBottom: '72px' } }>
         <h1 ref={quoteRef}>
           Autodidacte, j&lsquo;aime aussi découvrir de nouveaux langages, frameworks, librairies, ... et travailler sur des<span className='text-strong'>&nbsp;projets variés</span> dans des domaines différents.</h1>
       </Container>

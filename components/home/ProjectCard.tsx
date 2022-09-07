@@ -61,6 +61,7 @@ export default ProjectCard;
 const ProjectCardLink = styled.a`
   max-width: calc(100vw - 2rem);
   flex: 1 0 auto;
+  //WebkitMaskImage: -webkit-radial-gradient(white, black),
   ${tw`overflow-hidden rounded-3xl`}
 `
 

@@ -105,9 +105,10 @@ export const TIMELINE: TimelineNode[] = [
       description: 'Description ...',
       logo: 'logo-marine.jpg'
     },
-    branch: 2,
+    branch: 1,
     type: 'checkpoint',
-    converge: true
+    converge: true,
+    parallel: 2
   },
   {
     content: '2019',

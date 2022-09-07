@@ -81,7 +81,7 @@ const Skills = () => {
 export default Skills;
 
 const Section = styled.section`
-  ${tw`w-full relative select-none`}
+  ${tw`w-full relative select-none mt-24`}
 `
 
 const Container = styled.div`
@@ -95,7 +95,7 @@ const Container = styled.div`
   }
 
   .skill-icons {
-    ${tw`flex flex-wrap`}
+    ${tw`flex flex-wrap transform-gpu`}
   }
 
   .skill-icon {
