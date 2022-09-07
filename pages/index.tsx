@@ -60,7 +60,7 @@ const Home: NextPage = () => {
           <HeroWithSvg />
           {/*<Hero />*/}
           <About clientHeight={clientHeight} />
-          <Project clientHeight={clientHeight} />
+          <Project clientHeight={clientHeight} isDesktop={isDesktop} />
           <Quote clientHeight={clientHeight} />
           <Skill />
           <Timeline isDesktop={isDesktop} />

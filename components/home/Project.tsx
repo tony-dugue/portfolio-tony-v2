@@ -9,20 +9,62 @@ import { Draggable } from "gsap/dist/Draggable";
 import ProjectCard from './ProjectCard'
 
 interface Props {
-  clientHeight: number
+  clientHeight: number,
+  isDesktop: boolean
 }
 
 const Project: React.FunctionComponent<Props> = (props:Props) => {
 
-  const { clientHeight } = props
+  const { clientHeight, isDesktop } = props
 
   const targetSection = useRef<HTMLDivElement>(null);
   const sectionTitle = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
 
-    gsap.registerPlugin(Draggable);
+    let projectsScrollTrigger: any;
+    let projectsTimeline: any;
 
+    if (isDesktop) {
+      [projectsTimeline, projectsScrollTrigger] = getProjectsSt();
+    } else {
+      const projectWrapper = targetSection.current!.querySelector(
+        ".project-wrapper"
+      ) as HTMLDivElement;
+      projectWrapper.style.width = "calc(100vw - 1rem)";
+      projectWrapper.style.overflowX = "scroll";
+    }
+
+    const [revealTimeline, revealScrollTrigger] = getRevealSt();
+
+    return () => {
+      projectsScrollTrigger && projectsScrollTrigger.kill();
+      projectsTimeline && projectsTimeline.kill();
+      revealScrollTrigger && revealScrollTrigger.kill();
+      revealTimeline && revealTimeline.progress(1);
+    };
+  }, [targetSection, sectionTitle, isDesktop]);
+
+  const getRevealSt = (): [GSAPTimeline, ScrollTrigger] => {
+    const revealTl = gsap.timeline({ defaults: { ease: Linear.easeNone } });
+    revealTl.from(
+      targetSection.current!.querySelectorAll(".seq"),
+      { opacity: 0, duration: 0.5, stagger: 0.5 },
+      "<"
+    );
+
+    const scrollTrigger = ScrollTrigger.create({
+      trigger: targetSection.current,
+      start: "top bottom",
+      end: "bottom bottom",
+      scrub: 0,
+      animation: revealTl,
+    });
+
+    return [revealTl, scrollTrigger];
+  };
+
+  const getProjectsSt = (): [GSAPTimeline, ScrollTrigger] => {
       const timeline = gsap.timeline({ defaults: { ease: Linear.easeNone } });
       const sidePadding = document.body.clientWidth - targetSection.current!.querySelector('.inner-container')!.clientWidth;
       const elementWidth = sidePadding + targetSection.current!.querySelector('.project-wrapper')!.clientWidth;
@@ -34,62 +76,21 @@ const Project: React.FunctionComponent<Props> = (props:Props) => {
         .to(targetSection.current, { x: width })
         .to(sectionTitle.current, { x: -width }, '<');
 
-    let projectScrollTrigger = ScrollTrigger.create({
+    const scrollTrigger = ScrollTrigger.create({
         trigger: targetSection.current,
         start: 'top top',
         end: duration,
-        scrub: 0.3,
+        scrub: 0,
         pin: true,
         animation: timeline,
         pinSpacing: 'margin'
       });
 
-    let proxy = document.createElement("div");
-
-    function updateProxy() {
-      if (projectScrollTrigger) {
-        gsap.set(proxy, {
-          x: -projectScrollTrigger.scroll(),
-          overwrite: "auto",
-        });
-      }
-    }
-
-    Draggable.create(proxy, {
-      trigger: targetSection.current,
-      type: "x",
-      throwProps: true,
-      onThrowUpdate: function () {
-        projectScrollTrigger.scroll(-this.x);
-      },
-      onDrag: function () {
-        projectScrollTrigger.scroll(-this.x);
-      },
-    });
-
-    window.addEventListener("wheel", updateProxy);
-
-    const revealTl = gsap.timeline({ defaults: { ease: Linear.easeNone } });
-    revealTl.from(
-      targetSection.current!.querySelectorAll(".seq"),
-      { opacity: 0, duration: 0.5, stagger: 0.5 },
-      "<"
-    );
-
-    ScrollTrigger.create({
-      trigger: targetSection.current,
-      start: "top bottom",
-      end: "bottom bottom",
-      scrub: 0,
-      animation: revealTl,
-    });
-
-
-
-  }, [targetSection, sectionTitle])
+    return [timeline, scrollTrigger];
+  };
 
   return (
-    <Section ref={targetSection} id={NAVLINKS[1].ref}>
+    <Section ref={targetSection} id={NAVLINKS[1].ref} className={isDesktop ? 'is-desktop' : ''}>
 
       <SectionWrapper>
         <Container ref={sectionTitle} className="inner-container">
@@ -101,6 +102,7 @@ const Project: React.FunctionComponent<Props> = (props:Props) => {
         <ProjectItems className={`project-wrapper ${(clientHeight > 650 ? 'big' : 'small')}`}>
           {PROJECTS.map( (project, index) => (
             <ProjectCard
+              isDesktop={isDesktop}
               key={project.name}
               {...project}
             />
@@ -115,7 +117,11 @@ const Project: React.FunctionComponent<Props> = (props:Props) => {
 export default Project;
 
 const Section = styled.section`
-  ${tw`w-full min-h-screen relative select-none 2xl:container mx-auto transform-gpu`}
+  ${tw`w-full relative select-none transform-gpu`}
+  
+  &.isDesktop {
+    ${tw`min-h-screen`}
+  }
 `
 
 const SectionWrapper = styled.div`
