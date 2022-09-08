@@ -42,7 +42,17 @@ export const SOCIAL_LINKS = [
   { name: 'facebook', url: 'https://duguetony.fr'}
 ]
 
-export const PROJECTS = [
+export interface IProject {
+  name: string;
+  image: string;
+  blurImage: string;
+  description: string;
+  gradient: string[];
+  url: string;
+  tech: string[];
+}
+
+export const PROJECTS: IProject[] = [
   {
     name: 'Firmain',
     image: '/images/projects/firmain.png',
@@ -87,188 +97,242 @@ export const SKILLS = {
   other: ['git', 'webpack', 'gulp', 'aftereffects']
 }
 
-export const TIMELINE: TimelineNode[] = [
-  {
-    content: '2020',
-    branch: 1,
-    type: 'year'
-  },
-  {
-    content: {
-      title: 'title ...',
-      description: 'Description ...',
-      logo: 'logo-marine.jpg'
-    },
-    branch: 2,
-    type: 'checkpoint',
-    diverge: true
-  },
-  {
-    content: {
-      title: 'title ...',
-      description: 'Description ...',
-      logo: 'logo-marine.jpg'
-    },
-    branch: 1,
-    type: 'checkpoint',
-    converge: true,
-    parallel: 2
-  },
-  {
-    content: '2019',
-    branch: 1,
-    type: 'year'
-  },
-  {
-    content: {
-      title: 'title ...',
-      description: 'Description ...',
-      logo: 'logo-marine.jpg'
-    },
-    branch: 1,
-    type: 'checkpoint'
-  },
-  {
-    content: {
-      title: 'title ...',
-      description: 'Description ...',
-      logo: 'logo-marine.jpg'
-    },
-    branch: 1,
-    type: 'checkpoint'
-  },
-  {
-    content: {
-      title: 'title ...',
-      description: 'Description ...',
-      logo: 'logo-marine.jpg'
-    },
-    branch: 1,
-    type: 'checkpoint'
-  },
-  {
-    content: '2018',
-    branch: 1,
-    type: 'year',
-  },
-  {
-    content: {
-      title: 'title ...',
-      description: 'Description ...',
-      logo: 'logo-marine.jpg'
-    },
-    branch: 1,
-    type: 'checkpoint',
-    diverge: true
-  },
-  {
-    content: {
-      title: 'title ...',
-      description: 'Description ...',
-    },
-    branch: 1,
-    type: 'checkpoint',
-    parallel: 2
-  },
-  {
-    content: '2017',
-    branch: 2,
-    type: 'year'
-  },
-  {
-    content: {
-      title: 'title ...',
-      description: 'Description ...',
-    },
-    branch: 2,
-    type: 'checkpoint',
-    parallel: 1
-  },
-  {
-    content: {
-      title: 'title ...',
-      description: 'Description ...',
-    },
-    branch: 1,
-    type: 'checkpoint',
-    parallel: 2
-  },
-  {
-    content: {
-      title: 'title ...',
-      description: 'Description ...',
-    },
-    branch: 2,
-    type: 'checkpoint',
-    parallel: 1
-  },
-  {
-    content: {
-      title: 'title ...',
-      description: 'Description ...',
-    },
-    branch: 1,
-    type: 'checkpoint',
-    parallel: 2
-  },
-  {
-    content: '2016',
-    branch: 2,
-    type: 'year'
-  },
-  {
-    content: {
-      title: 'title ...',
-      description: 'Description ...',
-    },
-    branch: 2,
-    type: 'checkpoint',
-    converge: true
-  },
-  {
-    content: '',
-    branch: 1,
-    type: 'year'
-  },
-  {
-    content: {
-      title: 'title ...',
-      description: 'Description ...',
-      logo: 'logo-marine.jpg'
-    },
-    branch: 1,
-    type: 'checkpoint'
-  },
-  {
-    content: '2014',
-    branch: 1,
-    type: 'year'
-  },
-  {
-    content: {
-      title: 'title ...',
-      description: 'Description ...',
-      logo: 'logo-marine.jpg'
-
-    },
-    branch: 1,
-    type: 'checkpoint'
-  }
-]
-
-export interface TimelineNode {
-  content: string | TimelineContent,
-  branch: 1 | 2,
-  type: 'year' | 'checkpoint',
-  converge?: boolean,
-  diverge?: boolean,
-  parallel?: 1 | 2
+export enum Branch {
+  LEFT = "leftSide",
+  RIGHT = "rightSide",
 }
 
-export interface TimelineContent {
-  title: string,
-  description: string,
-  logo?: string
+export enum NodeTypes {
+  CONVERGE = "converge",
+  DIVERGE = "diverge",
+  CHECKPOINT = "checkpoint",
+}
+
+export enum ItemSize {
+  SMALL = "small",
+  LARGE = "large",
+}
+
+export const TIMELINE: Array<TimelineNode> = [
+  {
+    type: NodeTypes.CHECKPOINT,
+    title: "2021",
+    size: ItemSize.LARGE,
+    shouldDrawLine: false,
+    alignment: Branch.LEFT,
+  },
+  {
+    type: NodeTypes.CHECKPOINT,
+    title: "title ...",
+    size: ItemSize.SMALL,
+    subtitle: "Description ...",
+    image: "/images/logos/logo-marine.jpg",
+    shouldDrawLine: true,
+    alignment: Branch.LEFT,
+  },
+  {
+    type: NodeTypes.CHECKPOINT,
+    title: "2020",
+    size: ItemSize.LARGE,
+    shouldDrawLine: false,
+    alignment: Branch.LEFT,
+  },
+  {
+    type: NodeTypes.DIVERGE,
+  },
+  {
+    type: NodeTypes.CHECKPOINT,
+    title: "title ...",
+    size: ItemSize.SMALL,
+    subtitle: "Description ...",
+    image: "/images/logos/logo-marine.jpg",
+    shouldDrawLine: true,
+    alignment: Branch.RIGHT,
+  },
+  {
+    type: NodeTypes.CHECKPOINT,
+    title: "title ...",
+    size: ItemSize.SMALL,
+    subtitle: "Description ...",
+    image: "/images/logos/logo-marine.jpg",
+    shouldDrawLine: true,
+    alignment: Branch.LEFT,
+  },
+  {
+    type: NodeTypes.CONVERGE,
+  },
+  {
+    type: NodeTypes.CHECKPOINT,
+    title: "2019",
+    size: ItemSize.LARGE,
+    shouldDrawLine: false,
+    alignment: Branch.LEFT,
+  },
+  {
+    type: NodeTypes.CHECKPOINT,
+    title: "title ...",
+    size: ItemSize.SMALL,
+    subtitle: "Description ...",
+    image: "/images/logos/logo-marine.jpg",
+    shouldDrawLine: true,
+    alignment: Branch.LEFT,
+  },
+  {
+    type: NodeTypes.CHECKPOINT,
+    title: "title ...",
+    size: ItemSize.SMALL,
+    subtitle: "Description ...",
+    image: "/images/logos/logo-marine.jpg",
+    shouldDrawLine: true,
+    alignment: Branch.LEFT,
+  },
+  {
+    type: NodeTypes.CHECKPOINT,
+    title: "title ...",
+    size: ItemSize.SMALL,
+    subtitle: "Description ...",
+    image: "/images/logos/logo-marine.jpg",
+    shouldDrawLine: true,
+    alignment: Branch.LEFT,
+  },
+
+  {
+    type: NodeTypes.CHECKPOINT,
+    title: "2018",
+    size: ItemSize.LARGE,
+    shouldDrawLine: false,
+    alignment: Branch.LEFT,
+  },
+  {
+    type: NodeTypes.DIVERGE,
+  },
+  {
+    type: NodeTypes.CHECKPOINT,
+    title: "title ...",
+    size: ItemSize.SMALL,
+    subtitle: "Description ...",
+    image: "/images/logos/logo-marine.jpg",
+    shouldDrawLine: true,
+    alignment: Branch.LEFT,
+  },
+  {
+    type: NodeTypes.CHECKPOINT,
+    title: "title ...",
+    size: ItemSize.SMALL,
+    subtitle: "Description ...",
+    image: "/images/logos/logo-marine.jpg",
+    shouldDrawLine: true,
+    alignment: Branch.LEFT,
+  },
+
+  {
+    type: NodeTypes.CHECKPOINT,
+    title: "2017",
+    size: ItemSize.LARGE,
+    shouldDrawLine: false,
+    alignment: Branch.RIGHT,
+  },
+  {
+    type: NodeTypes.CHECKPOINT,
+    title: "title ...",
+    size: ItemSize.SMALL,
+    subtitle: "Description ...",
+    shouldDrawLine: true,
+    alignment: Branch.RIGHT,
+  },
+
+  {
+    type: NodeTypes.CHECKPOINT,
+    title: "title ...",
+    size: ItemSize.SMALL,
+    subtitle: "Description ...",
+    shouldDrawLine: true,
+    alignment: Branch.LEFT,
+  },
+
+  {
+    type: NodeTypes.CHECKPOINT,
+    title: "title ...",
+    size: ItemSize.SMALL,
+    subtitle: "Description ...",
+    shouldDrawLine: true,
+    alignment: Branch.RIGHT,
+  },
+
+  {
+    type: NodeTypes.CHECKPOINT,
+    title: "title ...",
+    size: ItemSize.SMALL,
+    subtitle: "Description ...",
+    shouldDrawLine: true,
+    alignment: Branch.LEFT,
+  },
+  {
+    type: NodeTypes.CHECKPOINT,
+    title: "2016",
+    size: ItemSize.LARGE,
+    shouldDrawLine: false,
+    alignment: Branch.RIGHT,
+  },
+  {
+    type: NodeTypes.CHECKPOINT,
+    title: "title ...",
+    size: ItemSize.SMALL,
+    subtitle: "Description ...",
+    shouldDrawLine: true,
+    alignment: Branch.RIGHT,
+  },
+  {
+    type: NodeTypes.CONVERGE,
+  },
+  {
+    type: NodeTypes.CHECKPOINT,
+    title: "",
+    size: ItemSize.LARGE,
+    shouldDrawLine: false,
+    alignment: Branch.LEFT,
+  },
+  {
+    type: NodeTypes.CHECKPOINT,
+    title: "title ...",
+    size: ItemSize.SMALL,
+    subtitle: "Description ...",
+    image: "/images/logos/logo-marine.jpg",
+    shouldDrawLine: true,
+    alignment: Branch.LEFT,
+  },
+  {
+    type: NodeTypes.CHECKPOINT,
+    title: "2014",
+    size: ItemSize.LARGE,
+    shouldDrawLine: false,
+    alignment: Branch.LEFT,
+  },
+  {
+    type: NodeTypes.CHECKPOINT,
+    title: "title ...",
+    size: ItemSize.SMALL,
+    subtitle: "Description ...",
+    image: "/images/logos/logo-marine.jpg",
+    shouldDrawLine: true,
+    alignment: Branch.LEFT,
+  },
+];
+
+export type TimelineNode = CheckpointNode | BranchNode;
+
+export interface CheckpointNode {
+  type: NodeTypes.CHECKPOINT;
+  title: string;
+  subtitle?: string;
+  size: ItemSize;
+  image?: string;
+  shouldDrawLine: boolean;
+  alignment: Branch;
+}
+
+export interface BranchNode {
+  type: NodeTypes.CONVERGE | NodeTypes.DIVERGE;
 }
 
 export const GTAG = ''

@@ -112,8 +112,8 @@ const ProjectSection = ({ isDesktop }: { isDesktop: boolean }) => {
             <ProjectCard
               isDesktop={isDesktop}
               classes={idx !== PROJECTS.length - 1 ? "with-margin-right" : ''}
+              project={project}
               key={project.name}
-              {...project}
             />
           ))}
         </ProjectItems>

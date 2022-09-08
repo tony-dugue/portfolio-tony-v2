@@ -284,6 +284,19 @@ const GlobalStyles = createGlobalStyle`
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+
+  .section-container {
+    //@apply 2xl:container xl:px-20 md:px-12 px-4 mx-auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+
+    @media (min-width: 768px) {
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+  }
 `
 
 export default GlobalStyles

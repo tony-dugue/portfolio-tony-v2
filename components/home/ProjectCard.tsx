@@ -1,25 +1,14 @@
 import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import VanillaTilt from 'vanilla-tilt';
+import { IProject } from '../../constants';
 
 import styled from "styled-components";
 import tw from "twin.macro";
 
-interface Props {
-  classes: string,
-  isDesktop: boolean,
-  name: string,
-  image: string,
-  blurImage: string,
-  description: string,
-  gradient: string[],
-  url: string,
-  tech: string[]
-}
+const ProjectCard = ({ project, classes = "", isDesktop }: { project: IProject; classes: string; isDesktop: boolean; }) => {
 
-const ProjectCard: React.FunctionComponent<Props> = (props:Props) => {
-
-  const { classes, isDesktop, name, image, blurImage, description, gradient: [stop1, stop2], url, tech } = props
+  const { name, tech, image, blurImage, description, gradient: [stop1, stop2], url } = project
 
   const projectCard = useRef<HTMLDivElement>(null);
 

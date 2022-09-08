@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { motion } from 'framer-motion'
 
 interface Props {
-  isDesktop: React.ReactNode
+  isDesktop: boolean
 }
 
 const Cursor = (props:Props) => {
