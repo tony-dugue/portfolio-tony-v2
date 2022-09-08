@@ -9,44 +9,21 @@ import ProjectCard from './ProjectCard'
 
 const ProjectSection = ({ isDesktop }: { isDesktop: boolean }) => {
 
-  const targetSection = useRef<HTMLDivElement>(null);
-  const sectionTitle = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<null | HTMLDivElement>(null);
+  const sectionTitleElementRef = useRef<null | HTMLDivElement>(null);
 
-  useEffect(() => {
-
-    let projectsScrollTrigger: any;
-    let projectsTimeline: any;
-
-    if (isDesktop) {
-      [projectsTimeline, projectsScrollTrigger] = getProjectsSt();
-    } else {
-      const projectWrapper = targetSection.current!.querySelector(
-        ".project-wrapper"
-      ) as HTMLDivElement;
-      projectWrapper.style.width = "calc(100vw - 1rem)";
-      projectWrapper.style.overflowX = "scroll";
-    }
-
-    const [revealTimeline, revealScrollTrigger] = getRevealSt();
-
-    return () => {
-      projectsScrollTrigger && projectsScrollTrigger.kill();
-      projectsTimeline && projectsTimeline.kill();
-      revealScrollTrigger && revealScrollTrigger.kill();
-      revealTimeline && revealTimeline.progress(1);
-    };
-  }, [targetSection, sectionTitle, isDesktop]);
-
-  const getRevealSt = (): [GSAPTimeline, ScrollTrigger] => {
+  const initRevealAnimation = (
+    targetSectionRef: any
+  ): [GSAPTimeline, ScrollTrigger] => {
     const revealTl = gsap.timeline({ defaults: { ease: Linear.easeNone } });
     revealTl.from(
-      targetSection.current!.querySelectorAll(".seq"),
+      targetSectionRef.current.querySelectorAll(".seq"),
       { opacity: 0, duration: 0.5, stagger: 0.5 },
       "<"
     );
 
     const scrollTrigger = ScrollTrigger.create({
-      trigger: targetSection.current,
+      trigger: targetSectionRef.current,
       start: "top bottom",
       end: "bottom bottom",
       scrub: 0,
@@ -56,40 +33,79 @@ const ProjectSection = ({ isDesktop }: { isDesktop: boolean }) => {
     return [revealTl, scrollTrigger];
   };
 
-  const getProjectsSt = (): [GSAPTimeline, ScrollTrigger] => {
-      const timeline = gsap.timeline({ defaults: { ease: Linear.easeNone } });
-      const sidePadding = document.body.clientWidth - targetSection.current!.querySelector('.inner-container')!.clientWidth;
-      const elementWidth = sidePadding + targetSection.current!.querySelector('.project-wrapper')!.clientWidth;
-      targetSection.current!.style.width = `${elementWidth}px`;
-      const width = window.innerWidth - elementWidth;
-      const duration = `${(elementWidth / window.innerHeight * 100)}%`;
+  const initProjectsAnimation = (
+    targetSectionRef: any,
+    sectionTitleElementRef: any,
+  ): [GSAPTimeline, ScrollTrigger] => {
 
-      timeline
-        .to(targetSection.current, { x: width })
-        .to(sectionTitle.current, { x: -width }, '<');
+    const timeline = gsap.timeline({ defaults: { ease: Linear.easeNone } });
+    const sidePadding =
+      document.body.clientWidth -
+      targetSectionRef.current.querySelector(".inner-container")!.clientWidth;
+    const elementWidth = sidePadding + targetSectionRef.current.querySelector(".project-wrapper")!.clientWidth;
+    targetSectionRef.current!.style.width = `${elementWidth}px`;
+    const width = window.innerWidth - elementWidth;
+    const duration = `${(elementWidth / window.innerHeight) * 100}%`;
+    timeline
+      .to(targetSectionRef.current, { x: width })
+      .to(sectionTitleElementRef.current, { x: -width }, "<");
 
     const scrollTrigger = ScrollTrigger.create({
-        trigger: targetSection.current,
-        start: 'top top',
-        end: duration,
-        scrub: 0,
-        pin: true,
-        animation: timeline,
-        pinSpacing: 'margin'
-      });
+      trigger: targetSectionRef.current,
+      start: "top top",
+      end: duration,
+      scrub: 0,
+      pin: true,
+      animation: timeline,
+      pinSpacing: "margin",
+    });
 
     return [timeline, scrollTrigger];
   };
 
+
+
+  useEffect(() => {
+
+    let projectsScrollTrigger: ScrollTrigger | undefined;
+    let projectsTimeline: GSAPTimeline | undefined;
+
+    if (isDesktop) {
+      [projectsTimeline, projectsScrollTrigger] = initProjectsAnimation(
+        sectionRef,
+        sectionTitleElementRef
+      );
+    } else {
+      const projectWrapper = sectionRef.current!.querySelector(
+        ".project-wrapper"
+      ) as HTMLDivElement;
+      projectWrapper.style.width = "calc(100vw - 1rem)";
+      projectWrapper.style.overflowX = "scroll";
+    }
+
+    const [revealTimeline, revealScrollTrigger] =
+      initRevealAnimation(sectionRef);
+
+    return () => {
+      projectsScrollTrigger && projectsScrollTrigger.kill();
+      projectsTimeline && projectsTimeline.kill();
+      revealScrollTrigger && revealScrollTrigger.kill();
+      revealTimeline && revealTimeline.progress(1);
+    };
+  }, [sectionRef, sectionTitleElementRef, isDesktop]);
+
+  const { ref: projectsSectionRef } = NAVLINKS[1];
+
   return (
-    <Section ref={targetSection} id={NAVLINKS[1].ref} className={isDesktop ? 'is-desktop' : ''}>
+    <Section ref={sectionRef} id={projectsSectionRef} className={`section-container ${isDesktop ? 'is-desktop' : ''}`}>
 
       <SectionWrapper>
-        <Container ref={sectionTitle} className="inner-container">
-          <p>PROJETS</p>
-          <h1 className="text-gradient w-fit">Mes réalisations</h1>
-          <h2>Passionné depuis toujours par les nouvelles technologies mais aussi par le design, je conçois et réalise des applications web intuitive et fonctionnelle mais toujours avec une dose de créativité.</h2>
-        </Container>
+
+        <ProjectTitle ref={sectionTitleElementRef} className="inner-container">
+          <p className="seq">PROJETS</p>
+          <h1 className="text-gradient w-fit seq">Mes réalisations</h1>
+          <h2 className="seq">Passionné depuis toujours par les nouvelles technologies mais aussi par le design, je conçois et réalise des applications web intuitive et fonctionnelle mais toujours avec une dose de créativité.</h2>
+        </ProjectTitle>
 
         <ProjectItems className="project-wrapper seq">
           {PROJECTS.map( (project, idx) => (
@@ -110,7 +126,7 @@ const ProjectSection = ({ isDesktop }: { isDesktop: boolean }) => {
 export default ProjectSection;
 
 const Section = styled.section`
-  ${tw`w-full relative select-none transform-gpu`}
+  ${tw`w-full relative select-none transform-gpu flex-col flex py-8 justify-center`}
   
   &.isDesktop {
     ${tw`min-h-screen`}
@@ -121,12 +137,12 @@ const SectionWrapper = styled.div`
   ${tw`flex-col flex py-8 xl:px-20 md:px-12 px-4 justify-center h-full`}
 `
 
-const Container = styled.div`
-  ${tw`flex flex-col  transform-gpu`}
+const ProjectTitle = styled.div`
+  ${tw`flex flex-col transform-gpu`}
   
   p {
     color: ${props => props.theme.colorPrimary};
-    ${tw`uppercase tracking-widest text-sm`}
+    ${tw`uppercase tracking-widest text-sm `}
   }
   
   h1 {

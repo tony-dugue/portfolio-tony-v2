@@ -7,28 +7,37 @@ import tw from "twin.macro";
 import { gsap, Linear } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
-const Skills = () => {
+const SkillSection = () => {
 
-  const targetSection = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-
+  const initRevealAnimation = (
+    targetSection: any
+  ): ScrollTrigger => {
     const revealTl = gsap.timeline({ defaults: { ease: Linear.easeNone } });
-    revealTl
-      .from(targetSection.current!.querySelectorAll('.seq'), { opacity: 0, duration: 0.5, stagger: 0.5 }, '<');
+    revealTl.from(
+      targetSection.current.querySelectorAll(".seq"),
+      { opacity: 0, duration: 0.5, stagger: 0.5 },
+      "<"
+    );
 
-    ScrollTrigger.create({
-      trigger: targetSection.current!.querySelector('.skills-wrapper'),
-      start: '100px bottom',
+    return ScrollTrigger.create({
+      trigger: targetSection.current.querySelector(".skills-wrapper"),
+      start: "100px bottom",
       end: `center center`,
       animation: revealTl,
       scrub: 0,
     });
+  };
 
-  }, [targetSection])
+  useEffect(() => {
+    const revealAnimationRef = initRevealAnimation(sectionRef);
+
+    return revealAnimationRef.kill;
+  }, [sectionRef]);
 
   return (
-    <Section id={NAVLINKS[2].ref} ref={targetSection}>
+    <Section id={NAVLINKS[2].ref} ref={sectionRef} className="section-container">
       <Container>
 
         <img src='/svgs/pattern-right.svg' className='pattern-right' loading='lazy' height={700} width={320} />
@@ -78,14 +87,14 @@ const Skills = () => {
   )
 }
 
-export default Skills;
+export default SkillSection;
 
 const Section = styled.section`
-  ${tw`w-full relative select-none mt-24`}
+  ${tw`w-full relative select-none mb-24 py-12 flex flex-col justify-center`}
 `
 
 const Container = styled.div`
-  ${tw`2xl:container mx-auto py-12 xl:px-20 md:px-12 px-4 flex flex-col justify-center`}
+  ${tw`2xl:container py-12 xl:px-20 md:px-12 px-4 flex flex-col justify-center`}
   
   .pattern-left {
     ${tw`absolute left-0 -bottom-1/3 w-1/12 max-w-xs md:block hidden`}
@@ -113,7 +122,7 @@ const SkillIntro = styled.div`
   
   p {
     color: ${props => props.theme.colorPrimary};
-    ${tw`uppercase tracking-widest text-sm `}
+    ${tw`uppercase tracking-widest text-sm`}
   } 
   
   h1 {
@@ -138,7 +147,7 @@ const SkillTop = styled.div`
 `
 
 const SkillBottom = styled.div`
-  ${tw`flex flex-wrap mt-5`}
+  ${tw`flex flex-wrap mt-10`}
   
   .top {
     ${tw`mr-6 mb-6`}

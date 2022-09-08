@@ -1,48 +1,70 @@
 import React, { useEffect, useRef } from 'react'
 import { gsap, Linear } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+
 import styled from "styled-components";
 import tw from "twin.macro";
 
 const CollaborationSection = () => {
 
   const quoteRef = useRef<HTMLDivElement>(null);
-  const targetSection = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-
-    const smallScreen = document.body.clientWidth < 767;
-
+  const initTextAnimation = (targetSection: any): ScrollTrigger => {
     const timeline = gsap.timeline({ defaults: { ease: Linear.easeNone } });
-
     timeline
       .from(quoteRef.current, { opacity: 0, duration: 2 })
-      .to(quoteRef.current!.querySelector('.text-strong'), { backgroundPositionX: '100%', duration: 1 });
+      .to(quoteRef.current!.querySelector(".text-strong"), {
+        backgroundPositionX: "100%",
+        duration: 1,
+      });
 
-    const slidingTimeline = gsap.timeline({ defaults: { ease: Linear.easeNone } });
-
-    slidingTimeline.to(targetSection.current!.querySelector('.ui-left'), { xPercent: smallScreen ? -500 : -150 })
-      .from(targetSection.current!.querySelector('.ui-right'), { xPercent: smallScreen ? -500 : -150 }, '<')
-
-    ScrollTrigger.create({
+    return ScrollTrigger.create({
       trigger: targetSection.current,
-      start: 'center bottom',
-      end: 'center center',
+      start: "center bottom",
+      end: "center center",
       scrub: 0,
       animation: timeline,
     });
+  };
 
-    ScrollTrigger.create({
+  const initSlidingTextAnimation = (targetSection: any) => {
+    const smallScreen = document.body.clientWidth < 767;
+
+    const slidingTl = gsap.timeline({ defaults: { ease: Linear.easeNone } });
+
+    slidingTl
+      .to(targetSection.current.querySelector(".ui-left"), {
+        xPercent: smallScreen ? -500 : -150,
+      })
+      .from(
+        targetSection.current.querySelector(".ui-right"),
+        { xPercent: smallScreen ? -500 : -150 },
+        "<"
+      );
+
+    return ScrollTrigger.create({
       trigger: targetSection.current,
-      start: 'top bottom',
-      end: 'bottom top',
+      start: "top bottom",
+      end: "bottom top",
       scrub: 0,
-      animation: slidingTimeline,
+      animation: slidingTl,
     });
-  }, [quoteRef, targetSection])
+  };
+
+  useEffect(() => {
+    const textAnimation = initTextAnimation(sectionRef);
+
+    const slidingAnimation = initSlidingTextAnimation(sectionRef);
+
+    return () => {
+      textAnimation.kill();
+      slidingAnimation.kill();
+    };
+  }, [quoteRef, sectionRef]);
 
   return (
-    <Section ref={targetSection} className="section-container">
+    <Section ref={sectionRef} className="section-container">
 
       <Container>
         <p className='ui-left'>
@@ -63,7 +85,7 @@ const CollaborationSection = () => {
 export default CollaborationSection;
 
 const Section = styled.section`
-  ${tw`w-full relative select-none`}
+  ${tw`w-full relative select-none tall:py-36 py-48 flex flex-col`}
 `
 
 const Container = styled.div`
