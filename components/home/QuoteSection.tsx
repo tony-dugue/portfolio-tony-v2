@@ -4,13 +4,7 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import styled from "styled-components";
 import tw from "twin.macro";
 
-interface Props {
-  clientHeight: number;
-}
-
-const QuoteSection: React.FunctionComponent<Props> = (props:Props) => {
-
-  const { clientHeight } = props
+const QuoteSection = () => {
 
   const quoteRef = useRef<HTMLDivElement>(null);
   const targetSection = useRef<HTMLDivElement>(null);
@@ -33,7 +27,7 @@ const QuoteSection: React.FunctionComponent<Props> = (props:Props) => {
 
   return (
     <Section ref={targetSection}>
-      <Container style={ clientHeight > 650 ? { paddingTop: '60px', paddingBottom: '60px' } : { paddingTop: '72px', paddingBottom: '72px' } }>
+      <Container className="section-container">
         <h1 ref={quoteRef}>
           Autodidacte, j&lsquo;aime aussi découvrir de nouveaux langages, frameworks, librairies, ... et travailler sur des<span className='text-strong'>&nbsp;projets variés</span> dans des domaines différents.</h1>
       </Container>
@@ -48,7 +42,7 @@ const Section = styled.section`
 `
 
 const Container = styled.div`
-  ${tw`2xl:container py-60 mx-auto xl:px-20 md:px-12 px-4`}
+  ${tw`tall:py-60 py-72`}
   
   h1 {
     ${tw`font-medium text-3xl md:text-5xl text-center`}

@@ -5,6 +5,7 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 interface Props {
+  classes: string,
   isDesktop: boolean,
   name: string,
   image: string,
@@ -17,7 +18,7 @@ interface Props {
 
 const ProjectCard: React.FunctionComponent<Props> = (props:Props) => {
 
-  const { isDesktop, name, image, blurImage, description, gradient, url, tech } = props
+  const { classes, isDesktop, name, image, blurImage, description, gradient, url, tech } = props
 
   const projectCard = useRef<HTMLDivElement>(null);
 
@@ -33,7 +34,7 @@ const ProjectCard: React.FunctionComponent<Props> = (props:Props) => {
 
 
   return (
-    <ProjectCardLink href={url} target='_blank' rel='noreferrer' className='link' style={{ maxWidth: isDesktop ? "calc(100vw - 2rem)" : "calc(100vw - 4rem)" }}>
+    <ProjectCardLink href={url} target='_blank' rel='noreferrer' className={`link ${classes}`} style={{ maxWidth: isDesktop ? "calc(100vw - 2rem)" : "calc(100vw - 4rem)" }}>
       <ProjectCardWrapper ref={projectCard} style={{ background: `linear-gradient(90deg, ${gradient[0]} 0%, ${gradient[1]} 100%)` }}>
 
         <img src='/svgs/project-bg.svg' alt='Project' className="project-img-first" />
@@ -65,6 +66,10 @@ const ProjectCardLink = styled.a`
   flex: 1 0 auto;
   //WebkitMaskImage: -webkit-radial-gradient(white, black),
   ${tw`overflow-hidden rounded-3xl`}
+  
+  &.with-margin-right {
+    ${tw`md:mr-10 mr-6`}
+  }
 `
 
 const ProjectCardWrapper = styled.div`

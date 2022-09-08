@@ -4,44 +4,45 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import styled from "styled-components";
 import tw from "twin.macro";
 
-interface Props {
-  clientHeight: number
-}
-
-const AboutSection: React.FunctionComponent<Props> = (props:Props) => {
-
-  const { clientHeight } = props
+const AboutSection = () => {
 
   const quoteRef = useRef<HTMLDivElement>(null);
   const targetSection = useRef<HTMLDivElement>(null);
 
+  const initAboutAnimation = (quoteRef: any, targetSection: any): ScrollTrigger => {
+  const timeline = gsap.timeline({
+    defaults: { ease: Linear.easeNone, duration: 0.1 },
+  });
+
+  timeline
+    .fromTo(quoteRef.current!.querySelector(".about-1"), { opacity: 0.2 }, { opacity: 1 })
+    .to(quoteRef.current!.querySelector(".about-1"), {opacity: 0.2, delay: 0.5,})
+
+    .fromTo(quoteRef.current!.querySelector(".about-2"), { opacity: 0.2 }, { opacity: 1 }, "<")
+    .to(quoteRef.current!.querySelector(".about-2"), {opacity: 0.2, delay: 0.5,})
+
+    .fromTo(quoteRef.current!.querySelector(".about-3"), { opacity: 0.2 }, { opacity: 1 }, "<")
+    .to(quoteRef.current!.querySelector(".about-3"), {opacity: 0.2, delay: 1,});
+
+    const scrollTriggerInstance = ScrollTrigger.create({
+    trigger: targetSection.current,
+    start: "center 80%",
+    end: "center top",
+    scrub: 0,
+    animation: timeline,
+  });
+    return scrollTriggerInstance;
+  };
+
   useEffect(() => {
-    const timeline = gsap.timeline({
-      defaults: { ease: Linear.easeNone, duration: 0.1 },
-    });
+    const aboutScrollTriggerInstance = initAboutAnimation(quoteRef, targetSection);
 
-    timeline
-      .fromTo(quoteRef.current!.querySelector(".about-1"), { opacity: 0.2 }, { opacity: 1 })
-      .to(quoteRef.current!.querySelector(".about-1"), {opacity: 0.2, delay: 0.5,})
-
-      .fromTo(quoteRef.current!.querySelector(".about-2"), { opacity: 0.2 }, { opacity: 1 }, "<")
-      .to(quoteRef.current!.querySelector(".about-2"), {opacity: 0.2, delay: 0.5,})
-
-      .fromTo(quoteRef.current!.querySelector(".about-3"), { opacity: 0.2 }, { opacity: 1 }, "<")
-      .to(quoteRef.current!.querySelector(".about-3"), {opacity: 0.2, delay: 1,});
-
-    ScrollTrigger.create({
-      trigger: targetSection.current,
-      start: "center 80%",
-      end: "center top",
-      scrub: 0,
-      animation: timeline,
-    });
+    return aboutScrollTriggerInstance.kill;
   }, [quoteRef, targetSection]);
 
   return (
-    <Section ref={targetSection}>
-      <Container className={`${ clientHeight > 650 ? "big-height" : "small-height"}`}>
+    <Section ref={targetSection} className="section-container">
+      <Container>
 
         <h1 ref={quoteRef}>
           <span className="about-1 leading-tight">
@@ -69,7 +70,7 @@ const AboutSection: React.FunctionComponent<Props> = (props:Props) => {
 export default AboutSection;
 
 const Section = styled.section`
-  ${tw`w-full relative select-none`}
+  ${tw`tall:pt-20 tall:pb-16 pt-40 pb-24 w-full relative select-none`}
 `
 
 const Container = styled.div`
@@ -83,7 +84,7 @@ const Container = styled.div`
   }
 
   h1 {
-    ${tw`font-medium text-xl sm:text-3xl md:text-5xl`}
+    ${tw`font-medium text-lg text-2xl sm:text-3xl md:text-5xl`}
   }
   
   .leading-tight {

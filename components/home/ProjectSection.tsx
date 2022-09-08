@@ -7,14 +7,7 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
 import ProjectCard from './ProjectCard'
 
-interface Props {
-  clientHeight: number,
-  isDesktop: boolean
-}
-
-const ProjectSection: React.FunctionComponent<Props> = (props:Props) => {
-
-  const { clientHeight, isDesktop } = props
+const ProjectSection = ({ isDesktop }: { isDesktop: boolean }) => {
 
   const targetSection = useRef<HTMLDivElement>(null);
   const sectionTitle = useRef<HTMLDivElement>(null);
@@ -98,10 +91,11 @@ const ProjectSection: React.FunctionComponent<Props> = (props:Props) => {
           <h2>Passionné depuis toujours par les nouvelles technologies mais aussi par le design, je conçois et réalise des applications web intuitive et fonctionnelle mais toujours avec une dose de créativité.</h2>
         </Container>
 
-        <ProjectItems className={`project-wrapper ${(clientHeight > 650 ? 'big' : 'small')}`}>
-          {PROJECTS.map( (project, index) => (
+        <ProjectItems className="project-wrapper seq">
+          {PROJECTS.map( (project, idx) => (
             <ProjectCard
               isDesktop={isDesktop}
+              classes={idx !== PROJECTS.length - 1 ? "with-margin-right" : ''}
               key={project.name}
               {...project}
             />
@@ -156,7 +150,7 @@ const Container = styled.div`
 
 const ProjectItems = styled.div`
   width: fit-content;
-  ${tw`flex w-fit`}
+  ${tw`tall:mt-12 mt-6 flex w-fit`}
   
   a {
     ${tw`mr-10`}

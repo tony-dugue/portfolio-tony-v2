@@ -29,12 +29,11 @@ const Home: NextPage = () => {
   gsap.config({ nullTargetWarn: false });
 
   const [isDesktop, setIsDesktop] = useState(true);
-  const [clientHeight, setClientHeight] = useState(0);
 
-  let timer: any = null;
+  let timer: NodeJS.Timeout | null = null;
 
   const debouncedDimensionCalculator = () => {
-    clearTimeout(timer);
+    clearTimeout(Number(timer));
     timer = setTimeout(() => {
       const isDesktopResult =
         typeof window.orientation === "undefined" &&
@@ -43,7 +42,6 @@ const Home: NextPage = () => {
       window.history.scrollRestoration = "manual";
 
       setIsDesktop(isDesktopResult);
-      setClientHeight(window.innerHeight);
     }, DEBOUNCE_TIME);
   };
 
@@ -70,12 +68,12 @@ const Home: NextPage = () => {
           {renderBackdrop()}
           <HeroSection />
           {/*<Hero />*/}
-          <AboutSection clientHeight={clientHeight} />
-          <ProjectSection clientHeight={clientHeight} isDesktop={isDesktop} />
-          <QuoteSection clientHeight={clientHeight} />
+          <AboutSection />
+          <ProjectSection isDesktop={isDesktop} />
+          <QuoteSection />
           <Skill />
           <TimelineSection isDesktop={isDesktop} />
-          <CollaborationSection clientHeight={clientHeight} />
+          <CollaborationSection />
           <Footer />
         </Main>
 
