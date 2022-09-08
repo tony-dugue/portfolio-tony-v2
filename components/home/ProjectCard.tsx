@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import VanillaTilt from 'vanilla-tilt';
+
 import styled from "styled-components";
 import tw from "twin.macro";
 
@@ -18,7 +19,7 @@ interface Props {
 
 const ProjectCard: React.FunctionComponent<Props> = (props:Props) => {
 
-  const { classes, isDesktop, name, image, blurImage, description, gradient, url, tech } = props
+  const { classes, isDesktop, name, image, blurImage, description, gradient: [stop1, stop2], url, tech } = props
 
   const projectCard = useRef<HTMLDivElement>(null);
 
@@ -35,13 +36,13 @@ const ProjectCard: React.FunctionComponent<Props> = (props:Props) => {
 
   return (
     <ProjectCardLink href={url} target='_blank' rel='noreferrer' className={`link ${classes}`} style={{ maxWidth: isDesktop ? "calc(100vw - 2rem)" : "calc(100vw - 4rem)" }}>
-      <ProjectCardWrapper ref={projectCard} style={{ background: `linear-gradient(90deg, ${gradient[0]} 0%, ${gradient[1]} 100%)` }}>
+      <ProjectCardWrapper ref={projectCard} style={{ background: `linear-gradient(90deg, ${stop1} 0%, ${stop2} 100%)` }}>
 
-        <img src='/svgs/project-bg.svg' alt='Project' className="project-img-first" />
+        <Image src='/svgs/project-bg.svg' layout="fill" alt='Project' className="project-img-first" />
         <Image placeholder='blur' blurDataURL={blurImage} src={image} alt={name} layout='fill' className="project-img-second" />
 
-        <div className="tech-ctr-first" style={{ background: `linear-gradient(180deg, ${gradient[0]} 0%, rgba(0,0,0,0) 100%)` }}></div>
-        <div className="tech-ctr-second" style={{ background: `linear-gradient(0deg, ${gradient[0]} 10%, rgba(0,0,0,0) 100%)` }}></div>
+        <div className="tech-ctr-first" style={{ background: `linear-gradient(180deg, ${stop1} 0%, rgba(0,0,0,0) 100%)` }}></div>
+        <div className="tech-ctr-second" style={{ background: `linear-gradient(0deg, ${stop1} 10%, rgba(0,0,0,0) 100%)` }}></div>
 
         <h1 className='tech-name'>{name}</h1>
 
@@ -108,7 +109,6 @@ const ProjectCardWrapper = styled.div`
 
   .tech-icons {
     transform: rotate(-22.5deg) translateZ(2rem);
-
     ${tw`w-1/2 h-full absolute left-24 top-0 sm:flex items-center hidden`}
     
     &-item {

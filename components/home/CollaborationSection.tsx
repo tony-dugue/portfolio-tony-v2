@@ -5,12 +5,18 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import styled from "styled-components";
 import tw from "twin.macro";
 
-const CollaborationSection = () => {
+interface Props {
+  isSmallScreen: () => {}
+}
+
+const CollaborationSection: React.FunctionComponent<Props> = (props:Props) => {
+
+  const { isSmallScreen } = props
 
   const quoteRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  const initTextAnimation = (targetSection: any): ScrollTrigger => {
+  const initTextGradientAnimation = (targetSection: any): ScrollTrigger => {
     const timeline = gsap.timeline({ defaults: { ease: Linear.easeNone } });
     timeline
       .from(quoteRef.current, { opacity: 0, duration: 2 })
@@ -29,17 +35,16 @@ const CollaborationSection = () => {
   };
 
   const initSlidingTextAnimation = (targetSection: any) => {
-    const smallScreen = document.body.clientWidth < 767;
 
     const slidingTl = gsap.timeline({ defaults: { ease: Linear.easeNone } });
 
     slidingTl
       .to(targetSection.current.querySelector(".ui-left"), {
-        xPercent: smallScreen ? -500 : -150,
+        xPercent: isSmallScreen() ? -500 : -150,
       })
       .from(
         targetSection.current.querySelector(".ui-right"),
-        { xPercent: smallScreen ? -500 : -150 },
+        { xPercent: isSmallScreen() ? -500 : -150 },
         "<"
       );
 
@@ -53,12 +58,12 @@ const CollaborationSection = () => {
   };
 
   useEffect(() => {
-    const textAnimation = initTextAnimation(sectionRef);
+    const textBgAnimation = initTextGradientAnimation(sectionRef);
 
     const slidingAnimation = initSlidingTextAnimation(sectionRef);
 
     return () => {
-      textAnimation.kill();
+      textBgAnimation.kill();
       slidingAnimation.kill();
     };
   }, [quoteRef, sectionRef]);

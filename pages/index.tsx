@@ -30,6 +30,8 @@ const Home: NextPage = () => {
 
   const [isDesktop, setIsDesktop] = useState(true);
 
+  const isSmallScreen = (): boolean => document.body.clientWidth < 767;
+
   let timer: NodeJS.Timeout | null = null;
 
   const debouncedDimensionCalculator = () => {
@@ -72,8 +74,8 @@ const Home: NextPage = () => {
           <ProjectSection isDesktop={isDesktop} />
           <QuoteSection />
           <Skill />
-          <TimelineSection isDesktop={isDesktop} />
-          <CollaborationSection />
+          <TimelineSection isDesktop={isDesktop} isSmallScreen={isSmallScreen} />
+          <CollaborationSection isSmallScreen={isSmallScreen} />
           <Footer />
         </Main>
 

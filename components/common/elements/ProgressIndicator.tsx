@@ -1,24 +1,29 @@
-import { useEffect, useRef } from 'react';
+import {useEffect, useRef, useState} from 'react';
 import styled from "styled-components";
 import tw from "twin.macro";
 
 const ProgressIndicator = () => {
 
-  const progressRef = useRef<HTMLDivElement>(null);
+  const [progress, setProgress] = useState(0);
+
+  const calculateProgress = () => {
+    const winScroll =
+      document.body.scrollTop || document.documentElement.scrollTop;
+    const height =
+      document.documentElement.scrollHeight -
+      document.documentElement.clientHeight;
+    const scrolled = winScroll / height;
+    setProgress(scrolled);
+  };
 
   useEffect(() => {
-    window.addEventListener('scroll', () => {
-
-      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (winScroll / height);
-      progressRef.current ? progressRef.current!.style.transform = `scaleX(${scrolled})` : '';
-    })
-  }, [progressRef]);
+    window.addEventListener("scroll", calculateProgress);
+    return () => window.removeEventListener("scroll", calculateProgress);
+  }, [progress]);
 
   return (
     <Progress className='progress'>
-      <ProgressBar className='progress-bar' ref={progressRef} />
+      <ProgressBar className='progress-bar' style={{ transform: `scaleX(${progress})` }} />
     </Progress>
   )
 }

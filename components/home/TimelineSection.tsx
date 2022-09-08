@@ -15,7 +15,8 @@ const curveLength = 150;
 const dotSize = 26;
 
 interface Props {
-  isDesktop: boolean
+  isDesktop: boolean,
+  isSmallScreen: () => {}
 }
 
 interface TimelineContent {
@@ -26,7 +27,7 @@ interface TimelineContent {
 
 const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
 
-  const { isDesktop } = props
+  const { isDesktop, isSmallScreen } = props
 
   const [svgWidth, setSvgWidth] = useState(400);
   const [branch2X, setBranch2X] = useState(109);
@@ -143,7 +144,7 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
     const resultString = createSvg(TIMELINE);
     timelineSvg.current!.innerHTML = resultString;
 
-    if (document.body.clientWidth < 767) {
+    if (isSmallScreen()) {
       setBranch2X(70);
     }
 
@@ -152,7 +153,7 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
 
     let duration;
 
-    if(isDesktop && document.body.clientWidth > 767) {
+    if(isDesktop && isSmallScreen()) {
 
       timeline
         .to(screenContainer.current!.querySelector('.slide-1'), { opacity: 0, delay: 2.35 })
