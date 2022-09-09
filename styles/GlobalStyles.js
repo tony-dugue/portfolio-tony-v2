@@ -297,6 +297,10 @@ const GlobalStyles = createGlobalStyle`
       padding-right: 3rem;
     }
   }
+
+  .will-change-opacity {
+    will-change: opacity;
+  }
 `
 
 export default GlobalStyles

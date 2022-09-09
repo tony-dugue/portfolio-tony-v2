@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, {useEffect, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import tw from "twin.macro";
 import { NAVLINKS, PROJECTS } from '../../constants';
 import { gsap, Linear } from 'gsap'
@@ -11,6 +11,8 @@ const ProjectSection = ({ isDesktop }: { isDesktop: boolean }) => {
 
   const sectionRef = useRef<null | HTMLDivElement>(null);
   const sectionTitleElementRef = useRef<null | HTMLDivElement>(null);
+
+  const [willChange, setwillChange] = useState(false);
 
   const initRevealAnimation = (
     targetSectionRef: any
@@ -58,6 +60,7 @@ const ProjectSection = ({ isDesktop }: { isDesktop: boolean }) => {
       pin: true,
       animation: timeline,
       pinSpacing: "margin",
+      onToggle: (self) => setwillChange(self.isActive),
     });
 
     return [timeline, scrollTrigger];
@@ -101,7 +104,7 @@ const ProjectSection = ({ isDesktop }: { isDesktop: boolean }) => {
 
       <SectionWrapper>
 
-        <ProjectTitle ref={sectionTitleElementRef} className="inner-container">
+        <ProjectTitle ref={sectionTitleElementRef} className={`inner-container  ${willChange ? "will-change-transform" : ""}`}>
           <p className="text-gradient seq">PROJETS</p>
           <h1 className="text-gradient w-fit seq">Mes réalisations</h1>
           <h2 className="seq">Passionné depuis toujours par les nouvelles technologies mais aussi par le design, je conçois et réalise des applications web intuitive et fonctionnelle mais toujours avec une dose de créativité.</h2>
@@ -126,7 +129,7 @@ const ProjectSection = ({ isDesktop }: { isDesktop: boolean }) => {
 export default ProjectSection;
 
 const Section = styled.section`
-  ${tw`w-full relative select-none transform-gpu flex-col flex py-8 justify-center`}
+  ${tw`w-full relative select-none flex-col flex py-8 justify-center`}
   
   &.isDesktop {
     ${tw`min-h-screen`}
@@ -138,7 +141,7 @@ const SectionWrapper = styled.div`
 `
 
 const ProjectTitle = styled.div`
-  ${tw`flex flex-col transform-gpu`}
+  ${tw`flex flex-col`}
   
   p {
     color: ${props => props.theme.colorPrimary};

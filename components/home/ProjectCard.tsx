@@ -8,7 +8,7 @@ import tw from "twin.macro";
 
 const ProjectCard = ({ project, classes = "", isDesktop }: { project: IProject; classes: string; isDesktop: boolean; }) => {
 
-  const { name, tech, image, blurImage, description, gradient: [stop1, stop2], url } = project
+  const { name, techs, image, blurImage, description, gradient: [stop1, stop2], url } = project
 
   const projectCard = useRef<HTMLDivElement>(null);
 
@@ -37,8 +37,10 @@ const ProjectCard = ({ project, classes = "", isDesktop }: { project: IProject; 
 
         <div className="tech-icons">
           <div className="tech-icons-item">
-            {tech.map((el, i) => (
-              <img className={i % 2 === 0 ? 'tech-icons-item-img' : ''} src={`/svgs/tech/${el}.svg`} alt={el} height={45} width={45} key={el} />
+            {techs.map((tech, i) => (
+              <div className={i % 2 === 0 ? 'tech-icons-item-img' : ''} key={tech}>
+                <Image src={`/svgs/tech/${tech}.svg`} alt={tech} height={45} width={45} objectFit="contain" />
+              </div>
             ))}
           </div>
         </div>
@@ -119,12 +121,12 @@ const ProjectCardWrapper = styled.div`
   
   .tech-name {
     transform: translateZ(3rem);
-    ${tw`text-2xl sm:text-3xl z-10 pl-2 transform-gpu`}
+    ${tw`text-2xl sm:text-3xl z-10 pl-2`}
   }
   
   .tech-desc {
     color: ${props => props.theme.colorWhite};
     transform: translateZ(0.8rem);
-    ${tw`text-lg z-10 tracking-wide font-medium transform-gpu`}
+    ${tw`text-lg z-10 tracking-wide font-medium`}
   }
 `

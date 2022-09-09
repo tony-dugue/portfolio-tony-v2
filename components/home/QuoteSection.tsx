@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import { gsap, Linear } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
@@ -9,6 +9,8 @@ const QuoteSection = () => {
 
   const quoteRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
+
+  const [willChange, setwillChange] = useState(false);
 
   const initQuoteAnimation = (
     quoteRef: any,
@@ -28,6 +30,7 @@ const QuoteSection = () => {
       end: "center center",
       scrub: 0,
       animation: timeline,
+      onToggle: (self) => setwillChange(self.isActive)
     });
   };
 
@@ -39,7 +42,7 @@ const QuoteSection = () => {
   return (
     <Section ref={sectionRef}>
       <Container className="section-container">
-        <h1 ref={quoteRef}>
+        <h1 ref={quoteRef}  className={`${willChange ? "will-change-opacity" : ""}`}>
           Autodidacte, j&lsquo;aime aussi découvrir de nouveaux langages, frameworks, librairies, ... et travailler sur des<span className='text-strong'>&nbsp;projets variés</span> dans des domaines différents.</h1>
       </Container>
     </Section>

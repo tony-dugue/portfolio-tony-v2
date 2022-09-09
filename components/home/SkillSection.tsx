@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import {useEffect, useRef, useState} from 'react';
 import Image from 'next/image';
 import { NAVLINKS, SKILLS } from '../../constants';
 import styled from "styled-components";
@@ -10,6 +10,8 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 const SkillSection = () => {
 
   const sectionRef = useRef<HTMLDivElement>(null);
+
+  const [willChange, setwillChange] = useState(false);
 
   const initRevealAnimation = (
     targetSection: any
@@ -27,6 +29,7 @@ const SkillSection = () => {
       end: `center center`,
       animation: revealTl,
       scrub: 0,
+      onToggle: (self) => setwillChange(self.isActive),
     });
   };
 
@@ -40,8 +43,13 @@ const SkillSection = () => {
     <Section id={NAVLINKS[2].ref} ref={sectionRef} className="section-container">
       <Container>
 
-        <img src='/svgs/pattern-right.svg' className='pattern-right' loading='lazy' height={700} width={320} />
-        <img src='/svgs/pattern-left.svg' className='pattern-left' loading='lazy' height={335} width={140} />
+        <div className='pattern-right'>
+          <Image src='/svgs/pattern-right.svg' className='pattern-right' loading='lazy' height={700} width={320} alt="pattern" />
+        </div>
+
+        <div className='pattern-left'>
+          <Image src='/svgs/pattern-left.svg' className='pattern-left' loading='lazy' height={335} width={140} alt="pattern" />
+        </div>
 
         <SkillWrapper className="skills-wrapper">
 
@@ -72,7 +80,7 @@ const SkillSection = () => {
 
             <div>
               <h3 className='seq'>Autres compétences</h3>
-              <div className='skill-icons seq'>
+              <div className={`skill-icons seq ${willChange ? "will-change-opacity" : ""}`}>
                 {SKILLS.other.map(skill => (
                   <Image key={skill} src={`/svgs/skills/${skill}.svg`} alt={skill} width={76} height={76} className="skill-icon" />
                 ))}
@@ -104,7 +112,7 @@ const Container = styled.div`
   }
 
   .skill-icons {
-    ${tw`flex flex-wrap transform-gpu`}
+    ${tw`flex flex-wrap`}
   }
 
   .skill-icon {

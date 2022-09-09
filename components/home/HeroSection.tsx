@@ -40,7 +40,7 @@ const HeroSection = () => {
       <Container>
 
         <div className="hero-desc">
-          <p className="seq">Hello 👋🏻</p>
+          <h2 className="seq">Hello 👋🏻</h2>
           <h1 className="seq">Je suis Tony Dugué</h1>
         </div>
 
@@ -90,11 +90,11 @@ const Container = styled.div`
   }
   
   .hero-desc {
-    ${tw`mb-5`};
+    ${tw`md:mb-5 mb-2`};
   }
   
   .hero-typed {
-    ${tw`mb-5`};
+    ${tw`mb-4`};
   }
 
   h1 {
@@ -135,7 +135,7 @@ const Cta = styled.div`
 `
 
 const ImageCtr = styled.div`
-  ${tw`absolute right-0 bottom-0 -z-1 md:w-3/4 w-full scale-125 sm:scale-100 transform-gpu`};
+  ${tw`absolute right-0 md:bottom-0 bottom-8 -z-1 md:w-3/4 w-full scale-125 sm:scale-100 flex items-end`};
 
   @media screen and (max-width: 768px) {
     display: none;

@@ -1,5 +1,5 @@
 import { gsap, Linear } from "gsap";
-import React, { useEffect, useRef } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import styled from "styled-components";
 import tw from "twin.macro";
@@ -8,6 +8,8 @@ const AboutSection = () => {
 
   const quoteRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
+
+  const [willChange, setwillChange] = useState(false);
 
   const initAboutAnimation = (quoteRef: any, targetSection: any): ScrollTrigger => {
   const timeline = gsap.timeline({
@@ -27,6 +29,7 @@ const AboutSection = () => {
     end: "center top",
     scrub: 0,
     animation: timeline,
+    onToggle: (self) => setwillChange(self.isActive),
   });
     return scrollTriggerInstance;
   };
@@ -42,13 +45,13 @@ const AboutSection = () => {
       <Container>
 
         <h1 ref={quoteRef}>
-          <span className="about-1 leading-tight">
+          <span className={`about-1 leading-tight ${willChange ? "will-change-opacity" : ""}`}>
             Après de longues années dans la surveillance du trafic maritime, j&lsquo;ai débuté une reconversion  afin de faire de ma première passion, un métier.{" "}
           </span>
 
           <br/><br/>
 
-          <span className="about-2 leading-tight">
+          <span className={`about-2 leading-tight ${willChange ? "will-change-opacity" : ""}`}>
             Passionné depuis toujours par les nouvelles technologies mais aussi par le design, je conçois et réalise des applications web intuitive et fonctionnelle mais toujours avec une dose de créativité.{" "}
           </span>
         </h1>
