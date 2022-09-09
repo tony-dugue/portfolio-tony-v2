@@ -14,6 +14,7 @@ const ProjectSection = ({ isDesktop }: { isDesktop: boolean }) => {
   const sectionTitleElementRef = useRef<null | HTMLDivElement>(null);
 
   const [willChange, setwillChange] = useState(false);
+  const [horizontalAnimationEnabled, sethorizontalAnimationEnabled] = useState(false);
 
   const initRevealAnimation = (
     targetSectionRef: any
@@ -76,6 +77,8 @@ const ProjectSection = ({ isDesktop }: { isDesktop: boolean }) => {
 
     const { matches } = window.matchMedia(NO_MOTION_PREFERENCE_QUERY);
 
+    sethorizontalAnimationEnabled(isDesktop && matches);
+
     if (isDesktop && matches) {
       [projectsTimeline, projectsScrollTrigger] = initProjectsAnimation(
         sectionRef,
@@ -103,7 +106,7 @@ const ProjectSection = ({ isDesktop }: { isDesktop: boolean }) => {
   const { ref: projectsSectionRef } = NAVLINKS[1];
 
   return (
-    <Section ref={sectionRef} id={projectsSectionRef} className={`section-container ${isDesktop ? 'is-desktop' : ''}`}>
+    <Section ref={sectionRef} id={projectsSectionRef} className={`section-container snap-x ${isDesktop ? 'is-desktop' : ''}`}>
 
       <SectionWrapper>
 
@@ -116,8 +119,8 @@ const ProjectSection = ({ isDesktop }: { isDesktop: boolean }) => {
         <ProjectItems className="project-wrapper seq">
           {PROJECTS.map( (project, idx) => (
             <ProjectCard
-              isDesktop={isDesktop}
-              classes={idx !== PROJECTS.length - 1 ? "with-margin-right" : ''}
+              animationEnabled={horizontalAnimationEnabled}
+              classes={ (idx !== PROJECTS.length - 1 || !horizontalAnimationEnabled) ? "with-margin-right" : ''}
               project={project}
               key={project.name}
             />

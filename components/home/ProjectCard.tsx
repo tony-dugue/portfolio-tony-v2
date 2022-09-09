@@ -6,7 +6,7 @@ import { IProject } from '../../constants';
 import styled from "styled-components";
 import tw from "twin.macro";
 
-const ProjectCard = ({ project, classes = "", isDesktop }: { project: IProject; classes: string; isDesktop: boolean; }) => {
+const ProjectCard = ({ project, classes = "", animationEnabled }: { project: IProject; classes: string; animationEnabled: boolean; }) => {
 
   const { name, techs, image, blurImage, description, gradient: [stop1, stop2], url } = project
 
@@ -24,7 +24,7 @@ const ProjectCard = ({ project, classes = "", isDesktop }: { project: IProject; 
 
 
   return (
-    <ProjectCardLink href={url} target='_blank' rel='noreferrer' className={`link ${classes}`} style={{ maxWidth: isDesktop ? "calc(100vw - 2rem)" : "calc(100vw - 4rem)" }}>
+    <ProjectCardLink href={url} target='_blank' rel='noreferrer' className={`link snap-start ${classes}`} style={{ maxWidth: animationEnabled ? "calc(100vw - 2rem)" : "calc(100vw - 4rem)" }}>
       <ProjectCardWrapper ref={projectCard} style={{ background: `linear-gradient(90deg, ${stop1} 0%, ${stop2} 100%)` }}>
 
         <Image src='/svgs/project-bg.svg' layout="fill" alt='Project' className="project-img-first" />
@@ -56,7 +56,6 @@ export default ProjectCard;
 
 const ProjectCardLink = styled.a`
   flex: 1 0 auto;
-  //WebkitMaskImage: -webkit-radial-gradient(white, black),
   ${tw`overflow-hidden rounded-3xl`}
   
   &.with-margin-right {
