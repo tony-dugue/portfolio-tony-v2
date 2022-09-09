@@ -102,7 +102,7 @@ const ProjectSection = ({ isDesktop }: { isDesktop: boolean }) => {
       <SectionWrapper>
 
         <ProjectTitle ref={sectionTitleElementRef} className="inner-container">
-          <p className="seq">PROJETS</p>
+          <p className="text-gradient seq">PROJETS</p>
           <h1 className="text-gradient w-fit seq">Mes réalisations</h1>
           <h2 className="seq">Passionné depuis toujours par les nouvelles technologies mais aussi par le design, je conçois et réalise des applications web intuitive et fonctionnelle mais toujours avec une dose de créativité.</h2>
         </ProjectTitle>
@@ -142,18 +142,18 @@ const ProjectTitle = styled.div`
   
   p {
     color: ${props => props.theme.colorPrimary};
-    ${tw`uppercase tracking-widest text-sm `}
+    ${tw`md:text-5xl text-4xl font-bold w-fit`}
   }
   
   h1 {
-    ${tw`md:text-5xl text-4xl font-bold mt-2`};
+    ${tw`uppercase tracking-widest text-gray-200 text-sm`};
 
     @media screen and (max-width: 768px) {
       font-size: 2rem;
     }
   }
   h2 {
-    ${tw`text-2xl md:max-w-3xl w-full max-w-sm mt-2`};
+    ${tw`text-2xl md:max-w-2xl w-full mt-2`};
     width: 50vw;
     
     @media screen and (max-width: 768px) {

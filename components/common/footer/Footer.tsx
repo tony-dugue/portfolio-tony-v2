@@ -40,7 +40,7 @@ const Footer = () => {
 export default Footer;
 
 const FooterSection = styled.footer`
-  background: url(/svgs/footer-bg.svg),linear-gradient(153.86deg,#02494c 0%,#016877 15.69%,#0D576D 48.9%,#004865 95.52%);
+  background: url("/svgs/footer-bg.svg"),linear-gradient(153.86deg,#02494c 0%,#016877 15.69%,#0D576D 48.9%,#004865 95.52%);
   ${tw`w-full relative select-none bg-cover`}
 `
 

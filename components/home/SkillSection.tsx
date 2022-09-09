@@ -46,8 +46,8 @@ const SkillSection = () => {
         <SkillWrapper className="skills-wrapper">
 
           <SkillIntro>
-            <p className="seq">Compétences</p>
-            <h1 className="text-gradient seq">Mes compétences</h1>
+            <p className="text-gradient seq">Compétences</p>
+            <h1 className="text-gradient w-fit seq">Mes compétences</h1>
             <h2 className="seq">J&lsquo;aime concevoir et créer des expériences utilisateur optimisées en utilisant une architecture front moderne. </h2>
           </SkillIntro>
 
@@ -119,18 +119,28 @@ const SkillIntro = styled.div`
   .intro-container {
     ${tw`flex flex-col gap-2`}
   }
-  
+
   p {
     color: ${props => props.theme.colorPrimary};
-    ${tw`uppercase tracking-widest text-sm`}
-  } 
-  
-  h1 {
-    ${tw`md:text-5xl text-4xl font-bold w-fit mt-2`}
+    ${tw`md:text-5xl text-4xl font-bold w-fit`}
   }
-  
+
+  h1 {
+    ${tw`uppercase tracking-widest text-gray-200 text-sm`};
+
+    @media screen and (max-width: 768px) {
+      font-size: 2rem;
+    }
+  }
   h2 {
-    ${tw`text-2xl md:max-w-2xl w-full mt-2`}
+    ${tw`text-2xl md:max-w-2xl w-full mt-2`};
+    width: 50vw;
+
+    @media screen and (max-width: 768px) {
+      font-size: 1.2rem;
+      width: 80vw;
+      line-height: 1.3em;
+    }
   }
 `
 

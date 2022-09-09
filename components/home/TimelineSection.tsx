@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {RefObject, useEffect, useRef, useState} from 'react';
 import { NAVLINKS, Branch, BranchNode, CheckpointNode, ItemSize, NodeTypes, TIMELINE, TimelineNode } from '../../constants';
 import Image from 'next/image';
 import { gsap, Linear } from 'gsap'
@@ -36,13 +36,16 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
   const [svgWidth, setSvgWidth] = useState(400);
   const [rightBranchX, setRightBranchX] = useState(109);
 
-  const svgLength = TIMELINE.filter((item) => item.type === NodeTypes.CHECKPOINT && item.shouldDrawLine)?.length * separation;
+  const svgCheckpointItems = TIMELINE.filter( item => item.type === NodeTypes.CHECKPOINT && item.shouldDrawLine);
+
+  const svgLength = svgCheckpointItems?.length * separation;
 
   const timelineSvg = useRef<null | SVGSVGElement>(null);
   const svgContainer = useRef<null | HTMLDivElement>(null);
   const screenContainer = useRef<null | HTMLDivElement>(null);
 
-  const addNodeRefsToItems = (timeline: TimelineNode[]): LinkedTimelineNode[] => {
+  const addNodeRefsToItems = (timeline: Array<TimelineNode>
+  ): Array<LinkedTimelineNode> => {
     return timeline.map((node, idx) => ({
       ...node,
       next: timeline[idx + 1],
@@ -58,7 +61,7 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
 
     const timelineSvg = addNodeRefsToItems(timeline).reduce(
       (svg: string, node: LinkedTimelineNode) => {
-        const { type, next, prev } = node;
+        const { type, next } = node;
         let lineY = y;
         let dotY = y + separation / 2;
 
@@ -79,7 +82,7 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
 
             if (shouldDrawLine) {
               // TO DO fix syntax
-              svg = shouldDrawLine ? drawLine(node, lineY, index, isDiverged) + svg : svg;
+              svg = shouldDrawLine ? `${drawLine(node, lineY, index, isDiverged)}${svg}` : svg;
               y = y + separation;
               index++;
             }
@@ -100,7 +103,7 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
 
             // To Do fix syntax
             // Drawing CONVERGE branch with previous line and index
-            svg = drawBranch(node, y - separation, index - 1) + svg;
+            svg = `${drawBranch(node, y, index)}${svg}`;
           }
             break;
         }
@@ -192,10 +195,13 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
     }
 
     const lineX = alignment === Branch.LEFT ? leftBranchX : rightBranchX;
-    const divergedLineX =
-      alignment === Branch.LEFT ? rightBranchX : leftBranchX;
+
     let str = `<line class='str' x1=${lineX} y1=${y} x2=${lineX} y2=${lineY} stroke=${svgColor} /><line class='str line-${i}' x1=${lineX} y1=${y} x2=${lineX} y2=${lineY} stroke=${animColor} />`;
+
+    // If already diverged, draw parallel line to the existing line
     if (isDiverged) {
+      const divergedLineX = alignment === Branch.LEFT ? rightBranchX : leftBranchX;
+
       str = str.concat(
         `<line class='str' x1=${divergedLineX} y1=${y} x2=${divergedLineX} y2=${lineY} stroke=${svgColor} /><line class='str line-${i}' x1=${divergedLineX} y1=${y} x2=${divergedLineX} y2=${lineY} stroke=${animColor} />`
       );
@@ -250,7 +256,80 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
     }
   };
 
-  useEffect(() => {
+  const addLineSvgAnimation = (
+    timeline: GSAPTimeline,
+    duration: number,
+    index: number
+  ): GSAPTimeline => {
+    const startTime = `start+=${duration * index}`;
+
+    timeline.from(svgContainer.current!.querySelectorAll(`.line-${index + 1}`), { scaleY: 0, duration }, startTime);
+
+    return timeline;
+  };
+
+  const addDivergingBranchLineAnimation = (
+    timeline: GSAPTimeline,
+    duration: number,
+    index: number
+  ): GSAPTimeline => {
+    timeline
+      .from(svgContainer.current!.querySelector(`.line-${index + 1}`), { scaleY: 0, duration }, `start+=${duration * index}`)
+      .from(svgContainer.current!.querySelector(`.branch-${index + 1}`), { strokeDashoffset: 186, duration: duration - 2 }, `start+=${duration * index}`)
+      .from(svgContainer.current!.querySelector(`.branch-line-${index + 1}`), { scaleY: 0, duration: duration - 1 }, `start+=${duration * (index + 1) - 2}`);
+
+    return timeline;
+  };
+
+  const addConvergingBranchLineAnimation = (
+    timeline: GSAPTimeline,
+    duration: number,
+    index: number
+  ): GSAPTimeline => {
+    timeline
+      .from(
+        svgContainer.current!.querySelector(`.line-${index + 1}`),
+        { scaleY: 0, duration },
+        `start+=${duration * index}`
+      )
+      .from(
+        svgContainer.current!.querySelector(`.branch-line-${index + 1}`),
+        { scaleY: 0, duration: duration - 1 },
+        `start+=${duration * index}`
+      )
+      .from(
+        svgContainer.current!.querySelector(`.branch-${index + 1}`),
+        { strokeDashoffset: 186, duration: duration - 2 },
+        `start+=${duration * (index + 1) - 1}`
+      );
+
+    return timeline;
+  };
+
+  const animateTimeline = (timeline: GSAPTimeline, duration: number): void => {
+    let index = 0;
+
+    addNodeRefsToItems(TIMELINE).forEach((item) => {
+      const { type } = item;
+
+      if (type === NodeTypes.CHECKPOINT && item.shouldDrawLine) {
+        const { next, prev } = item;
+
+        if (prev?.type === NodeTypes.DIVERGE) {
+          addDivergingBranchLineAnimation(timeline, duration, index);
+        } else if (next?.type === NodeTypes.CONVERGE) {
+          addConvergingBranchLineAnimation(timeline, duration, index);
+        } else {
+          addLineSvgAnimation(timeline, duration, index);
+        }
+
+        index++;
+      }
+    });
+  };
+
+  const setTimelineSvg = (svgContainer: RefObject<HTMLDivElement>, timelineSvg: RefObject<SVGSVGElement>) => {
+
     const containerWidth = svgContainer.current!.clientWidth;
     setSvgWidth(containerWidth);
 
@@ -260,119 +339,92 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
     if (isSmallScreen()) {
       setRightBranchX(70);
     }
+  };
+
+  const setSlidesAnimation = (timeline: GSAPTimeline): void => {
+    svgCheckpointItems.forEach((_, index) => {
+      // all except the first slide
+      if (index !== 0) {
+        timeline.fromTo(
+          screenContainer.current!.querySelector(`.slide-${index + 1}`),
+          { opacity: 0 },
+          { opacity: 1 }
+        );
+      }
+
+      // all except the last slide
+      if (index !== svgCheckpointItems.length - 1) {
+        timeline.to(
+          screenContainer.current!.querySelector(`.slide-${index + 1}`),
+          {
+            opacity: 0,
+            delay: 2.35,
+          }
+        );
+      }
+    });
+  };
+
+  const initScrollTrigger = (): {
+    timeline: GSAPTimeline;
+    duration: number;
+  } => {
 
     const timeline = gsap
       .timeline({ defaults: { ease: Linear.easeNone, duration: 0.44 } })
       .addLabel("start");
-    let duration;
 
+    let duration: number;
+    let trigger: HTMLDivElement | null;
+    let start: string;
+    let end: string;
+    let additionalConfig = {};
+
+    // Slide as a trigger for Desktop
     if (isDesktop && !isSmallScreen()) {
-      timeline
-        .to(screenContainer.current!.querySelector(".slide-1"), {opacity: 0, delay: 2.35})
 
-        .fromTo(screenContainer.current!.querySelector(".slide-2"), { opacity: 0 }, { opacity: 1 })
-        .to(screenContainer.current!.querySelector(".slide-2"), {opacity: 0, delay: 2.35 })
-
-        .fromTo(screenContainer.current!.querySelector(".slide-3"), { opacity: 0 }, { opacity: 1 })
-        .to(screenContainer.current!.querySelector(".slide-3"), {opacity: 0, delay: 2.35 })
-
-        .fromTo(screenContainer.current!.querySelector(".slide-4"), { opacity: 0 }, { opacity: 1 })
-        .to(screenContainer.current!.querySelector(".slide-4"), {opacity: 0, delay: 2.35 })
-
-        .fromTo(screenContainer.current!.querySelector(".slide-5"), { opacity: 0 }, { opacity: 1 })
-        .to(screenContainer.current!.querySelector(".slide-5"), {opacity: 0, delay: 2.35 })
-
-        .fromTo(screenContainer.current!.querySelector(".slide-6"), { opacity: 0 }, { opacity: 1 })
-        .to(screenContainer.current!.querySelector(".slide-6"), {opacity: 0, delay: 2.35 })
-
-        .fromTo(screenContainer.current!.querySelector(".slide-7"), { opacity: 0 }, { opacity: 1 })
-        .to(screenContainer.current!.querySelector(".slide-7"), {opacity: 0, delay: 2.35 })
-
-        .fromTo(screenContainer.current!.querySelector(".slide-8"), { opacity: 0 }, { opacity: 1 })
-        .to(screenContainer.current!.querySelector(".slide-8"), {opacity: 0, delay: 2.35 })
-
-        .fromTo(screenContainer.current!.querySelector(".slide-9"), { opacity: 0 }, { opacity: 1 })
-        .to(screenContainer.current!.querySelector(".slide-9"), {opacity: 0, delay: 2.35 })
-
-        .fromTo(screenContainer.current!.querySelector(".slide-10"), { opacity: 0 }, { opacity: 1 })
-        .to(screenContainer.current!.querySelector(".slide-10"), {opacity: 0, delay: 2.35 })
-
-        .fromTo(screenContainer.current!.querySelector(".slide-11"), { opacity: 0 }, { opacity: 1 })
-        .to(screenContainer.current!.querySelector(".slide-11"), {opacity: 0, delay: 2.35 })
-
-        .fromTo(screenContainer.current!.querySelector(".slide-12"), { opacity: 0 }, { opacity: 1 })
-        .to(screenContainer.current!.querySelector(".slide-12"), {opacity: 0, delay: 2.35 })
-
-        .fromTo(screenContainer.current!.querySelector(".slide-13"), { opacity: 0 }, { opacity: 1 })
-        .to(screenContainer.current!.querySelector(".slide-13"), {opacity: 0, delay: 2.35 })
-
-        .fromTo(screenContainer.current!.querySelector(".slide-14"), { opacity: 0 }, { opacity: 1 })
-        .to(screenContainer.current!.querySelector(".slide-14"), {opacity: 0, delay: 2.35 })
-
-        .fromTo(screenContainer.current!.querySelector(".slide-15"), { opacity: 0 }, { opacity: 1 });
+      // Animation for right side slides
+      setSlidesAnimation(timeline);
 
       const platformHeight = screenContainer.current!.getBoundingClientRect().height;
 
-      ScrollTrigger.create({
-        trigger: screenContainer.current,
-        start: `top ${(window.innerHeight - platformHeight) / 2}`,
-        end: `+=${svgLength - platformHeight}`,
+      trigger = screenContainer.current;
+      start = `top ${(window.innerHeight - platformHeight) / 2}`;
+      end = `+=${svgLength - platformHeight}`;
+      additionalConfig = {
         pin: true,
         pinSpacing: true,
-        scrub: 0,
-        animation: timeline,
-      });
+      };
       duration = timeline.totalDuration() / 15;
     } else {
+      // Clearing out the right side on mobile devices
       screenContainer.current!.innerHTML = "";
-      ScrollTrigger.create({
-        trigger: svgContainer.current,
-        start: "top center",
-        end: `+=${svgLength}`,
-        scrub: 0,
-        animation: timeline,
-      });
+      trigger = svgContainer.current;
+      start = "top center";
+      end = `+=${svgLength}`;
       duration = 3;
     }
 
-    timeline
-      .from(svgContainer.current!.querySelector(".line-1"), { scaleY: 0, duration: duration }, "start")
+    ScrollTrigger.create({
+      ...additionalConfig,
+      trigger,
+      start,
+      end,
+      scrub: 0,
+      animation: timeline,
+    });
+    return { timeline, duration };
+  };
 
-      .from(svgContainer.current!.querySelector(".line-2"), { scaleY: 0, duration: duration }, `start+=${duration}`)
-      .from(svgContainer.current!.querySelector(".branch-2"), { strokeDashoffset: 186, duration: duration - 2 }, `start+=${duration}`)
-      .from(svgContainer.current!.querySelector(".branch-line-2"), { scaleY: 0, duration: duration - 1 }, `start+=${2 * duration - 2}`)
+  useEffect(() => {
+    // Generate and set the timeline svg
+    setTimelineSvg(svgContainer, timelineSvg);
 
-      .from(svgContainer.current!.querySelector(".line-3"), { scaleY: 0, duration: duration }, `start+=${2 * duration}`)
-      .from(svgContainer.current!.querySelector(".branch-line-3"), { scaleY: 0, duration: duration - 1 }, `start+=${2 * duration}`)
-      .from(svgContainer.current!.querySelector(".branch-3"), { strokeDashoffset: 186, duration: duration - 2 }, `start+=${3 * duration - 1}`)
+    const { timeline, duration }: { timeline: GSAPTimeline; duration: number } =
+      initScrollTrigger();
 
-      .from(svgContainer.current!.querySelector(".line-4"), { scaleY: 0, duration: duration }, `start+=${3 * duration}`)
-
-      .from(svgContainer.current!.querySelector(".line-5"), { scaleY: 0, duration: duration }, `start+=${4 * duration}`)
-
-      .from(svgContainer.current!.querySelector(".line-6"), { scaleY: 0, duration: duration }, `start+=${5 * duration}`)
-
-      .from(svgContainer.current!.querySelector(".line-7"), { scaleY: 0, duration: duration }, `start+=${6 * duration}`)
-      .from(svgContainer.current!.querySelector(".branch-7"), { strokeDashoffset: 186, duration: duration - 2 }, `start+=${6 * duration}`)
-      .from(svgContainer.current!.querySelector(".branch-line-7"), { scaleY: 0, duration: duration - 1 }, `start+=${7 * duration - 2}`)
-
-      .from(svgContainer.current!.querySelectorAll(".line-8"), { scaleY: 0, duration: duration }, `start+=${7 * duration}`)
-
-      .from(svgContainer.current!.querySelectorAll(".line-9"), { scaleY: 0, duration: duration }, `start+=${8 * duration}`)
-
-      .from(svgContainer.current!.querySelectorAll(".line-10"), { scaleY: 0, duration: duration }, `start+=${9 * duration}`)
-
-      .from(svgContainer.current!.querySelectorAll(".line-11"), { scaleY: 0, duration: duration }, `start+=${10 * duration}`)
-
-      .from(svgContainer.current!.querySelectorAll(".line-12"), { scaleY: 0, duration: duration }, `start+=${11 * duration}`)
-
-      .from(svgContainer.current!.querySelector(".line-13"), { scaleY: 0, duration: duration }, `start+=${12 * duration}`)
-      .from(svgContainer.current!.querySelector(".branch-line-13"), { scaleY: 0, duration: duration - 1 }, `start+=${12 * duration}`)
-      .from(svgContainer.current!.querySelector(".branch-13"), { strokeDashoffset: 186, duration: duration - 2 }, `start+=${13 * duration - 1}`)
-
-      .from(svgContainer.current!.querySelectorAll(".line-14"), { scaleY: 0, duration: duration }, `start+=${13 * duration}`)
-
-      .from(svgContainer.current!.querySelectorAll(".line-15"), { scaleY: 0, duration: duration }, `start+=${14 * duration - 1}`);
+    // Animation for Timeline SVG
+    animateTimeline(timeline, duration);
 
   }, [
     timelineSvg,
@@ -388,8 +440,8 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
     <Section id={NAVLINKS[3].ref} className="section-container">
 
       <TimelineIntro>
-        <p className='seq'>Parcours</p>
-        <h1 className='text-gradient seq'>Mon parcours</h1>
+        <p className='text-gradient seq'>Parcours</p>
+        <h1 className='text-gradient w-fit seq'>Mon parcours</h1>
         <h2 className='seq'>Un aperçu des étapes de mon parcours professionnel</h2>
       </TimelineIntro>
 
@@ -406,20 +458,19 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
 
             <div className="timeline-slide-container">
               <div className="timeline-slide">
-                <Image className='timeline-slide-image slide-1' src='/images/timeline/timeline-1.jpg' alt='Timeline' layout='fill' />
-                <Image className='timeline-slide-image slide-2' src='/images/timeline/timeline-2.jpg' alt='Timeline' layout='fill' />
-                <Image className='timeline-slide-image slide-3' src='/images/timeline/timeline-3.jpg' alt='Timeline' layout='fill' />
-                <Image className='timeline-slide-image slide-4' src='/images/timeline/timeline-4.jpg' alt='Timeline' layout='fill' />
-                <Image className='timeline-slide-image slide-5' src='/images/timeline/timeline-5.jpg' alt='Timeline' layout='fill' />
-                <Image className='timeline-slide-image slide-6' src='/images/timeline/timeline-6.jpg' alt='Timeline' layout='fill' />
-                <Image className='timeline-slide-image slide-7' src='/images/timeline/timeline-7.jpg' alt='Timeline' layout='fill' />
-                <Image className='timeline-slide-image slide-8' src='/images/timeline/timeline-8.jpg' alt='Timeline' layout='fill' />
-                <Image className='timeline-slide-image slide-9' src='/images/timeline/timeline-9.jpg' alt='Timeline' layout='fill' />
-                <Image className='timeline-slide-image slide-10' src='/images/timeline/timeline-10.jpg' alt='Timeline' layout='fill' />
-                <Image className='timeline-slide-image slide-11' src='/images/timeline/timeline-11.jpg' alt='Timeline' layout='fill' />
-                <Image className='timeline-slide-image slide-12' src='/images/timeline/timeline-12.jpg' alt='Timeline' layout='fill' />
-                <Image className='timeline-slide-image slide-13' src='/images/timeline/timeline-13.jpg' alt='Timeline' layout='fill' />
-                <Image className='timeline-slide-image slide-14' src='/images/timeline/timeline-14.jpg' alt='Timeline' layout='fill' />
+
+                {svgCheckpointItems.map((item, index) => (
+                  <Image
+                    className={`w-full absolute top-0 object-cover slide-${
+                      index + 1
+                    }`}
+                    key={index}
+                    src={(item as CheckpointNode).slideImage || ""}
+                    alt="Timeline"
+                    layout="fill"
+                  />
+                ))}
+
               </div>
             </div>
           </TimelineScreenContainer>
@@ -441,11 +492,11 @@ const TimelineIntro = styled.div`
 
   p {
     color: ${props => props.theme.colorPrimary};
-    ${tw`uppercase tracking-widest text-sm`}
+    ${tw`md:text-5xl text-4xl font-bold w-fit`}
   }
 
   h1 {
-    ${tw`md:text-5xl text-4xl font-bold w-fit mt-2`};
+    ${tw`uppercase tracking-widest text-gray-200 text-sm`};
 
     @media screen and (max-width: 768px) {
       font-size: 2rem;
@@ -453,9 +504,11 @@ const TimelineIntro = styled.div`
   }
   h2 {
     ${tw`text-2xl md:max-w-2xl w-full mt-2`};
+    width: 50vw;
 
     @media screen and (max-width: 768px) {
       font-size: 1.2rem;
+      width: 80vw;
       line-height: 1.3em;
     }
   }
