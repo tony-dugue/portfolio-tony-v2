@@ -8,10 +8,55 @@ const HeroIllustration = () => (
     xmlns="http://www.w3.org/2000/svg"
   >
     <style>
-      {
-        "@keyframes translate{0%{transform:translateX(0)}50%{transform:translateX(24px)}}@keyframes translate2{0%{transform:translateX(0)}50%{transform:translateX(-24px)}}.cog{animation:spin 20000ms linear 0ms infinite;transform-origin:53.8% 85.69%}"
+     {`
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+
+        to {
+          transform: rotate(360deg);
+        }
       }
-    </style>
+
+      @keyframes translate {
+
+        0%,
+        to {
+          transform: translateX(0)
+        }
+
+        50% {
+          transform: translateX(24px)
+        }
+      }
+
+      @keyframes translate2 {
+
+        0%,
+        to {
+          transform: translateX(0)
+        }
+
+        50% {
+          transform: translateX(-24px)
+        }
+      }
+
+      @media(prefers-reduced-motion: no-preference) {
+        .cog {
+          animation: spin 20000ms linear 0s infinite;
+          transform-origin: 53.8% 85.69%;
+        }
+        .switchToggle1 {
+          animation: translate 3000ms ease-in .5s infinite;
+        }
+        .switchToggle2 {
+          animation: translate2 3000ms ease-in 0s infinite;
+        }
+      }
+   `}
+      </style>
     <g id="Frame_595">
       <g id="Group" opacity={0.2}>
         <path
@@ -90,11 +135,9 @@ const HeroIllustration = () => (
           />
           <path
             id="Rectangle_3"
+            className="switchToggle1"
             d="M785.832 334.906h-.228a8.27 8.27 0 1 0 0 16.542h.228a8.27 8.27 0 0 0 8.27-8.271 8.27 8.27 0 0 0-8.27-8.271z"
             fill="#fff"
-            style={{
-              animation: "translate 3000ms ease-in .5s infinite",
-            }}
           />
         </g>
         <g id="switch-3">
@@ -120,10 +163,8 @@ const HeroIllustration = () => (
           <path
             id="Rectangle_7"
             d="M808.455 362.421h-.215a7.826 7.826 0 0 0 0 15.652h.215a7.826 7.826 0 0 0 0-15.652z"
+            className="switchToggle2"
             fill="#fff"
-            style={{
-              animation: "translate2 3000ms ease-in 0s infinite",
-            }}
           />
         </g>
         <path

@@ -4,6 +4,7 @@ import tw from "twin.macro";
 import { NAVLINKS, PROJECTS } from '../../constants';
 import { gsap, Linear } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { NO_MOTION_PREFERENCE_QUERY } from "../../pages/index";
 
 import ProjectCard from './ProjectCard'
 
@@ -73,7 +74,9 @@ const ProjectSection = ({ isDesktop }: { isDesktop: boolean }) => {
     let projectsScrollTrigger: ScrollTrigger | undefined;
     let projectsTimeline: GSAPTimeline | undefined;
 
-    if (isDesktop) {
+    const { matches } = window.matchMedia(NO_MOTION_PREFERENCE_QUERY);
+
+    if (isDesktop && matches) {
       [projectsTimeline, projectsScrollTrigger] = initProjectsAnimation(
         sectionRef,
         sectionTitleElementRef

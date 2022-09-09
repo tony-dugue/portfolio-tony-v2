@@ -23,6 +23,8 @@ import Scripts from "../components/common/scripts"
 
 const DEBOUNCE_TIME = 100;
 
+export const NO_MOTION_PREFERENCE_QUERY = "(prefers-reduced-motion: no-preference)";
+
 const Home: NextPage = () => {
 
   gsap.registerPlugin(ScrollTrigger);

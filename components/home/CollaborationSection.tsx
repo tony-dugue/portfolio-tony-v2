@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react'
 import { gsap, Linear } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { NO_MOTION_PREFERENCE_QUERY } from "../../pages/index";
 
 import styled from "styled-components";
 import tw from "twin.macro";
@@ -33,7 +34,7 @@ const CollaborationSection: React.FunctionComponent<Props> = (props:Props) => {
       end: "center center",
       scrub: 0,
       animation: timeline,
-      onToggle: (self) => setwillChange(self.isActive),
+      onToggle: (self) => setwillChange(self.isActive)
     });
   };
 
@@ -63,11 +64,17 @@ const CollaborationSection: React.FunctionComponent<Props> = (props:Props) => {
   useEffect(() => {
     const textBgAnimation = initTextGradientAnimation(sectionRef);
 
-    const slidingAnimation = initSlidingTextAnimation(sectionRef);
+    let slidingAnimation: ScrollTrigger | undefined;
+
+    const { matches } = window.matchMedia(NO_MOTION_PREFERENCE_QUERY);
+
+    if (matches) {
+      slidingAnimation = initSlidingTextAnimation(sectionRef);
+    }
 
     return () => {
       textBgAnimation.kill();
-      slidingAnimation.kill();
+      slidingAnimation?.kill();
     };
   }, [quoteRef, sectionRef]);
 

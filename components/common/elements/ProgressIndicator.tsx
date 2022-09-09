@@ -1,4 +1,5 @@
-import {useEffect, useRef, useState} from 'react';
+import {useEffect, useState} from 'react';
+import { NO_MOTION_PREFERENCE_QUERY } from "../../../pages/index";
 import styled from "styled-components";
 import tw from "twin.macro";
 
@@ -17,7 +18,9 @@ const ProgressIndicator = () => {
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", calculateProgress);
+    const { matches } = window.matchMedia(NO_MOTION_PREFERENCE_QUERY);
+
+    matches && window.addEventListener("scroll", calculateProgress);
     return () => window.removeEventListener("scroll", calculateProgress);
   }, [progress]);
 
