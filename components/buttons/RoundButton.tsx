@@ -11,7 +11,7 @@ const RoundButton = (props: IButtonProps) => {
 
   return (
     <RoundBtnWrapper>
-      <a href={link} className="cta">
+      <a href={link} className="cta link">
         <span>{text}</span>
         <svg width="13px" height="10px" viewBox="0 0 13 10">
           <path d="M1,5 L11,5"></path>

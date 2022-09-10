@@ -300,10 +300,10 @@ export const TIMELINE: Array<TimelineNode> = [
   },
   {
     type: NodeTypes.CHECKPOINT,
-    title: "",
+    title: "2015",
     size: ItemSize.LARGE,
-    shouldDrawLine: false,
-    alignment: Branch.RIGHT,
+    shouldDrawLine: true,
+    alignment: Branch.LEFT,
   },
   {
     type: NodeTypes.CHECKPOINT,

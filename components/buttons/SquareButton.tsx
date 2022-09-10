@@ -20,7 +20,7 @@ const SquareButton: React.FunctionComponent<Props> = (props:Props) => {
       href={href}
       target={newTab ? '_blank' : ''}
       rel={newTab ? 'noreferrer' : ''}
-      className={(type === 'primary' ? 'primary' : type === 'white' ? 'white' : 'outline')}
+      className={(type === 'primary' ? 'primary link' : type === 'white' ? 'white link' : 'outline link')}
     >
       {name}
     </ButtonLink>

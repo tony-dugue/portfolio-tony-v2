@@ -95,7 +95,7 @@ const ButtonWrapper = styled.div`
   }
 `
 
-const HamburgerToggle = styled.button`${tw`w-6 h-6`}`
+const HamburgerToggle = styled.a`${tw`w-6 h-6`}`
 
 const HamburgerCtr = styled.div`${tw`absolute top-0 right-0 w-6 h-6 flex items-center justify-center`}`
 

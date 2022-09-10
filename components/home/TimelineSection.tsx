@@ -71,14 +71,10 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
             const { shouldDrawLine } = node;
 
             // special handling for last checkpoint
-            if (!next) {
-              lineY = y - separation / 2;
-            }
+            if (!next) lineY = y - separation / 2;
 
             // special handling for dot without line
-            if (!shouldDrawLine) {
-              dotY = y;
-            }
+            if (!shouldDrawLine) dotY = y;
 
             if (shouldDrawLine) {
               // TO DO fix syntax
@@ -94,7 +90,7 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
           {
             isDiverged = true;
 
-            svg = drawBranch(node, y, index) + svg;
+            svg = `${drawBranch(node, y, index)}${svg}`;
           }
             break;
           case NodeTypes.CONVERGE:
@@ -103,7 +99,7 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
 
             // To Do fix syntax
             // Drawing CONVERGE branch with previous line and index
-            svg = `${drawBranch(node, y, index)}${svg}`;
+            svg = `${drawBranch(node, y - separation, index - 1)}${svg}`;
           }
             break;
         }
@@ -159,16 +155,18 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
     const foreignObjectY = y - dotSize / 2;
     const foreignObjectWidth = svgWidth - (dotSize / 2 + 10 + offset);
 
-    const titleSizeClass = size === ItemSize.LARGE ? "text-6xl" : "text-2xl";
+    const titleSizeClass = size === ItemSize.LARGE ? "text-big" : "";
+
     const logoString = image
       ? `<img src='${image}' class='timeline-logo' loading='lazy' width='100' height='32' alt='${image}' />`
       : "";
+
     const subtitleString = subtitle
-      ? `<p class='text-xl mt-2 text-gray-200 font-medium tracking-wide'>${subtitle}</p>`
+      ? `<p class='timeline-item-subtitle'>${subtitle}</p>`
       : "";
 
     return `<foreignObject x=${foreignObjectX} y=${foreignObjectY} width=${foreignObjectWidth} 
-        height=${separation}>${logoString}<p class='${titleSizeClass}'>${title}</p>${subtitleString}</foreignObject>`;
+        height=${separation}>${logoString}<p class='timeline-item-title ${titleSizeClass}'>${title}</p>${subtitleString}</foreignObject>`;
   };
 
   const drawLine = (
@@ -213,6 +211,7 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
     const { type } = timelineNode;
 
     switch (type) {
+
       case NodeTypes.DIVERGE:
         return `<path class='str' d='M ${leftBranchX} ${y} C ${leftBranchX} ${
           y + curveLength / 2
@@ -229,7 +228,8 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
         }' stroke=${animColor} /><line class='str branch-line-${i}' x1=${rightBranchX} y1=${
           y + curveLength
         } x2=${rightBranchX} y2=${y + separation} stroke=${animColor} />`;
-      case NodeTypes.CONVERGE:
+
+        case NodeTypes.CONVERGE:
         return `<path class='str' d='M ${rightBranchX} ${
           y + separation - curveLength
         } C ${rightBranchX} ${
@@ -251,7 +251,8 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
         }' stroke=${animColor} /><line class='str branch-line-${i}' x1=${rightBranchX} y1=${y} x2=${rightBranchX} y2=${Math.abs(
           y + separation - curveLength
         )} stroke=${animColor} />`;
-      default:
+
+        default:
         return "";
     }
   };
@@ -524,6 +525,10 @@ const TimelineContentCol = styled.div`
   
   .timeline-title {
     ${tw`text-2xl`}
+    
+    &.text-big {
+    "text-6xl"
+    }
   }
   
   .timeline-description {
@@ -533,6 +538,14 @@ const TimelineContentCol = styled.div`
 
 const TimelineContentColLeft = styled.div`
   ${tw`col-span-12 md:col-span-6`}
+
+  .timeline-item-title {
+    ${tw`text-xl mt-2 text-gray-200 font-medium tracking-wide`}
+  }
+  
+  .timeline-item-subtitle {
+    ${tw`text-xl mt-2 text-gray-200 font-medium tracking-wide`}
+  }
 `
 
 const TimelineContentColRight = styled.div`
