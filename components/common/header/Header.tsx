@@ -10,7 +10,7 @@ const Header = () => {
   const [menuVisible, setMenuVisible] = useState(false);
 
   return (
-    <NavWrapper>
+    <HeaderWrapper>
       <Container>
 
         <ImageWrapper>
@@ -41,13 +41,13 @@ const Header = () => {
         </RightContent>
 
       </Container>
-    </NavWrapper>
+    </HeaderWrapper>
   )
 }
 
 export default Header;
 
-const NavWrapper = styled.nav`
+const HeaderWrapper = styled.header`
   ${tw`w-full fixed top-0 left-0 right-0 2xl:container mx-auto xl:px-20 md:px-12 px-4 select-none z-50 bg-gradient-to-b from-gray-200 to-transparent`}
 `
 
@@ -95,7 +95,7 @@ const ButtonWrapper = styled.div`
   }
 `
 
-const HamburgerToggle = styled.a`${tw`w-6 h-6`}`
+const HamburgerToggle = styled.button`${tw`w-6 h-6`}`
 
 const HamburgerCtr = styled.div`${tw`absolute top-0 right-0 w-6 h-6 flex items-center justify-center`}`
 
@@ -104,7 +104,7 @@ const HamburgerItem = styled.div`
   ${tw`relative flex-none w-full duration-300 flex items-center justify-center`}
 `
 
-const OuterMenu = styled.div`
+const OuterMenu = styled.nav`
   z-index: 1;
 
   &.menu-visible {

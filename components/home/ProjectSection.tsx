@@ -85,11 +85,17 @@ const ProjectSection = ({ isDesktop }: { isDesktop: boolean }) => {
         sectionTitleElementRef
       );
     } else {
-      const projectWrapper = sectionRef.current!.querySelector(
-        ".project-wrapper"
-      ) as HTMLDivElement;
-      projectWrapper.style.width = "calc(100vw - 1rem)";
-      projectWrapper.style.overflowX = "scroll";
+      const projectWrapper = sectionRef.current!.querySelector(".project-wrapper") as HTMLDivElement;
+
+      const parentPadding = window
+        .getComputedStyle(sectionRef.current!)
+        .getPropertyValue("padding-left");
+
+      sectionRef.current!.style.setProperty("width", "100%");
+      projectWrapper.classList.add("full-width");
+      projectWrapper.style.setProperty("width", `calc(100vw)`);
+      projectWrapper.style.setProperty("padding", `0 ${parentPadding}`);
+      projectWrapper.style.setProperty("transform", `translateX(-${parentPadding})`);
     }
 
     const [revealTimeline, revealScrollTrigger] =
@@ -116,11 +122,10 @@ const ProjectSection = ({ isDesktop }: { isDesktop: boolean }) => {
           <h2 className="seq">Passionné depuis toujours par les nouvelles technologies mais aussi par le design, je conçois et réalise des applications web intuitive et fonctionnelle mais toujours avec une dose de créativité.</h2>
         </ProjectTitle>
 
-        <ProjectItems className="project-wrapper seq">
-          {PROJECTS.map( (project, idx) => (
+        <ProjectItems className="project-wrapper snap-x seq scroll-pl-6 snap-mandatory">
+          {PROJECTS.map( (project) => (
             <ProjectCard
               animationEnabled={horizontalAnimationEnabled}
-              classes={ (idx !== PROJECTS.length - 1 || !horizontalAnimationEnabled) ? "with-margin-right" : ''}
               project={project}
               key={project.name}
             />
@@ -175,7 +180,11 @@ const ProjectTitle = styled.div`
 
 const ProjectItems = styled.div`
   width: fit-content;
-  ${tw`tall:mt-12 mt-6 flex w-fit`}
+  ${tw`tall:mt-12 mt-6 flex grid grid-flow-col auto-cols-max md:gap-10 gap-6 w-fit`}
+  
+  &.full-width {
+    ${tw`w-full overflow-x-auto`}
+  }
   
   a {
     ${tw`mr-10`}

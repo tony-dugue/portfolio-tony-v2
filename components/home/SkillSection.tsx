@@ -40,16 +40,17 @@ const SkillSection = () => {
   }, [sectionRef]);
 
   return (
-    <Section id={NAVLINKS[2].ref} ref={sectionRef} className="section-container">
-      <Container>
+    <Section>
 
-        <div className='pattern-right'>
-          <Image src='/svgs/pattern-right.svg' className='pattern-right' loading='lazy' height={700} width={320} alt="pattern" />
-        </div>
+      <div className='pattern-right'>
+        <Image src='/svgs/pattern-right.svg' className='pattern-right' loading='lazy' height={700} width={320} alt="pattern" />
+      </div>
 
-        <div className='pattern-left'>
-          <Image src='/svgs/pattern-left.svg' className='pattern-left' loading='lazy' height={335} width={140} alt="pattern" />
-        </div>
+      <div className='pattern-left'>
+        <Image src='/svgs/pattern-left.svg' className='pattern-left' loading='lazy' height={335} width={140} alt="pattern" />
+      </div>
+
+      <Container id={NAVLINKS[2].ref} ref={sectionRef} className="section-container">
 
         <SkillWrapper className="skills-wrapper">
 
@@ -98,18 +99,18 @@ const SkillSection = () => {
 export default SkillSection;
 
 const Section = styled.section`
-  ${tw`w-full relative select-none mb-24 py-12 flex flex-col justify-center`}
+  ${tw`relative`}
+
+  .pattern-left {
+    ${tw`absolute left-0 -bottom-3.5 w-1/12 max-w-xs md:block hidden`}
+  }
+  .pattern-right {
+    ${tw`absolute right-0 -bottom-1/3 w-1/5 max-w-xs md:flex hidden justify-end`}
+  }
 `
 
 const Container = styled.div`
-  ${tw`2xl:container py-12 xl:px-20 md:px-12 px-4 flex flex-col justify-center`}
-  
-  .pattern-left {
-    ${tw`absolute left-0 -bottom-1/3 w-1/12 max-w-xs md:block hidden`}
-  }
-  .pattern-right {
-    ${tw`absolute right-0 -bottom-2/3 w-1/5 max-w-xs md:block hidden`}
-  }
+  ${tw`w-full relative select-none mb-24 py-12 flex flex-col justify-center`}
 
   .skill-icons {
     ${tw`flex flex-wrap`}

@@ -6,7 +6,7 @@ import { IProject } from '../../constants';
 import styled from "styled-components";
 import tw from "twin.macro";
 
-const ProjectCard = ({ project, classes = "", animationEnabled }: { project: IProject; classes: string; animationEnabled: boolean; }) => {
+const ProjectCard = ({ project, animationEnabled }: { project: IProject; animationEnabled: boolean; }) => {
 
   const { name, techs, image, blurImage, description, gradient: [stop1, stop2], url } = project
 
@@ -24,7 +24,7 @@ const ProjectCard = ({ project, classes = "", animationEnabled }: { project: IPr
 
 
   return (
-    <ProjectCardLink href={url} target='_blank' rel='noreferrer' className={`link snap-start ${classes}`} style={{ maxWidth: animationEnabled ? "calc(100vw - 2rem)" : "calc(100vw - 4rem)" }}>
+    <ProjectCardLink href={url} target='_blank' rel='noreferrer' className="link snap-start" style={{ maxWidth: animationEnabled ? "calc(100vw - 2rem)" : "calc(100vw - 4rem)" }}>
       <ProjectCardWrapper ref={projectCard} style={{ background: `linear-gradient(90deg, ${stop1} 0%, ${stop2} 100%)` }}>
 
         <Image src='/svgs/project-bg.svg' layout="fill" alt='Project' className="project-img-first" />
