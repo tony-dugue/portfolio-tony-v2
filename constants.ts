@@ -74,7 +74,7 @@ export const PROJECTS: IProject[] = [
   {
     name: 'Lemona Food Truck',
     image: '/images/projects/lemona.jpg',
-    blurImage: '/images/projects/lemona-blur.png',
+    blurImage: '/images/projects/lemona-blur.jpg',
     description: 'Site vitrine présentant l\'activité d\'une chaine de Food Truck vintage spécialisé dans les produits à base de Citron.',
     gradient: ["#17007B", "#3A2C79"],
     url: '#',

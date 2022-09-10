@@ -37,9 +37,7 @@ const Layout: React.FunctionComponent<Props> = (props:Props) => {
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
       </Head>
 
-      <Header>
-        <NavigationMenu />
-      </Header>
+      <Header />
 
       <ProgressIndicator />
       <Cursor isDesktop={props.isDesktop} />

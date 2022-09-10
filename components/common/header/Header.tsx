@@ -1,13 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
+
 import RoundButton from "../../buttons/RoundButton"
+import NavigationMenu from "./NavigationMenu";
 
-interface Props {
-  children: React.ReactNode
-}
+const Header = () => {
 
-const Header: React.FunctionComponent<Props> = (props:Props) => {
+  const [menuVisible, setMenuVisible] = useState(false);
+
   return (
     <NavWrapper>
       <Container>
@@ -24,12 +25,18 @@ const Header: React.FunctionComponent<Props> = (props:Props) => {
             <RoundButton text="Contact" link="/#contact" />
           </ButtonWrapper>
 
-          <OuterMenu>
-            <HamburgerInput aria-labelledby='menu' className='checkbox-toggle link' type='checkbox' />
-            <HamburgerCtr className='hamburger'>
-              <HamburgerItem></HamburgerItem>
-            </HamburgerCtr>
-            {props.children}
+          <OuterMenu className={`${menuVisible ? "menu-visible" : ""}`}>
+
+            <HamburgerToggle className='link' onClick={() => setMenuVisible(!menuVisible)}>
+
+              <HamburgerCtr className='hamburger'>
+                <HamburgerItem></HamburgerItem>
+              </HamburgerCtr>
+
+            </HamburgerToggle>
+
+            <NavigationMenu setMenuVisible={setMenuVisible} />
+
           </OuterMenu>
         </RightContent>
 
@@ -88,7 +95,7 @@ const ButtonWrapper = styled.div`
   }
 `
 
-const HamburgerInput = styled.input`${tw`absolute top-0 right-0 w-6 h-6 opacity-0`}`
+const HamburgerToggle = styled.a`${tw`w-6 h-6`}`
 
 const HamburgerCtr = styled.div`${tw`absolute top-0 right-0 w-6 h-6 flex items-center justify-center`}`
 
@@ -100,51 +107,41 @@ const HamburgerItem = styled.div`
 const OuterMenu = styled.div`
   z-index: 1;
 
-  .checkbox-toggle {
-    z-index: 9999;
-    cursor: pointer;
+  &.menu-visible {
 
-    &:checked {
-      + {
-        .hamburger {
-          > div {
-            transform: rotate(135deg);
-            &:before {
-              top: 0;
-              transform: rotate(90deg);
-            }
-            &:after {
-              top: 0;
-              transform: rotate(90deg);
-              opacity: 0;
-            }
-          }
+    .hamburger {
+      > div {
+        transform: rotate(135deg);
+        &:before {
+          top: 0;
+          transform: rotate(90deg);
+        }
+        &:after {
+          top: 0;
+          transform: rotate(90deg);
+          opacity: 0;
         }
       }
-      ~ {
-        .menu {
-          pointer-events: auto;
-          visibility: visible !important;
-          backdrop-filter: blur(0.625rem);
-          -webkit-backdrop-filter: blur(0.625rem);
-          
-          > div {
-            transform: scale(1);
-            transition-duration: 0.75s;
-            > div {
-              opacity: 1;
-              transition: opacity 0.4s ease 0.4s;
-            }
-          }
-        }
-      }
+
       &:hover {
-        + {
-          .hamburger {
-            > div {
-              transform: rotate(225deg);
-            }
+          > div {
+            transform: rotate(225deg);
           }
+      }
+    }
+    
+    .menu {
+      pointer-events: auto;
+      visibility: visible !important;
+      backdrop-filter: blur(0.625rem);
+      -webkit-backdrop-filter: blur(0.625rem);
+      
+      > div {
+        transform: scale(1);
+        transition-duration: 0.75s;
+        > div {
+          opacity: 1;
+          transition: opacity 0.4s ease 0.4s;
         }
       }
     }
@@ -187,7 +184,7 @@ const OuterMenu = styled.div`
       transition: all 0.4s ease;
       backface-visibility: hidden;
       background: rgba(0, 0, 0, 0.5);
-      @supports not (backdrop-filter: blur(0.625rem)) {
+      @supports not (backdrop-filter: blur(1px)) {
         background: rgba(0, 0, 0, 0.8);
       }
 

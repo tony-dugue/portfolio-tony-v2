@@ -1,43 +1,34 @@
-import {useEffect} from "react";
+import { Dispatch, SetStateAction } from "react";
 import { NAVLINKS } from '../../../constants';
 import styled from "styled-components";
 import tw from "twin.macro";
 
-const NavigationMenu = () => {
-
-  useEffect(() => {
-
-    // close menu navigation
-    const anchorNodes = document.querySelectorAll('a[href^="#"]');
-
-    anchorNodes.forEach(el => {
-      const checkbox: HTMLInputElement | null = document.querySelector('.checkbox-toggle');
-      el.addEventListener('click', () => checkbox!.checked = false )
-    })
-  }, []);
+const NavigationMenu = ({ setMenuVisible }: { setMenuVisible: Dispatch<SetStateAction<boolean>> }) => {
 
   return (
-    <Wrapper className="menu">
+    <Section className="menu">
       <Container>
         <MenuContainer>
-          <ListContainer>
+          <ListContainer role="menu">
 
             {NAVLINKS.map(link => (
-              <NavItem key={link.name}>
-                <NavLink className="link" href={`#${link.ref}`}>{link.name}</NavLink>
+              <NavItem key={link.name} role="menuitem">
+                <NavLink className="link" href={`#${link.ref}`} onClick={() => setMenuVisible(false)}>
+                  {link.name}
+                </NavLink>
               </NavItem>
             ))}
 
           </ListContainer>
         </MenuContainer>
       </Container>
-    </Wrapper>
+    </Section>
   )
 }
 
 export default NavigationMenu;
 
-const Wrapper = styled.div`
+const Section = styled.div`
   background-color: ${props => props.theme.colorSecondary};
   color: ${props => props.theme.colorWhite};
   z-index: 999;
