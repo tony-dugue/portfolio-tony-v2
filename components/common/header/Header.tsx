@@ -48,12 +48,12 @@ const Header = () => {
 export default Header;
 
 const HeaderWrapper = styled.header`
-  ${tw`w-full fixed top-0 left-0 right-0 2xl:container mx-auto xl:px-20 md:px-12 px-4 select-none z-50 bg-gradient-to-b from-gray-200 to-transparent`}
+  ${tw`w-full fixed top-0 left-0 right-0 select-none z-50 bg-gradient-to-b from-gray-200 to-transparent`}
 `
 
 const Container = styled.div`
   height: ${props => props.theme.navHeight};
-  ${tw`relative flex justify-between items-center`};
+  ${tw`relative flex justify-between items-center mx-auto 2xl:container xl:px-20 md:px-12 px-4`};
 
   @media screen and (max-width: 992px) {
     height: 40px;
@@ -64,7 +64,7 @@ const ImageWrapper = styled.div`
   width: auto;
   cursor: pointer;
   transition: all 0.2s ease;
-  margin-top: 20px;
+  margin-top: 0;
 
   @media screen and (max-width: 992px) {
     margin-top: 40px;
@@ -79,7 +79,7 @@ const ImageWrapper = styled.div`
     transform: rotate(180deg);
 
     @media screen and (max-width: 992px) {
-      width: 80px;
+      width: 100px;
     }
   }
 `
@@ -87,12 +87,18 @@ const ImageWrapper = styled.div`
 const RightContent = styled.div`
   width: 240px;
   ${tw`relative`};
+
+  @media screen and (max-width: 992px) {
+    margin-top: 40px;
+  }
+  @media screen and (max-width: 768px) {
+    margin-top: 10px;
+    margin-right: 15px;
+  }
 `
 
 const ButtonWrapper = styled.div`
-  @media screen and (max-width: 992px) {
-    display: none;
-  }
+  ${tw`md:block hidden`};
 `
 
 const HamburgerToggle = styled.a`${tw`w-6 h-6`}`
