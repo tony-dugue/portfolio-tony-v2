@@ -302,7 +302,7 @@ export const TIMELINE: Array<TimelineNode> = [
     type: NodeTypes.CHECKPOINT,
     title: "2015",
     size: ItemSize.LARGE,
-    shouldDrawLine: true,
+    shouldDrawLine: false,
     alignment: Branch.LEFT,
   },
   {

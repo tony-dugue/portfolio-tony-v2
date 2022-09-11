@@ -6,6 +6,7 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
 import styled from "styled-components";
 import tw from "twin.macro";
+import Heading from "../headings/Heading";
 
 const svgColor = '#9CA3AF';
 const animColor = '#FA5457';
@@ -440,11 +441,11 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
   return (
     <Section id={NAVLINKS[3].ref} className="section-container">
 
-      <TimelineIntro>
-        <p className='text-gradient seq'>Parcours</p>
-        <h1 className='text-gradient w-fit seq'>Mon parcours</h1>
-        <h2 className='seq'>Un aperçu des étapes de mon parcours professionnel</h2>
-      </TimelineIntro>
+      <Heading
+        title="Parcours"
+        subtitle="Mon parcours"
+        description="Un aperçu des étapes de mon parcours professionnel"
+      />
 
       <TimelineContentCol>
 

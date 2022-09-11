@@ -46,7 +46,7 @@ const AboutSection = () => {
 
         <h1 ref={quoteRef}>
           <span className={`about-1 leading-tight ${willChange ? "will-change-opacity" : ""}`}>
-            Après de longues années dans la surveillance du trafic maritime, j&lsquo;ai débuté une reconversion  afin de faire de ma première passion, un métier.{" "}
+            Après de longues années dans la surveillance du trafic maritime, j&lsquo;ai effectué une reconversion  afin de faire de ma première passion, un métier.{" "}
           </span>
 
           <br/><br/>

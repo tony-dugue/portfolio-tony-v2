@@ -1,11 +1,14 @@
 import {useEffect, useRef, useState} from 'react';
 import Image from 'next/image';
 import { NAVLINKS, SKILLS } from '../../constants';
-import styled from "styled-components";
-import tw from "twin.macro";
 
 import { gsap, Linear } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+
+import styled from "styled-components";
+import tw from "twin.macro";
+
+import Heading from "../headings/Heading";
 
 const SkillSection = () => {
 
@@ -54,11 +57,11 @@ const SkillSection = () => {
 
         <SkillWrapper className="skills-wrapper">
 
-          <SkillIntro>
-            <p className="text-gradient seq">Compétences</p>
-            <h1 className="text-gradient w-fit seq">Mes compétences</h1>
-            <h2 className="seq">J&lsquo;aime concevoir et créer des expériences utilisateur optimisées en utilisant une architecture front moderne. </h2>
-          </SkillIntro>
+          <Heading
+            title="Compétences"
+            subtitle="Mes compétences"
+            description="J'aime concevoir et créer des expériences utilisateur optimisées en utilisant une architecture front moderne."
+          />
 
           <SkillTop>
             <h3 className='seq'>Développement Frontend</h3>
@@ -119,37 +122,6 @@ const Container = styled.div`
   .skill-icon {
     padding-right: 1.25rem !important;
     padding-bottom: 1.25rem !important;
-  }
-`
-
-const SkillIntro = styled.div`
-  ${tw`flex flex-col`}
-
-  .intro-container {
-    ${tw`flex flex-col gap-2`}
-  }
-
-  p {
-    color: ${props => props.theme.colorPrimary};
-    ${tw`md:text-5xl text-4xl font-bold w-fit`}
-  }
-
-  h1 {
-    ${tw`uppercase tracking-widest text-gray-200 text-sm`};
-
-    @media screen and (max-width: 768px) {
-      font-size: 2rem;
-    }
-  }
-  h2 {
-    ${tw`text-2xl md:max-w-2xl w-full mt-2`};
-    width: 50vw;
-
-    @media screen and (max-width: 768px) {
-      font-size: 1.2rem;
-      width: 80vw;
-      line-height: 1.3em;
-    }
   }
 `
 

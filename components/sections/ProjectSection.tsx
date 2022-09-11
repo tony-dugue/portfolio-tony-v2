@@ -7,6 +7,7 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { NO_MOTION_PREFERENCE_QUERY } from "../../pages/index";
 
 import ProjectCard from './ProjectCard'
+import Heading from "../headings/Heading";
 
 const ProjectSection = ({ isDesktop }: { isDesktop: boolean }) => {
 
@@ -117,9 +118,11 @@ const ProjectSection = ({ isDesktop }: { isDesktop: boolean }) => {
       <SectionWrapper>
 
         <ProjectTitle ref={sectionTitleElementRef} className={`inner-container  ${willChange ? "will-change-transform" : ""}`}>
-          <p className="text-gradient seq">PROJETS</p>
-          <h1 className="text-gradient w-fit seq">Mes réalisations</h1>
-          <h2 className="seq">Passionné depuis toujours par les nouvelles technologies mais aussi par le design, je conçois et réalise des applications web intuitive et fonctionnelle mais toujours avec une dose de créativité.</h2>
+          <Heading
+            title="Projets"
+            subtitle="Mes réalisations"
+            description="Passionné depuis toujours par les nouvelles technologies mais aussi par le design, je conçois et réalise des applications web intuitive et fonctionnelle mais toujours avec une dose de créativité."
+          />
         </ProjectTitle>
 
         <ProjectItems className="project-wrapper snap-x seq scroll-pl-6 snap-mandatory">
