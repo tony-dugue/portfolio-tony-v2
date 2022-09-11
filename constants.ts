@@ -60,7 +60,7 @@ export const PROJECTS: IProject[] = [
     description: 'Plateforme numérique pour gérer avec simplicité les process RH de gestion des formations internes ou externes et des compétences',
     gradient: ['#172839', '#334659'],
     url: 'https://app.escaledescompetences.fr/',
-    techs: ['react', 'sass', 'symfony']
+    techs: ['react', 'sass', 'redux', 'symfony']
   },
   {
     name: 'MotooPlanner',
@@ -69,7 +69,7 @@ export const PROJECTS: IProject[] = [
     description: 'Application web pour faciliter la planification de road trip en moto en groupe',
     gradient: ['#00765F', '#238975'],
     url: 'https://motooplanner.tonydugue.fr/',
-    techs: ['react', 'sass', 'symfony']
+    techs: ['react', 'redux', 'sass', 'symfony']
   },
   {
     name: 'Lemona Food Truck',

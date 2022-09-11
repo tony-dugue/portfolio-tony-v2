@@ -39,7 +39,7 @@ const ProjectCard = ({ project, animationEnabled }: { project: IProject; animati
           <div className="tech-icons-item">
             {techs.map((tech, i) => (
               <div className={i % 2 === 0 ? 'tech-icons-item-img' : ''} key={tech}>
-                <Image src={`/svgs/tech/${tech}.svg`} alt={tech} height={45} width={45} objectFit="contain" />
+                <Image src={`/svgs/skills/${tech}.svg`} alt={tech} height={45} width={45} objectFit="contain" />
               </div>
             ))}
           </div>
