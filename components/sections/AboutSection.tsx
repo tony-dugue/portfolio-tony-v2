@@ -36,7 +36,6 @@ const AboutSection = () => {
 
   useEffect(() => {
     const aboutScrollTriggerInstance = initAboutAnimation(quoteRef, sectionRef);
-
     return aboutScrollTriggerInstance.kill;
   }, [quoteRef, sectionRef]);
 
@@ -78,7 +77,9 @@ const Container = styled.div`
   }
 
   h1 {
-    ${tw`font-medium text-lg text-2xl sm:text-3xl md:text-5xl`}
+    ${tw`font-medium text-lg text-2xl sm:text-3xl md:text-4xl`}
+    margin-top: 20vh;
+    color: ${props => props.theme.colorWhite};
   }
   
   .leading-tight {

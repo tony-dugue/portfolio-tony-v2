@@ -66,4 +66,5 @@ const CursorMain = styled(motion.div)`
   top: 0;
   left: 0;
   pointer-events: none;
+  mix-blend-mode: difference;
 `

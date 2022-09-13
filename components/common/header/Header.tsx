@@ -48,7 +48,8 @@ const Header = () => {
 export default Header;
 
 const HeaderWrapper = styled.header`
-  ${tw`w-full fixed top-0 left-0 right-0 select-none z-50 bg-gradient-to-b from-gray-200 to-transparent`}
+  ${tw`w-full fixed top-0 left-0 right-0 select-none z-50`}
+  // bg-gradient-to-b from-gray-200 to-transparent
 `
 
 const Container = styled.div`

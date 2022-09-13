@@ -61,6 +61,7 @@ const SkillSection = () => {
             title="Compétences"
             subtitle="Mes compétences"
             description="J'aime concevoir et créer des expériences utilisateur optimisées en utilisant une architecture front moderne."
+            textColor="white"
           />
 
           <SkillTop>
@@ -103,17 +104,20 @@ export default SkillSection;
 
 const Section = styled.section`
   ${tw`relative`}
+  background: ${props => props.theme.colorSecondary};
+  min-height: 100vh;
 
   .pattern-left {
     ${tw`absolute left-0 -bottom-3.5 w-1/12 max-w-xs md:block hidden`}
   }
   .pattern-right {
     ${tw`absolute right-0 -bottom-1/3 w-1/5 max-w-xs md:flex hidden justify-end`}
+    z-index: 100;
   }
 `
 
 const Container = styled.div`
-  ${tw`w-full relative select-none mb-24 py-12 flex flex-col justify-center`}
+  ${tw`w-full relative select-none mb-24 py-12 flex flex-col justify-center 2xl:container xl:px-20 md:px-12 px-4`}
 
   .skill-icons {
     ${tw`flex flex-wrap`}
@@ -130,7 +134,7 @@ const SkillWrapper = styled.div`
 `
 
 const SkillTop = styled.div`
-  ${tw`flex flex-col mb-2 mt-10`}
+  ${tw`flex flex-col mb-2 mt-16`}
   
   h3 {
     ${tw`uppercase tracking-widest text-gray-200 text-sm mb-4`}
@@ -138,7 +142,7 @@ const SkillTop = styled.div`
 `
 
 const SkillBottom = styled.div`
-  ${tw`flex flex-wrap mt-10`}
+  ${tw`flex flex-wrap mt-5`}
   
   .top {
     ${tw`mr-6 mb-6`}

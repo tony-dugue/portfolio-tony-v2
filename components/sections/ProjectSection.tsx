@@ -44,11 +44,11 @@ const ProjectSection = ({ isDesktop }: { isDesktop: boolean }) => {
   ): [GSAPTimeline, ScrollTrigger] => {
 
     const timeline = gsap.timeline({ defaults: { ease: Linear.easeNone } });
-    const sidePadding =
-      document.body.clientWidth -
-      targetSectionRef.current.querySelector(".inner-container")!.clientWidth;
+    const sidePadding = document.body.clientWidth - targetSectionRef.current.querySelector(".inner-container")!.clientWidth;
     const elementWidth = sidePadding + targetSectionRef.current.querySelector(".project-wrapper")!.clientWidth;
+
     targetSectionRef.current!.style.width = `${elementWidth}px`;
+
     const width = window.innerWidth - elementWidth;
     const duration = `${(elementWidth / window.innerHeight) * 100}%`;
     timeline
@@ -122,6 +122,7 @@ const ProjectSection = ({ isDesktop }: { isDesktop: boolean }) => {
             title="Projets"
             subtitle="Mes réalisations"
             description="Passionné depuis toujours par les nouvelles technologies mais aussi par le design, je conçois et réalise des applications web intuitive et fonctionnelle mais toujours avec une dose de créativité."
+            textColor="inherit"
           />
         </ProjectTitle>
 
@@ -143,42 +144,21 @@ const ProjectSection = ({ isDesktop }: { isDesktop: boolean }) => {
 export default ProjectSection;
 
 const Section = styled.section`
-  ${tw`w-full relative select-none flex-col flex py-8 justify-center`}
-  
+  ${tw`w-full relative select-none flex-col flex py-8 justify-center`};
+  background: ${props => props.theme.colorBackground};
+
   &.isDesktop {
     ${tw`min-h-screen`}
   }
 `
 
 const SectionWrapper = styled.div`
-  ${tw`flex-col flex py-8 xl:px-20 md:px-12 px-4 justify-center h-full`}
+  ${tw`flex-col flex py-8 xl:px-10 md:px-0 px-4 justify-center h-full`}
 `
 
 const ProjectTitle = styled.div`
   ${tw`flex flex-col`}
-  
-  p {
-    color: ${props => props.theme.colorPrimary};
-    ${tw`md:text-5xl text-4xl font-bold w-fit`}
-  }
-  
-  h1 {
-    ${tw`uppercase tracking-widest text-gray-200 text-sm`};
-
-    @media screen and (max-width: 768px) {
-      font-size: 2rem;
-    }
-  }
-  h2 {
-    ${tw`text-2xl md:max-w-2xl w-full mt-2`};
-    width: 50vw;
-    
-    @media screen and (max-width: 768px) {
-      font-size: 1.2rem;
-      width: 80vw;
-      line-height: 1.3em;
-    }
-  }
+  margin-top: 40px;
 `
 
 const ProjectItems = styled.div`

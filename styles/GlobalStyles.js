@@ -276,13 +276,12 @@ const GlobalStyles = createGlobalStyle`
     border-radius: 6px;
   }
   .text-gradient {
-    background: linear-gradient(90deg, #0f3b56 0%, #2193b0 100%);
+    background: linear-gradient(90deg, rgba(250,84,87, 1) 0%, rgba(250,84,87, 0.7) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   .section-container {
-    //@apply 2xl:container xl:px-20 md:px-12 px-4 mx-auto;
     padding-left: 1rem;
     padding-right: 1rem;
     margin-left: auto;
