@@ -27,19 +27,14 @@ export const NAVLINKS = [
   }
 ]
 
-export const TYPED_STRINGS = [
-  'Développement Frontend',
-  'Développement Backend',
-  'Développement FullStack JS'
-]
-
 export const EMAIL = 'duguetony@gmail.com'
 
 export const SOCIAL_LINKS = [
-  { name: 'linkedin', url: 'https://duguetony.fr'},
-  { name: 'github', url: 'https://duguetony.fr'},
-  { name: 'instagram', url: 'https://duguetony.fr'},
-  { name: 'facebook', url: 'https://duguetony.fr'}
+  { name: 'linkedin', url: '#'},
+  { name: 'github', url: 'https://github.com/tony-dugue'},
+  { name: 'instagram', url: 'https://www.instagram.com/tony_dugue/'},
+  { name: 'facebook', url: 'https://www.facebook.com/tony.dugue'},
+  { name: 'mail', url: 'mailto:hello@duguetony.fr'}
 ]
 
 export interface IProject {

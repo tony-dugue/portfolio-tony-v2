@@ -1,144 +1,225 @@
-import { useEffect, useRef } from "react";
-import {SOCIAL_LINKS, EMAIL, TYPED_STRINGS, NAVLINKS} from "../../constants";
-import Typed from 'typed.js';
+import {useEffect, useRef} from "react";
+import {motion} from "framer-motion";
+import {gsap, Linear} from "gsap";
+import {ScrollTrigger} from "gsap/dist/ScrollTrigger";
+import {NAVLINKS, SOCIAL_LINKS} from "../../constants";
 
-import { gsap, Linear } from 'gsap'
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
 import tw from "twin.macro";
 
-import SquareButton from "../buttons/SquareButton"
-import HeroIllustration from "./HeroIllustration"
+const containerVariants = {
+  hidden : { opacity: 0 },
+  show : { opacity: 1, transition : { delayChildren: 1, staggerChildren: 0.2 } }
+}
+
+const letterVariants = {
+  hidden : { opacity: 0 },
+  show : { opacity: 1 }
+}
 
 const HeroSection = () => {
 
   gsap.registerPlugin(ScrollTrigger);
 
-  const typedElRef = useRef<HTMLDivElement>(null);
-  const targetSectionRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const goBackRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const typed = new Typed(typedElRef.current as Element, {
-      strings: TYPED_STRINGS,
-      typeSpeed: 50,
-      backSpeed: 50,
-      backDelay: 8000,
-      loop: true
-    });
 
     const revealTl = gsap.timeline({ defaults: { ease: Linear.easeNone } });
-    revealTl
-      .to(targetSectionRef.current, { opacity: 1, duration: 2, delay: 0.5 })
-      .from(targetSectionRef.current!.querySelectorAll('.seq'), { opacity: 0, duration: 0.5, stagger: 0.5 }, '<');
 
-    return () => typed.destroy();
-  }, [typedElRef, targetSectionRef]);
+    revealTl
+      .to(sectionRef.current, { opacity: 1, duration: 2, delay: 2 })
+      .from(sectionRef.current!.querySelectorAll('.seq'), { opacity: 0, duration: 0.5, stagger: 0.5 }, '<');
+
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top top",
+        scrub: true,
+        pin: false
+      }
+    }).to(goBackRef.current, { opacity: 0 })
+
+  }, [sectionRef]);
 
   return (
-    <Section id={NAVLINKS[0].ref} ref={targetSectionRef}>
-      <Container>
+    <div>
+      <Section ref={sectionRef} id={NAVLINKS[0].ref}>
 
-        <div className="hero-desc">
-          <h2 className="seq">Hello 👋🏻</h2>
-          <h1 className="seq">Je suis Tony Dugué</h1>
-        </div>
+        <Container>
 
-        <p className="hero-typed">
-          <span ref={typedElRef} className="seq"></span>
-        </p>
+          <motion.div variants={containerVariants} initial="hidden" animate="show">
+            <Title>
+              <motion.h1 variants={letterVariants}>T</motion.h1>
+              <motion.h1 variants={letterVariants}>o</motion.h1>
+              <motion.h1 variants={letterVariants}>n</motion.h1>
+              <motion.h1 variants={letterVariants}>y</motion.h1>
+              <motion.h1 variants={letterVariants}>&nbsp;</motion.h1>
+              <motion.h1 variants={letterVariants}>D</motion.h1>
+              <motion.h1 variants={letterVariants}>u</motion.h1>
+              <motion.h1 variants={letterVariants}>g</motion.h1>
+              <motion.h1 variants={letterVariants}>u</motion.h1>
+              <motion.h1 variants={letterVariants}>é</motion.h1>
+            </Title>
 
-        <SocialContainer className="seq">
-          {SOCIAL_LINKS.map(link => (
-            <SocialLink href={link.url} className="link" key={link.name} rel='noreferrer' target='_blank'>
-              <img src={`/svgs/social/${link.name}.svg`} alt={link.name} width={40} height={40} />
-            </SocialLink>
-          ))}
-        </SocialContainer>
+            <Description variants={letterVariants} className="seq">
+              <mark>Développeur Web et Mobile - FullStack JS</mark>
+              <br/>Rennes, France 🇫🇷
+              <span className="seq">Spécialisé en React, VueJS et NestJS.</span>
+            </Description>
 
-        <Cta className="seq">
-          <SquareButton type='outline' name='Resume' newTab={true} href='/tony-dugue-cv.pdf'></SquareButton>
-          <SquareButton type='primary' newTab={false} name='Contact' href={'mailto:'+EMAIL}></SquareButton>
-        </Cta>
+          </motion.div>
 
-      </Container>
+          <SocialContainer className="seq">
+            {SOCIAL_LINKS.map(link => (
+              <SocialLink href={link.url} className="link" key={link.name} rel='noreferrer' target='_blank'>
+                <img src={`/svgs/social/${link.name}.svg`} alt={link.name} width={40} height={40} />
+              </SocialLink>
+            ))}
+          </SocialContainer>
 
-      <ImageCtr className="hero-bg">
-        <HeroIllustration />
-      </ImageCtr>
+          <GoBack className="round" ref={goBackRef}>
+            <GoBackCircle>&#x2193;</GoBackCircle>
+            <img src='/images/rounded-text-black.png' alt="animation pour aller à la prochaine section" />
+          </GoBack>
 
-    </Section>
+        </Container>
+
+      </Section>
+    </div>
   )
 }
 
-export default HeroSection;
+export default HeroSection
 
-const Section = styled.div`
-  opacity: 0;
-  ${tw`w-full flex md:items-center py-8 2xl:container mx-auto xl:px-20 md:px-12 px-4 min-h-screen relative mb-24`};
-
-  @media screen and (max-width: 768px) {
-    ${tw`flex-col justify-center`};
-  }
+const Section = styled.section`
+  ${tw`relative w-full`};
+  min-height: ${props => `calc(100vh - ${props.theme.navHeight})`};
+  margin-top: ${props => props.theme.navHeight};
 `
 
 const Container = styled.div`
-  ${tw`font-medium flex flex-col gap-5 pt-20 select-none`};
+  ${tw`relative flex flex-col justify-center items-center mx-auto w-full text-center 2xl:container`};
+  min-height: 90vh;
 
   @media screen and (max-width: 768px) {
-    ${tw`justify-center items-center gap-2`};
+    padding: 0 2rem 5rem 2rem;
   }
-  
-  .hero-desc {
-    ${tw`md:mb-5 mb-2`};
-  }
-  
-  .hero-typed {
-    ${tw`mb-4`};
+`
+
+const Title = styled.div`
+  ${tw`flex justify-center items-center mt-0 uppercase`};
+  font-size: 5em;
+  font-family: ${props => props.theme.fontDin};
+  color: ${props => props.theme.colorTitle};
+  line-height: 0.7;
+
+  @media screen and (max-width: 992px) {
+    font-size: 4em;
   }
 
-  h1 {
-    ${tw`text-3xl`};
+  @media screen and (max-width: 768px) {
+    font-size: 1.8em;
+  }
+`
 
-    @media screen and (max-width: 992px) {
-      ${tw`text-2xl`};
-    }
+const Description = styled(motion.p)`
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  
+  color: ${props => props.theme.colorText};
+  font-size: 1.5rem;
+  line-height: 1.5;
+  font-weight: 600;
+
+
+  @media screen and (max-width: 768px) {
+    font-size: 1.2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
   }
   
-  p, span {
-    ${tw`text-xl sm:text-2xl md:text-4xl`};
+  mark {
+    position: relative;
+    display: inline-block;
+    padding: 4px 5px;
+    border-radius: 6px;
+    margin-right: 5px;
+    
+    background-color: ${props => props.theme.colorMark};
 
     @media screen and (max-width: 768px) {
-      ${tw`text-center`};
+      margin: 0 30px;
     }
   }
-
-  .typed-cursor {
-    font-size: 2rem;
+  
+  span {
+    display: block;
+    margin-top: 10px;
+    color: ${props => props.theme.colorBlack};
   }
 `
 
 const SocialContainer = styled.div`
-  ${tw`flex mb-5`}
+  ${tw`flex mb-5 justify-center`}
 `
 
 const SocialLink = styled.a`
-  ${tw`hover:opacity-80 duration-300 md:px-2 px-1`}
-`
-
-const Cta = styled.div`
-  ${tw`flex gap-5`}
-
-  a {
-    ${tw`mx-3`}
-  }
-`
-
-const ImageCtr = styled.div`
-  ${tw`absolute right-0 md:bottom-0 bottom-8 -z-1 md:w-3/4 w-full scale-125 sm:scale-100 flex items-end`};
+  ${tw`hover:opacity-80 duration-300 md:px-3 px-3`};
 
   @media screen and (max-width: 768px) {
-    display: none;
-  }
+  width: 4rem;
 }
+`
+
+const rotate = keyframes`
+  100% {
+    transform: rotate(1turn);
+  }
+`
+
+const GoBack = styled.div`
+  position: absolute;
+  bottom: 3rem;
+  left: 3rem;
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: 50%;
+  opacity: 1;
+
+  @media screen and (max-width: 768px) {
+    width: 4.3rem;
+    height: 4.3rem;
+    bottom: 3rem;
+    left: 2rem;
+  }
+  
+  img {
+    width: 100%;
+    height: auto;
+    animation: ${rotate} 25s linear infinite;
+  }
+`
+
+const GoBackCircle = styled.span`
+  width: 3.2rem;
+  height: 3.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  background-color: ${props => props.theme.colorSecondary};
+  color: ${props => props.theme.colorBackground};
+  font-size: 1.5rem;
+
+  @media screen and (max-width: 768px) {
+    width: 2.8rem;
+    height: 2.8rem;
+  }
 `

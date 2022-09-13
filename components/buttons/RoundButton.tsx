@@ -36,7 +36,7 @@ const RoundBtnWrapper = styled.button`
     &:before {
       content: "";
       position: absolute;
-      top: 5px;
+      top: 0;
       left: 0;
       display: block;
       border-radius: 28px;

@@ -10,7 +10,6 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { gsap } from "gsap";
 
 import Layout from "../components/common/layout/Layout"
-//import Hero from "../components/home/Hero"
 import HeroSection from "../components/sections/HeroSection"
 import AboutSection from "../components/sections/AboutSection"
 import ProjectSection from "../components/sections/ProjectSection"
@@ -71,7 +70,6 @@ const Home: NextPage = () => {
         <Main>
           {renderBackdrop()}
           <HeroSection />
-          {/*<Hero />*/}
           <AboutSection />
           <ProjectSection isDesktop={isDesktop} />
           <QuoteSection />

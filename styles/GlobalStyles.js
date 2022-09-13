@@ -176,7 +176,7 @@ const GlobalStyles = createGlobalStyle`
   
   html {
     box-sizing: border-box;
-    font-size: 18px;
+    font-size: 16px;
     scroll-behavior: smooth;
     -ms-overflow-style: scrollbar;
     scrollbar-color: black;
@@ -184,19 +184,16 @@ const GlobalStyles = createGlobalStyle`
     overflow-x: hidden;
     
     @media (min-width: 768px) {
-      font-size: 14px;
+      font-size: 0.8em;
     }
     @media (min-width: 1024px) {
-      font-size: 15px;
+      font-size: 1em;
     }
     @media (min-width: 1536px) {
-      font-size: 18px;
+      font-size: 1.2em;
     }
     @media (min-width: 1800px) {
-      font-size: 20px;
-    }
-    @media (min-width: 2000px) {
-      font-size: 22px;
+      font-size: 1.5em;
     }
   }
   ::-webkit-scrollbar {
@@ -246,7 +243,6 @@ const GlobalStyles = createGlobalStyle`
   }
   
   p, ul, ol, a {
-    font-size: 1rem;
     margin-top: 0;
     margin-bottom: 1rem;
   }
