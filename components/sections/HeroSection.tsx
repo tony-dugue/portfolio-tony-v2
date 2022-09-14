@@ -66,7 +66,7 @@ const HeroSection = () => {
             <Description variants={letterVariants} className="seq">
               <mark>Développeur Web et Mobile - FullStack JS</mark>
               <br/>Rennes, France 🇫🇷
-              <span className="seq">Spécialisé en React, VueJS et NestJS.</span>
+              <span className="seq">Spécialisé en React, NextJS et NestJS.</span>
             </Description>
 
           </motion.div>

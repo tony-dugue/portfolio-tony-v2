@@ -73,9 +73,18 @@ const SkillSection = () => {
             </div>
           </SkillTop>
 
+          <SkillMiddle>
+            <h3 className='seq'>Développement Backend</h3>
+            <div className='skill-icons seq'>
+              {SKILLS.backend.map(skill => (
+                <Image key={skill} src={`/svgs/skills/${skill}.svg`} alt={skill} width={76} height={76} className="skill-icon" />
+              ))}
+            </div>
+          </SkillMiddle>
+
           <SkillBottom>
             <div className="top">
-              <h3 className='seq'>UI, Design UX</h3>
+              <h3 className='seq'>UI, Design UX & 3D</h3>
               <div className='skill-icons seq'>
                 {SKILLS.userInterface.map(skill => (
                   <Image key={skill} src={`/svgs/skills/${skill}.svg`} alt={skill} width={76} height={76} className="skill-icon" />
@@ -134,7 +143,15 @@ const SkillWrapper = styled.div`
 `
 
 const SkillTop = styled.div`
-  ${tw`flex flex-col mb-2 mt-16`}
+  ${tw`flex flex-col mb-2 mt-10`}
+  
+  h3 {
+    ${tw`uppercase tracking-widest text-gray-200 text-sm mb-4`}
+  }
+`
+
+const SkillMiddle = styled.div`
+  ${tw`flex flex-col mb-2`}
   
   h3 {
     ${tw`uppercase tracking-widest text-gray-200 text-sm mb-4`}
@@ -142,7 +159,7 @@ const SkillTop = styled.div`
 `
 
 const SkillBottom = styled.div`
-  ${tw`flex flex-wrap mt-5`}
+  ${tw`flex flex-wrap mt-0`}
   
   .top {
     ${tw`mr-6 mb-6`}
