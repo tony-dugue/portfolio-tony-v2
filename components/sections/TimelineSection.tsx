@@ -9,10 +9,11 @@ import tw from "twin.macro";
 import Heading from "../headings/Heading";
 
 const svgColor = '#9CA3AF';
-const animColor = '#FA5457';
+const animColor = '#FCD34D';
+const dotColor = '#9CA3AF';
 const separation = 450;
-const strokeWidth = 2;
-const leftBranchX = 13;
+const strokeWidth = 3;
+const leftBranchX = 8;
 const curveLength = 150;
 const dotSize = 26;
 
@@ -114,7 +115,7 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
   };
 
   const getDotString = (x: number, y: number) => {
-    return `<rect class='dot' width=${dotSize} height=${dotSize} fill='#fafafa' x=${x - dotSize / 2} y=${y - dotSize / 2} ></rect><circle cx=${x} cy=${y} r='7' stroke=${animColor} class='dot' ></circle>`;
+    return `<rect class='dot' width=${dotSize} height=${dotSize} fill='#fafafa' x=${x - dotSize / 2} y=${y - dotSize / 2} ></rect><circle cx=${x} cy=${y} r='7' stroke=${dotColor} class='dot' ></circle>`;
   };
 
   const drawDot = (
@@ -149,7 +150,7 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
     y: number,
     isDiverged: boolean
   ) => {
-    const { title, subtitle, size, image } = timelineNode;
+    const { title, subtitle, period, size, image } = timelineNode;
 
     const offset = isDiverged ? rightBranchX : 10;
     const foreignObjectX = dotSize / 2 + 10 + offset;
@@ -162,12 +163,26 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
       ? `<img src='${image}' class='timeline-logo' loading='lazy' width='100' height='32' alt='${image}' />`
       : "";
 
+    const titleString = title
+      ? `<p class='timeline-item-title ${titleSizeClass}'>${title}</p>`
+      : "";
+
     const subtitleString = subtitle
       ? `<p class='timeline-item-subtitle'>${subtitle}</p>`
       : "";
 
-    return `<foreignObject x=${foreignObjectX} y=${foreignObjectY} width=${foreignObjectWidth} 
-        height=${separation}>${logoString}<p class='timeline-item-title ${titleSizeClass}'>${title}</p>${subtitleString}</foreignObject>`;
+    const periodString = period
+      ? `<p class='timeline-item-period'>${period}</p>`
+      : "";
+
+    return `
+       <foreignObject x=${foreignObjectX} y=${foreignObjectY} width=${foreignObjectWidth} height=${separation}>
+          ${logoString}
+          ${periodString}
+          ${titleString}
+          ${subtitleString}
+       </foreignObject>
+    `;
   };
 
   const drawLine = (
@@ -489,33 +504,6 @@ const Section = styled.section`
   ${tw`w-full relative select-none min-h-screen py-8 flex flex-col justify-center`}
 `
 
-const TimelineIntro = styled.div`
-  ${tw`flex flex-col`}
-
-  p {
-    color: ${props => props.theme.colorPrimary};
-    ${tw`md:text-5xl text-4xl font-bold w-fit`}
-  }
-
-  h1 {
-    ${tw`uppercase tracking-widest text-gray-200 text-sm`};
-
-    @media screen and (max-width: 768px) {
-      font-size: 2rem;
-    }
-  }
-  h2 {
-    ${tw`text-2xl md:max-w-2xl w-full mt-2`};
-    width: 50vw;
-
-    @media screen and (max-width: 768px) {
-      font-size: 1.2rem;
-      width: 80vw;
-      line-height: 1.3em;
-    }
-  }
-`
-
 const TimelineContentCol = styled.div`
   ${tw`grid grid-cols-12 gap-4 mt-20`}
   
@@ -525,7 +513,7 @@ const TimelineContentCol = styled.div`
   }
   
   .timeline-title {
-    ${tw`text-2xl`}
+    ${tw`text-2xl`};
     
     &.text-big {
     "text-6xl"
@@ -540,12 +528,20 @@ const TimelineContentCol = styled.div`
 const TimelineContentColLeft = styled.div`
   ${tw`col-span-12 md:col-span-6`}
 
+  .timeline-item-period {
+    ${tw`text-xl font-medium tracking-wide`};
+    color: ${props => props.theme.colorSecondary};
+  }
+  
   .timeline-item-title {
-    ${tw`text-xl mt-2 text-gray-200 font-medium tracking-wide`}
+    ${tw`text-3xl font-bold tracking-wide`};
+    color: ${props => props.theme.colorSecondary};
+    margin-top: -0.4rem;
   }
   
   .timeline-item-subtitle {
-    ${tw`text-xl mt-2 text-gray-200 font-medium tracking-wide`}
+    ${tw`text-xl mt-2 font-medium tracking-wide`}
+    color: ${props => props.theme.colorSecondary};
   }
 `
 
