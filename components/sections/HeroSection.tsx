@@ -2,7 +2,7 @@ import {useEffect, useRef} from "react";
 import {motion} from "framer-motion";
 import {gsap, Linear} from "gsap";
 import {ScrollTrigger} from "gsap/dist/ScrollTrigger";
-import {NAVLINKS, SOCIAL_LINKS} from "../../constants";
+import {NAVLINKS, SOCIAL_LINKS, TITLE_HERO} from "../../constants";
 
 import styled, {keyframes} from "styled-components";
 import tw from "twin.macro";
@@ -51,16 +51,11 @@ const HeroSection = () => {
 
           <motion.div variants={containerVariants} initial="hidden" animate="show">
             <Title>
-              <motion.h1 variants={letterVariants}>T</motion.h1>
-              <motion.h1 variants={letterVariants}>o</motion.h1>
-              <motion.h1 variants={letterVariants}>n</motion.h1>
-              <motion.h1 variants={letterVariants}>y</motion.h1>
-              <motion.h1 variants={letterVariants}>&nbsp;</motion.h1>
-              <motion.h1 variants={letterVariants}>D</motion.h1>
-              <motion.h1 variants={letterVariants}>u</motion.h1>
-              <motion.h1 variants={letterVariants}>g</motion.h1>
-              <motion.h1 variants={letterVariants}>u</motion.h1>
-              <motion.h1 variants={letterVariants}>é</motion.h1>
+              { TITLE_HERO.split("").map( (letter, idx) => (
+                <motion.h1 variants={letterVariants} key={idx}>
+                  {letter === " " ? '\u00A0' : letter}
+                </motion.h1>
+              ))}
             </Title>
 
             <Description variants={letterVariants} className="seq">

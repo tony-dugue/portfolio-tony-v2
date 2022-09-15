@@ -12,14 +12,14 @@ const QuoteSection = () => {
 
   const [willChange, setwillChange] = useState(false);
 
-  const initQuoteAnimation = (
-    quoteRef: any,
-    sectionRef: any
-  ): ScrollTrigger => {
+  const initQuoteAnimation = (quoteRef: any, sectionRef: any): ScrollTrigger => {
+
     const timeline = gsap.timeline({ defaults: { ease: Linear.easeNone } });
+
     timeline
       .from(quoteRef.current, { opacity: 0, duration: 2 })
       .to(quoteRef.current.querySelector(".text-strong"), {
+        opacity: 1,
         backgroundPositionX: "100%",
         duration: 1,
       });
@@ -56,10 +56,15 @@ const Section = styled.section`
 `
 
 const Container = styled.div`
-  ${tw`tall:py-60 py-72`}
+  ${tw`tall:py-14 py-72`}
   
   h1 {
-    ${tw`font-medium text-4xl md:text-5xl text-center`}
+    ${tw`font-medium text-lg text-2xl sm:text-3xl md:text-4xl text-center mx-auto`}
+    width: 80%;
+
+    @media screen and (max-width: 768px) {
+      opacity: 1 !important;
+    }
 
     .text-strong {
       ${tw`font-bold`}

@@ -13,7 +13,7 @@ const Footer = () => {
       <Wrapper>
         <Container className="section-container">
 
-          <h1>Je recherche des défis ! N&lsquo;hésitez pas à me contacter.</h1>
+          <h1>J'aime les défis ! N&lsquo;hésitez pas à me contacter.</h1>
 
           <SocialContainer>
             {SOCIAL_LINKS.map(link => (

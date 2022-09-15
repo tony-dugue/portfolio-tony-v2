@@ -442,9 +442,9 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
     <Section id={NAVLINKS[3].ref} className="section-container">
 
       <Heading
-        title="Parcours"
-        subtitle="Mon parcours"
+        title="Mon parcours"
         description="Un aperçu des étapes de mon parcours professionnel"
+        textColor="inherit"
       />
 
       <TimelineContentCol>

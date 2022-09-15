@@ -27,6 +27,8 @@ export const NAVLINKS = [
   }
 ]
 
+export const TITLE_HERO = 'Tony Dugué'
+
 export const EMAIL = 'duguetony@gmail.com'
 
 export const SOCIAL_LINKS = [

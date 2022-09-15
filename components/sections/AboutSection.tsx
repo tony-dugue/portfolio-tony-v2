@@ -64,6 +64,10 @@ export default AboutSection;
 
 const Section = styled.section`
   ${tw`tall:pt-20 tall:pb-16 pt-40 pb-24 w-full relative select-none`}
+  
+  .with-color {
+    ${props => props.theme.secondary};
+  }
 `
 
 const Container = styled.div`

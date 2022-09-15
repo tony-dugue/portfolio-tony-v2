@@ -119,8 +119,7 @@ const ProjectSection = ({ isDesktop }: { isDesktop: boolean }) => {
 
         <ProjectTitle ref={sectionTitleElementRef} className={`inner-container  ${willChange ? "will-change-transform" : ""}`}>
           <Heading
-            title="Projets"
-            subtitle="Mes réalisations"
+            title="Mes projets"
             description="Passionné depuis toujours par les nouvelles technologies mais aussi par le design, je conçois et réalise des applications web intuitive et fonctionnelle mais toujours avec une dose de créativité."
             textColor="inherit"
           />

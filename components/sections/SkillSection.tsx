@@ -16,10 +16,10 @@ const SkillSection = () => {
 
   const [willChange, setwillChange] = useState(false);
 
-  const initRevealAnimation = (
-    targetSection: any
-  ): ScrollTrigger => {
+  const initRevealAnimation = (targetSection: any): ScrollTrigger => {
+
     const revealTl = gsap.timeline({ defaults: { ease: Linear.easeNone } });
+
     revealTl.from(
       targetSection.current.querySelectorAll(".seq"),
       { opacity: 0, duration: 0.5, stagger: 0.5 },
@@ -38,7 +38,6 @@ const SkillSection = () => {
 
   useEffect(() => {
     const revealAnimationRef = initRevealAnimation(sectionRef);
-
     return revealAnimationRef.kill;
   }, [sectionRef]);
 
@@ -58,8 +57,7 @@ const SkillSection = () => {
         <SkillWrapper className="skills-wrapper">
 
           <Heading
-            title="Compétences"
-            subtitle="Mes compétences"
+            title="Mes compétences"
             description="J'aime concevoir et créer des expériences utilisateur optimisées en utilisant une architecture front moderne."
             textColor="white"
           />
@@ -143,7 +141,7 @@ const SkillWrapper = styled.div`
 `
 
 const SkillTop = styled.div`
-  ${tw`flex flex-col mb-2 mt-10`}
+  ${tw`flex flex-col mb-8 mt-10`}
   
   h3 {
     ${tw`uppercase tracking-widest text-gray-200 text-sm mb-4`}
@@ -151,7 +149,7 @@ const SkillTop = styled.div`
 `
 
 const SkillMiddle = styled.div`
-  ${tw`flex flex-col mb-2`}
+  ${tw`flex flex-col mb-8`}
   
   h3 {
     ${tw`uppercase tracking-widest text-gray-200 text-sm mb-4`}

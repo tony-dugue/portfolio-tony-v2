@@ -58,8 +58,8 @@ const Container = styled.div`
 
   .dot {
     position: absolute;
-    width: 142vmax;
-    height: 142vmax;
+    width: 160vmax;
+    height: 160vmax;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%) scale(0);
