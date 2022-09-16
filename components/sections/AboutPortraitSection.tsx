@@ -1,8 +1,8 @@
-import { gsap, Linear } from "gsap";
+import { gsap } from "gsap";
 import React, {useEffect, useRef} from "react";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
 import tw from "twin.macro";
 
 const AboutPortraitSection = () => {
@@ -23,7 +23,6 @@ const AboutPortraitSection = () => {
     })
       .to(".dot", {scale: 1})
       .to(".about-image", {scale: 0, opacity: 0, y: -100 })
-    //.set(".about-bottom", {backgroundColor: '#0f3b56'})
 
     ScrollTrigger.refresh();
 
@@ -36,9 +35,17 @@ const AboutPortraitSection = () => {
         <div className="dot"></div>
 
         <ImageBox className="about-image">
-          <Image>
-            <img src="/images/tony.jpeg" alt="portrait de tony dugué" />
-          </Image>
+
+          <CircleAnimation>
+            <div className="circle1"></div>
+            <div className="circle2"></div>
+            <div className="circle3">
+              <Image>
+                <img src="/images/tony.jpeg" alt="portrait de tony dugué" />
+              </Image>
+            </div>
+          </CircleAnimation>
+
         </ImageBox>
 
       </Container>
@@ -89,5 +96,68 @@ export const Image = styled.div`
   
   img {
     box-shadow: ${props => props.theme.boxShadowImg};
+  }
+`
+
+const animationCircle1 = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`
+
+const animationCircle2 = keyframes`
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+`
+
+export const CircleAnimation = styled.div`
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 380px;
+  height: 380px;
+  box-sizing: border-box;
+
+  @media screen and (max-width: 768px) {
+    width: 280px;
+    height: 280px;
+  }
+  
+  .circle1{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 8px dotted ${props => props.theme.colorSecondary};
+    border-spacing: 20px;
+    box-sizing: border-box;
+    font-weight: 500;
+    animation: ${animationCircle1} 60s linear infinite;
+  }
+  .circle2{
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    width: calc(100% - 50px);
+    height: calc(100% - 50px);
+    border-radius: 50%;
+    border: 4px dotted ${props => props.theme.colorSecondary};
+    box-sizing: border-box;
+    animation: ${animationCircle2} 80s linear infinite;
+  }
+  .circle3{
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    width: calc(90% - 50px);
+    height: calc(90% - 50px);
+    border-radius: 50%;
+    border: none;
+    box-sizing: border-box;
   }
 `
