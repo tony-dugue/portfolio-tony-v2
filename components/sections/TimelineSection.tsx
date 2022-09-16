@@ -13,7 +13,7 @@ const animColor = '#FCD34D';
 const dotColor = '#9CA3AF';
 const separation = 450;
 const strokeWidth = 3;
-const leftBranchX = 8;
+const leftBranchX = 10;
 const curveLength = 150;
 const dotSize = 26;
 
@@ -99,7 +99,6 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
           {
             isDiverged = false;
 
-            // To Do fix syntax
             // Drawing CONVERGE branch with previous line and index
             svg = `${drawBranch(node, y - separation, index - 1)}${svg}`;
           }
@@ -145,11 +144,8 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
     return `${textString}${dotString}`;
   };
 
-  const addText = (
-    timelineNode: LinkedCheckpointNode,
-    y: number,
-    isDiverged: boolean
-  ) => {
+  const addText = ( timelineNode: LinkedCheckpointNode, y: number, isDiverged: boolean ) => {
+
     const { title, subtitle, period, size, image } = timelineNode;
 
     const offset = isDiverged ? rightBranchX : 10;
@@ -371,13 +367,7 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
 
       // all except the last slide
       if (index !== svgCheckpointItems.length - 1) {
-        timeline.to(
-          screenContainer.current!.querySelector(`.slide-${index + 1}`),
-          {
-            opacity: 0,
-            delay: 2.35,
-          }
-        );
+        timeline.to(screenContainer.current!.querySelector(`.slide-${index + 1}`), {opacity: 0, delay: 2.35 });
       }
     });
   };
@@ -526,22 +516,38 @@ const TimelineContentCol = styled.div`
 `
 
 const TimelineContentColLeft = styled.div`
-  ${tw`col-span-12 md:col-span-6`}
+  ${tw`col-span-12 md:col-span-6 mr-16`};
+
+  @media screen and (max-width: 768px) {
+  ${tw`mr-2`};
+}
 
   .timeline-item-period {
     ${tw`text-xl font-medium tracking-wide`};
     color: ${props => props.theme.colorSecondary};
+
+    @media screen and (max-width: 768px) {
+      font-size: 1.1rem;
+    }
   }
   
   .timeline-item-title {
     ${tw`text-3xl font-bold tracking-wide`};
     color: ${props => props.theme.colorSecondary};
     margin-top: -0.4rem;
+
+    @media screen and (max-width: 768px) {
+      font-size: 1.3rem;
+    }
   }
   
   .timeline-item-subtitle {
     ${tw`text-xl mt-2 font-medium tracking-wide`}
     color: ${props => props.theme.colorSecondary};
+
+    @media screen and (max-width: 768px) {
+      font-size: 1.1rem;
+    }
   }
 `
 

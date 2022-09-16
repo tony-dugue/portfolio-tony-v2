@@ -91,7 +91,7 @@ const SkillSection = () => {
             </div>
 
             <div>
-              <h3 className='seq'>Autres compétences</h3>
+              <h3 className='seq'>Autres compétences & Outils</h3>
               <div className={`skill-icons seq ${willChange ? "will-change-opacity" : ""}`}>
                 {SKILLS.other.map(skill => (
                   <Image key={skill} src={`/svgs/skills/${skill}.svg`} alt={skill} width={76} height={76} className="skill-icon" />
