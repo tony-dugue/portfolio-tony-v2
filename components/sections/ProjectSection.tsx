@@ -78,9 +78,9 @@ const ProjectSection = ({ isDesktop }: { isDesktop: boolean }) => {
 
     const { matches } = window.matchMedia(NO_MOTION_PREFERENCE_QUERY);
 
-    sethorizontalAnimationEnabled(isDesktop && matches);
+    sethorizontalAnimationEnabled(matches);
 
-    if (isDesktop && matches) {
+    if (matches) {
       [projectsTimeline, projectsScrollTrigger] = initProjectsAnimation(
         sectionRef,
         sectionTitleElementRef
@@ -108,33 +108,31 @@ const ProjectSection = ({ isDesktop }: { isDesktop: boolean }) => {
       revealScrollTrigger && revealScrollTrigger.kill();
       revealTimeline && revealTimeline.progress(1);
     };
-  }, [sectionRef, sectionTitleElementRef, isDesktop]);
+  }, [sectionRef, sectionTitleElementRef]);
 
   const { ref: projectsSectionRef } = NAVLINKS[1];
 
   return (
-    <Section ref={sectionRef} id={projectsSectionRef} className={`section-container snap-x ${isDesktop ? 'is-desktop' : ''}`}>
+    <Section ref={sectionRef} id={projectsSectionRef} className={`section-container`}>
 
-      <SectionWrapper>
+      <ProjectTitle ref={sectionTitleElementRef} className={`inner-container ${willChange ? "will-change-transform" : ""}`}>
+        <Heading
+          title="Mes projets"
+          description="Passionné depuis toujours par les nouvelles technologies mais aussi par le design, je conçois et réalise des applications web intuitive et fonctionnelle mais toujours avec une dose de créativité."
+          textColor="inherit"
+        />
+      </ProjectTitle>
 
-        <ProjectTitle ref={sectionTitleElementRef} className={`inner-container  ${willChange ? "will-change-transform" : ""}`}>
-          <Heading
-            title="Mes projets"
-            description="Passionné depuis toujours par les nouvelles technologies mais aussi par le design, je conçois et réalise des applications web intuitive et fonctionnelle mais toujours avec une dose de créativité."
-            textColor="inherit"
+      <ProjectItems className="project-wrapper snap-x seq scroll-pl-6 snap-mandatory">
+        {PROJECTS.map( (project) => (
+          <ProjectCard
+            animationEnabled={horizontalAnimationEnabled}
+            project={project}
+            key={project.name}
           />
-        </ProjectTitle>
+        ))}
+      </ProjectItems>
 
-        <ProjectItems className="project-wrapper snap-x seq scroll-pl-6 snap-mandatory">
-          {PROJECTS.map( (project) => (
-            <ProjectCard
-              animationEnabled={horizontalAnimationEnabled}
-              project={project}
-              key={project.name}
-            />
-          ))}
-        </ProjectItems>
-      </SectionWrapper>
 
     </Section>
   )
@@ -151,21 +149,19 @@ const Section = styled.section`
   }
 `
 
-const SectionWrapper = styled.div`
-  ${tw`flex-col flex py-8 xl:px-10 md:px-0 px-4 justify-center h-full`}
-`
-
 const ProjectTitle = styled.div`
   ${tw`flex flex-col`}
-  margin-top: 40px;
+  margin-top: 60px;
 `
 
 const ProjectItems = styled.div`
   width: fit-content;
-  ${tw`tall:mt-12 mt-6 flex grid grid-flow-col auto-cols-max md:gap-10 gap-6 w-fit`}
+  ${tw`tall:mt-0 mt-6 flex grid grid-flow-col auto-cols-max md:gap-10 gap-6 w-fit`};
+
+
   
   &.full-width {
-    ${tw`w-full overflow-x-auto`}
+    ${tw`overflow-x-auto`}
   }
   
   a {

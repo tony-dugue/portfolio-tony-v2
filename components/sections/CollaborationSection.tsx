@@ -17,7 +17,7 @@ const CollaborationSection: React.FunctionComponent<Props> = (props:Props) => {
   const quoteRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  const [willChange, setwillChange] = useState(false);
+  const [willChange, setWillChange] = useState(false);
 
   const initTextGradientAnimation = (targetSection: any): ScrollTrigger => {
     const timeline = gsap.timeline({ defaults: { ease: Linear.easeNone } });
@@ -34,7 +34,7 @@ const CollaborationSection: React.FunctionComponent<Props> = (props:Props) => {
       end: "center center",
       scrub: 0,
       animation: timeline,
-      onToggle: (self) => setwillChange(self.isActive)
+      onToggle: (self) => setWillChange(self.isActive)
     });
   };
 

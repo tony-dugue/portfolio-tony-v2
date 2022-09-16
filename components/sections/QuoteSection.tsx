@@ -52,11 +52,11 @@ const QuoteSection = () => {
 export default QuoteSection;
 
 const Section = styled.section`
-  ${tw`w-full relative select-none`}
+  ${tw`w-full relative select-none tall:pt-20 pt-40 pb-24`}
 `
 
 const Container = styled.div`
-  ${tw`tall:py-14 py-72`}
+  ${tw`2xl:container mx-auto xl:px-20 md:px-12 px-4`};
   
   h1 {
     ${tw`font-medium text-lg text-2xl sm:text-3xl md:text-4xl text-center mx-auto`}

@@ -192,9 +192,6 @@ const GlobalStyles = createGlobalStyle`
     @media (min-width: 1536px) {
       font-size: 1.2em;
     }
-    @media (min-width: 1800px) {
-      font-size: 1.5em;
-    }
   }
   ::-webkit-scrollbar {
     width: 0.375rem;

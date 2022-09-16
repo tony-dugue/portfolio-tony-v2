@@ -491,7 +491,7 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
 export default TimelineSection;
 
 const Section = styled.section`
-  ${tw`w-full relative select-none min-h-screen py-8 flex flex-col justify-center`}
+  ${tw`w-full relative select-none min-h-screen py-8 flex flex-col justify-center 2xl:container mx-auto`}
 `
 
 const TimelineContentCol = styled.div`
