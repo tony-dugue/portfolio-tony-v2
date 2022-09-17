@@ -52,8 +52,7 @@ const Home: NextPage = () => {
   useEffect(() => {
     debouncedDimensionCalculator();
     window.addEventListener("resize", debouncedDimensionCalculator);
-    return () =>
-      window.removeEventListener("resize", debouncedDimensionCalculator);
+    return () => window.removeEventListener("resize", debouncedDimensionCalculator);
   }, [timer]);
 
   const renderBackdrop = (): React.ReactNode => (

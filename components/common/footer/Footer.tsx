@@ -1,5 +1,7 @@
+import Image from "next/image";
 import { EMAIL, NAVLINKS, SOCIAL_LINKS } from '../../../constants';
 import SquareButton from '../../buttons/SquareButton';
+
 import styled from "styled-components";
 import tw from "twin.macro";
 
@@ -11,7 +13,7 @@ const FooterTest = () => {
           <FooterContent>
 
             <FooterContentLeft>
-              <h2>Let's talk <br/> Right now !</h2>
+              <h2>Let&lsquo;s talk <br/> Right now !</h2>
               <p className="text-with-mark">Hello! Je suis Tony Dugué, un <mark>développeur web et mobile</mark> situé à Rennes, France.</p>
               <p>Développeur Web et mobile Fullstack JS spécialisé en React, NextJS et NestJS</p>
             </FooterContentLeft>
@@ -23,7 +25,7 @@ const FooterTest = () => {
               <SocialContainer className="seq">
                 {SOCIAL_LINKS.map(link => (
                   <SocialLink href={link.url} className="link" key={link.name} rel='noreferrer' target='_blank'>
-                    <img src={`/svgs/social/${link.name}.svg`} alt={link.name} width={40} height={40} />
+                    <Image src={`/svgs/social/${link.name}.svg`} alt={link.name} width={40} height={40} />
                   </SocialLink>
                 ))}
               </SocialContainer>

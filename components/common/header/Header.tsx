@@ -1,4 +1,6 @@
 import React, {useState} from "react";
+import Image from "next/image";
+
 import styled from "styled-components";
 import tw from "twin.macro";
 
@@ -15,7 +17,7 @@ const Header = () => {
 
         <ImageWrapper>
           <a href="#home" className='link'>
-            <img src="/images/usb-blue.png" alt="Logo - Tony Dugué" />
+            <img src="/images/usb-blue.png" className="logo" alt="Logo - Tony Dugué" />
           </a>
         </ImageWrapper>
 

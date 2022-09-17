@@ -37,9 +37,9 @@ const AboutPortraitSection = () => {
         <ImageBox className="about-image">
 
           <CircleAnimation>
-              <Image>
+              <ImageItem>
                 <img src="/images/tony.jpeg" alt="portrait de tony dugué" />
-              </Image>
+              </ImageItem>
               <div className="pulse"></div>
           </CircleAnimation>
 
@@ -80,7 +80,7 @@ export const ImageBox = styled.div`
   transform: translate(-50%, -50%);
 `
 
-export const Image = styled.div`
+export const ImageItem = styled.div`
   width: 300px;
   height: 300px;
   border-radius: 50%;
