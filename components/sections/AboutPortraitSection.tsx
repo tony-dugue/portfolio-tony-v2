@@ -37,13 +37,10 @@ const AboutPortraitSection = () => {
         <ImageBox className="about-image">
 
           <CircleAnimation>
-            <div className="circle1"></div>
-            <div className="circle2"></div>
-            <div className="circle3">
               <Image>
                 <img src="/images/tony.jpeg" alt="portrait de tony dugué" />
               </Image>
-            </div>
+              <div className="pulse"></div>
           </CircleAnimation>
 
         </ImageBox>
@@ -88,6 +85,7 @@ export const Image = styled.div`
   height: 300px;
   border-radius: 50%;
   overflow: hidden;
+  z-index: 2;
 
   @media screen and (max-width: 768px) {
     width: 200px;
@@ -99,65 +97,53 @@ export const Image = styled.div`
   }
 `
 
-const animationCircle1 = keyframes`
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-`
-
-const animationCircle2 = keyframes`
-  0% {
-    transform: rotate(360deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
+const pulsate = keyframes`
+  0% {transform: scale(0.8, 0.8); opacity: 0.0;}
+  50% {opacity: 1.0;}
+  100% {transform: scale(1, 1); opacity: 0.0;}
 `
 
 export const CircleAnimation = styled.div`
   position: absolute;
   transform: translate(-50%, -50%);
-  width: 380px;
-  height: 380px;
+  width: 300px;
+  height: 300px;
   box-sizing: border-box;
 
   @media screen and (max-width: 768px) {
-    width: 280px;
-    height: 280px;
+    width: 200px;
+    height: 200px;
   }
-  
-  .circle1{
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 8px dotted ${props => props.theme.colorSecondary};
-    border-spacing: 20px;
-    box-sizing: border-box;
-    font-weight: 500;
-    animation: ${animationCircle1} 60s linear infinite;
-  }
-  .circle2{
+
+
+  .pulse{
     position: absolute;
-    top: 25px;
-    left: 25px;
-    width: calc(100% - 50px);
-    height: calc(100% - 50px);
-    border-radius: 50%;
-    border: 4px dotted ${props => props.theme.colorSecondary};
-    box-sizing: border-box;
-    animation: ${animationCircle2} 80s linear infinite;
-  }
-  .circle3{
-    position: absolute;
-    top: 40px;
-    left: 40px;
-    width: calc(90% - 50px);
-    height: calc(90% - 50px);
+    top: 0;
+    left: 0;
+    width: calc(120%);
+    height: calc(120%);
     border-radius: 50%;
     border: none;
     box-sizing: border-box;
+
+    ::before {
+      content:"";
+      border: 15px solid ${props => `rgba(${props.theme.colorTernaryRgb}, 0.3)`};
+      border-radius: 50%;
+      height: 400px;
+      width: 400px;
+      position: absolute;
+      top: -50px;
+      left: -50px;
+      animation: ${pulsate} 3s ease-out;
+      animation-iteration-count: infinite;
+      opacity: 0.0;
+      z-index: 1;
+
+      @media screen and (max-width: 768px) {
+        height: 300px;
+        width: 300px;
+      }
+    }
   }
 `

@@ -9,9 +9,9 @@ export const light =  {
   colorPrimary: '#FA5457',
   colorPrimaryRgb: '250,84,87',
   colorSecondary: '#0f3b56',
-  colorTernary: '#0f2c6d',
-  colorTernaryRgb: '15,59,86',
   colorSecondaryRgb: '15,44,109',
+  colorTernary: '#FCD34D',
+  colorTernaryRgb: '252,211,77',
 
   colorBlack: '#000000',
   colorWhite: '#ffffff',
