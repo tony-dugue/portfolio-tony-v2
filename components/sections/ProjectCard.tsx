@@ -8,7 +8,7 @@ import tw from "twin.macro";
 
 const ProjectCard = ({ project, animationEnabled }: { project: IProject; animationEnabled: boolean; }) => {
 
-  const { name, techs, image, blurImage, description, gradient: [stop1, stop2], url } = project
+  const { name, techs, image, blurImage, description, gradient: [color1, color2], url } = project
 
   const projectCard = useRef<HTMLDivElement>(null);
 
@@ -25,13 +25,13 @@ const ProjectCard = ({ project, animationEnabled }: { project: IProject; animati
 
   return (
     <ProjectCardLink href={url} target='_blank' rel='noreferrer' className="link snap-start" style={{ maxWidth: animationEnabled ? "calc(100vw - 2rem)" : "calc(100vw - 4rem)" }}>
-      <ProjectCardWrapper ref={projectCard} style={{ background: `linear-gradient(90deg, ${stop1} 0%, ${stop2} 100%)` }}>
+      <ProjectCardWrapper ref={projectCard} style={{ background: `linear-gradient(90deg, ${color1} 0%, ${color2} 100%)` }}>
 
         <Image src='/svgs/project-bg.svg' layout="fill" alt='Project' className="project-img-first" />
         <Image placeholder='blur' blurDataURL={blurImage} src={image} alt={name} layout='fill' className="project-img-second" />
 
-        <div className="tech-ctr-first" style={{ background: `linear-gradient(180deg, ${stop1} 0%, rgba(0,0,0,0) 100%)` }}></div>
-        <div className="tech-ctr-second" style={{ background: `linear-gradient(0deg, ${stop1} 10%, rgba(0,0,0,0) 100%)` }}></div>
+        <div className="tech-ctr-first" style={{ background: `linear-gradient(180deg, ${color1} 0%, rgba(0,0,0,0) 100%)` }}></div>
+        <div className="tech-ctr-second" style={{ background: `linear-gradient(0deg, ${color1} 10%, rgba(0,0,0,0) 100%)` }}></div>
 
         <h1 className='tech-name'>{name}</h1>
 
@@ -66,18 +66,24 @@ const ProjectCardLink = styled.a`
 const ProjectCardWrapper = styled.div`
   height: 22rem;
   width: 38rem;
-  background: black;
+  background: ${props => props.theme.colorBlack};
   transform-style: preserve-3d;
   transform: perspective(1000px);
 
   ${tw`rounded-3xl relative p-6 flex-col flex justify-between`};
 
+  @media screen and (max-width: 1024px) {
+    height: 30rem;
+    width: 42rem;
+  }
+  
   @media screen and (max-width: 768px) {
-    height: 26rem;
+    height: 40vh;
+    width: 100%;
   }
 
   img {
-    object-fit: cover;
+    ${tw`object-cover`}
   }
 
   .project-img-first {
@@ -85,6 +91,7 @@ const ProjectCardWrapper = styled.div`
   }
   
   .project-img-second {
+    ${tw`absolute top-0 rounded-xl shadow-xl z-0`}
     width: 16.8rem !important;
     transform: rotate(-22.5deg);
     height: unset !important;
@@ -94,18 +101,34 @@ const ProjectCardWrapper = styled.div`
     left: unset !important;
     right: 2rem !important;
     bottom: unset !important;
-    ${tw`absolute top-0 rounded-xl shadow-xl z-0`}
+
+    @media screen and (max-width: 768px) {
+      width: 10rem !important;
+    }
   }
 
   .tech-icons {
+    ${tw`w-1/2 h-full absolute left-24 top-0 sm:flex items-center`}
     transform: rotate(-22.5deg) translateZ(2rem);
-    ${tw`w-1/2 h-full absolute left-24 top-0 sm:flex items-center hidden`}
+
+    @media screen and (max-width: 768px) {
+      ${tw`left-7 top-16 justify-start`}
+      transform: rotate(0deg) translateZ(0rem);
+    }
     
     &-item {
-      ${tw`flex flex-col pb-8`}
+      ${tw`flex flex-col pb-8`};
+
+      @media screen and (max-width: 768px) {
+        ${tw`flex-row`}
+      }
       
       &-img {
-        ${tw`ml-16 mb-4`}
+        ${tw`ml-16 mb-4`};
+
+        @media screen and (max-width: 768px) {
+          ${tw`ml-0 mb-0 mx-3`}
+        }
       }
     }
   }
@@ -119,13 +142,27 @@ const ProjectCardWrapper = styled.div`
   }
   
   .tech-name {
-    transform: translateZ(3rem);
     ${tw`text-2xl sm:text-3xl z-10 pl-2`}
+    color: ${props => props.theme.colorWhite};
+    transform: translateZ(3rem);
   }
   
   .tech-desc {
+    ${tw`text-base z-10 tracking-wide font-medium text-left ml-auto`}
     color: ${props => props.theme.colorWhite};
     transform: translateZ(0.8rem);
-    ${tw`text-lg z-10 tracking-wide font-medium`}
+    width: 60%;
+    padding: 5px 15px;
+    border-radius: 20px;
+    background: rgba(0,0,0, 0.2);
+
+    @media screen and (max-width: 1024px) {
+      ${tw`text-lg`}
+    }
+
+    @media screen and (max-width: 768px) {
+      ${tw`text-base`}
+      width: 100%;
+    }
   }
 `

@@ -73,7 +73,7 @@ export const PROJECTS: IProject[] = [
     image: '/images/projects/lemona.jpg',
     blurImage: '/images/projects/lemona-blur.jpg',
     description: 'Site vitrine présentant l\'activité d\'une chaine de Food Truck vintage spécialisé dans les produits à base de Citron.',
-    gradient: ["#17007B", "#3A2C79"],
+    gradient: ["#d1c97c", "#b6af6c"],
     url: '#',
     techs: ['pug', 'html', 'sass']
   },
@@ -90,7 +90,7 @@ export const PROJECTS: IProject[] = [
 
 export const SKILLS = {
   frontend: ['javascript', 'typescript', 'react', 'next', 'redux', 'graphql', 'tailwind', 'gsap', 'gatsby', 'sass', 'html', 'css'],
-  backend: ['nestjs', 'nodejs', 'express', 'php', 'symfony', 'mongodb', 'mysql'],
+  backend: ['nodejs', 'nestjs', 'express', 'php', 'symfony', 'mongodb', 'mysql'],
   userInterface: ['xd', 'illustrator', 'photoshop', 'blender', 'threejs'],
   other: ['git', 'docker', 'webpack', 'gulp', 'postman', 'idea', 'vscode']
 }

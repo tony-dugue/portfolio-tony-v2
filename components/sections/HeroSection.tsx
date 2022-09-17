@@ -24,6 +24,8 @@ const HeroSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null)
   const goBackRef = useRef<HTMLDivElement>(null)
 
+  const titleLetters = TITLE_HERO.split("")
+
   useEffect(() => {
 
     const revealTl = gsap.timeline({ defaults: { ease: Linear.easeNone } });
@@ -51,17 +53,17 @@ const HeroSection = () => {
 
           <motion.div variants={containerVariants} initial="hidden" animate="show">
             <Title>
-              { TITLE_HERO.split("").map( (letter, idx) => (
+              { titleLetters.map( (letter, idx) => (
                 <motion.h1 variants={letterVariants} key={idx}>
                   {letter === " " ? '\u00A0' : letter}
                 </motion.h1>
               ))}
             </Title>
 
-            <Description variants={letterVariants} className="seq">
+            <Description className="seq">
               <mark>Développeur Web et Mobile - FullStack JS</mark>
-              <br/>Rennes, France 🇫🇷
-              <span className="seq">Spécialisé en React, NextJS et NestJS.</span>
+              <p className="place seq">Rennes, France 🇫🇷</p>
+              <p className="language seq">Spécialisé en React, NextJS et NestJS.</p>
             </Description>
 
           </motion.div>
@@ -103,7 +105,7 @@ const Container = styled.div`
   }
 `
 
-const Title = styled.div`
+const Title = styled(motion.div)`
   ${tw`flex justify-center items-center mt-0 uppercase`};
   font-size: 5em;
   font-family: ${props => props.theme.fontDin};
@@ -119,7 +121,7 @@ const Title = styled.div`
   }
 `
 
-const Description = styled(motion.p)`
+const Description = styled.div`
   margin-top: 3rem;
   margin-bottom: 2rem;
   
@@ -149,8 +151,11 @@ const Description = styled(motion.p)`
     }
   }
   
-  span {
-    display: block;
+  .place {
+    ${tw`mt-2`}
+  }
+  
+  .language {
     margin-top: 10px;
     color: ${props => props.theme.colorBlack};
   }

@@ -39,7 +39,7 @@ const FooterTest = () => {
 
           </FooterContent>
 
-          <p className="footer-copyright">Design & Développement avec ❤️ par Tony Dugué</p>
+          <p className="footer-copyright">Design & Développement avec ❤️ avec NextJS, TypeScript, TailWind & GSAP</p>
 
         </Container>
     </FooterSection>
@@ -59,6 +59,7 @@ const Container = styled.div`
 
   .footer-copyright {
     ${tw`text-center pt-5`}
+    color: ${props => props.theme.colorBackground};
   }
 `
 
