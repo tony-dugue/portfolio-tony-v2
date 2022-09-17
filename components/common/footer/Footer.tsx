@@ -39,7 +39,7 @@ const FooterTest = () => {
 
           </FooterContent>
 
-          <p className="footer-copyright">Design & Développement avec ❤️ avec NextJS, TypeScript, TailWind & GSAP</p>
+          <p className="footer-copyright">Design & Développement avec ❤️ - NextJS, TypeScript, TailWind & GSAP</p>
 
         </Container>
     </FooterSection>
