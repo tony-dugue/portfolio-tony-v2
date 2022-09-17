@@ -100,7 +100,7 @@ const CollaborationSection: React.FunctionComponent<Props> = (props:Props) => {
 export default CollaborationSection;
 
 const Section = styled.section`
-  ${tw`w-full relative select-none tall:py-36 py-48 flex flex-col`}
+  ${tw`w-full relative select-none tall:py-16 py-24 flex flex-col`}
 `
 
 const Container = styled.div`

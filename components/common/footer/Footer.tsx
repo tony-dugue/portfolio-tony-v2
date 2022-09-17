@@ -1,81 +1,100 @@
 import { EMAIL, NAVLINKS, SOCIAL_LINKS } from '../../../constants';
-import Image from 'next/image';
 import SquareButton from '../../buttons/SquareButton';
 import styled from "styled-components";
 import tw from "twin.macro";
 
-const Footer = () => {
+const FooterTest = () => {
   return (
     <FooterSection id={NAVLINKS[4].ref}>
+        <Container>
 
-      <FooterImg src="/svgs/footer-curve.svg" alt="Footer" className='w-full' loading='lazy' height={290} width={1440} role="presentation" />
+          <FooterContent>
 
-      <Wrapper>
-        <Container className="section-container">
+            <FooterContentLeft>
+              <h2>Let's talk <br/> Right now !</h2>
+              <p>Hello! Je suis Tony Dugué, un <mark>développeur web et mobile</mark> situé à Rennes, France.</p>
+              <p>Développeur Web et mobile Fullstack JS spécialisé en React, NextJS et NestJS</p>
+            </FooterContentLeft>
 
-          <h1>J'aime les défis ! N&lsquo;hésitez pas à me contacter.</h1>
+            <FooterContentRight>
 
-          <SocialContainer>
-            {SOCIAL_LINKS.map(link => (
-              <SocialLink href={link.url} className="link" key={link.name} rel='noreferrer' target='_blank'>
-                <Image src={`/svgs/social/${link.name}.svg`} alt={link.name} width={40} height={40} />
-              </SocialLink>
-            ))}
-          </SocialContainer>
+              <h3>Social</h3>
 
-          <Cta>
-            <SquareButton type='outline' name='mon CV' newTab={true} href='/tony-dugue-cv.pdf'></SquareButton>
-            <SquareButton type='white' name={`Contact`} newTab={false} href={'mailto:' + EMAIL}></SquareButton>
-          </Cta>
+              <SocialContainer className="seq">
+                {SOCIAL_LINKS.map(link => (
+                  <SocialLink href={link.url} className="link" key={link.name} rel='noreferrer' target='_blank'>
+                    <img src={`/svgs/social/${link.name}.svg`} alt={link.name} width={40} height={40} />
+                  </SocialLink>
+                ))}
+              </SocialContainer>
+
+              <h3>Contact</h3>
+              <p>{EMAIL}</p>
+
+              <Cta>
+                <SquareButton type='outline' name='mon CV' newTab={true} href='/tony-dugue-cv.pdf'></SquareButton>
+              </Cta>
+
+            </FooterContentRight>
+
+          </FooterContent>
 
           <p>Design & Développement avec ❤️ par Tony Dugué</p>
 
         </Container>
-      </Wrapper>
-
     </FooterSection>
   )
 }
 
-export default Footer;
+export default FooterTest;
 
 const FooterSection = styled.footer`
-  background: url("/svgs/footer-bg.svg"),linear-gradient(153.86deg,#02494c 0%,#016877 15.69%,#0D576D 48.9%,#004865 95.52%);
-  ${tw`w-full relative select-none bg-cover flex flex-col items-stretch`}
-`
-
-const FooterImg = styled.img`
-  ${tw`w-full`}
-`
-
-const Wrapper = styled.div`
-  ${tw`h-full w-full`}
+  ${tw`w-full relative select-none tall:py-16 py-24 flex flex-col`}
+  background: ${props => props.theme.colorSecondary};
+  color: ${props => props.theme.colorWhite};
 `
 
 const Container = styled.div`
-  ${tw`flex-col flex h-full justify-end z-10 items-center py-12`}
+  ${tw`w-full flex flex-col justify-center items-center 2xl:container mx-auto xl:px-20 md:px-12 px-4`}
+`
+
+const FooterContent = styled.div`
+  ${tw`w-full flex justify-between items-center`}
+`
+
+const FooterContentLeft = styled.div`
+  ${tw``}
   
-  h1 {
-    ${tw`font-medium text-3xl md:text-4xl text-center`}
+  h2 {
+    ${tw`uppercase text-lg text-3xl sm:text-3xl md:text-5xl mb-8`}
   }
   
   p {
-    ${tw`text-center text-sm sm:text-base mt-8`}
+    ${tw`text-xl md:max-w-xl mb-8`}
+  }
+`
+
+const FooterContentRight = styled.div`
+  ${tw`flex flex-col items-end`}
+
+  h3 {
+    ${tw`uppercase tracking-widest text-xl mb-3`}
+    color: ${props => props.theme.colorPrimary};
   }
 `
 
 const SocialContainer = styled.div`
-  ${tw`flex mt-8`}
+  ${tw`flex justify-center mt-2`}
 `
 
 const SocialLink = styled.a`
-  ${tw`hover:opacity-80 duration-300 md:px-2 px-1`}
+  ${tw`hover:opacity-80 duration-300 pl-4`};
+
+  @media screen and (max-width: 768px) {
+  width: 4rem;
+}
 `
 
 const Cta = styled.div`
-  ${tw`flex mt-8`}
-  
-  a {
-    ${tw`mx-3`}
-  }
+  ${tw`mt-2`}
 `
