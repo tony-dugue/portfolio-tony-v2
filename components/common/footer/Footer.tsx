@@ -12,7 +12,7 @@ const FooterTest = () => {
 
             <FooterContentLeft>
               <h2>Let's talk <br/> Right now !</h2>
-              <p>Hello! Je suis Tony Dugué, un <mark>développeur web et mobile</mark> situé à Rennes, France.</p>
+              <p className="text-with-mark">Hello! Je suis Tony Dugué, un <mark>développeur web et mobile</mark> situé à Rennes, France.</p>
               <p>Développeur Web et mobile Fullstack JS spécialisé en React, NextJS et NestJS</p>
             </FooterContentLeft>
 
@@ -39,7 +39,7 @@ const FooterTest = () => {
 
           </FooterContent>
 
-          <p>Design & Développement avec ❤️ par Tony Dugué</p>
+          <p className="footer-copyright">Design & Développement avec ❤️ par Tony Dugué</p>
 
         </Container>
     </FooterSection>
@@ -49,37 +49,68 @@ const FooterTest = () => {
 export default FooterTest;
 
 const FooterSection = styled.footer`
-  ${tw`w-full relative select-none tall:py-16 py-24 flex flex-col`}
+  ${tw`w-full relative select-none tall:pt-16 pt-24 pb-8 flex flex-col`}
   background: ${props => props.theme.colorSecondary};
   color: ${props => props.theme.colorWhite};
 `
 
 const Container = styled.div`
-  ${tw`w-full flex flex-col justify-center items-center 2xl:container mx-auto xl:px-20 md:px-12 px-4`}
+  ${tw`w-full flex flex-col justify-center items-center 2xl:container mx-auto xl:px-20 md:px-12 px-4`};
+
+  .footer-copyright {
+    ${tw`text-center pt-5`}
+  }
 `
 
 const FooterContent = styled.div`
-  ${tw`w-full flex justify-between items-center`}
+  ${tw`w-full flex justify-between items-center`};
+
+  @media screen and (max-width: 768px) {
+    ${tw`flex-col`}
+  }
 `
 
 const FooterContentLeft = styled.div`
-  ${tw``}
+  ${tw`flex flex-col items-start`};
+
+  @media screen and (max-width: 768px) {
+    ${tw`items-center`}
+  }
   
   h2 {
     ${tw`uppercase text-lg text-3xl sm:text-3xl md:text-5xl mb-8`}
   }
   
   p {
-    ${tw`text-xl md:max-w-xl mb-8`}
+    ${tw`text-xl md:max-w-xl mb-8`};
+
+    @media screen and (max-width: 768px) {
+      ${tw`text-center px-8`};
+      line-height: 1.6;
+    }
+      
+    &.text-with-mark {
+      @media screen and (max-width: 768px) {
+        line-height: 1.8;
+      }
+    }
   }
 `
 
 const FooterContentRight = styled.div`
-  ${tw`flex flex-col items-end`}
+  ${tw`flex flex-col items-end`};
+
+  @media screen and (max-width: 768px) {
+    ${tw`items-center pb-8`}
+  }
 
   h3 {
     ${tw`uppercase tracking-widest text-xl mb-3`}
     color: ${props => props.theme.colorPrimary};
+
+    @media screen and (max-width: 768px) {
+      ${tw`pt-6`}
+    }
   }
 `
 
@@ -91,10 +122,11 @@ const SocialLink = styled.a`
   ${tw`hover:opacity-80 duration-300 pl-4`};
 
   @media screen and (max-width: 768px) {
-  width: 4rem;
-}
+    width: 4rem;
+    ${tw`pl-0 pr-4`};
+  }
 `
 
 const Cta = styled.div`
-  ${tw`mt-2`}
+  ${tw`mt-6`}
 `
