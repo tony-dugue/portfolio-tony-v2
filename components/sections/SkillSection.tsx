@@ -1,6 +1,7 @@
 import {useEffect, useRef, useState} from 'react';
 import Image from 'next/image';
 import { NAVLINKS, SKILLS } from '../../constants';
+import ReactTooltip from 'react-tooltip';
 
 import { gsap, Linear } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
@@ -62,11 +63,21 @@ const SkillSection = () => {
             textColor="white"
           />
 
+          <ReactTooltip className="skill-tooltip" multiline />
+
           <SkillTop>
             <h3 className='seq'>Développement Frontend</h3>
             <div className='skill-icons seq'>
               {SKILLS.frontend.map(skill => (
-                <Image key={skill} src={`/svgs/skills/${skill}.svg`} alt={skill} width={76} height={76} className="skill-icon" />
+                  <Image
+                    key={`frontend-${skill.id}`}
+                    src={`/svgs/skills/${skill.filename}.svg`}
+                    alt={skill.name}
+                    width={76}
+                    height={76}
+                    className="skill-icon"
+                    data-tip={`${skill.name}<br />(${skill.description})`}
+                  />
               ))}
             </div>
           </SkillTop>
@@ -75,7 +86,15 @@ const SkillSection = () => {
             <h3 className='seq'>Développement Backend</h3>
             <div className='skill-icons seq'>
               {SKILLS.backend.map(skill => (
-                <Image key={skill} src={`/svgs/skills/${skill}.svg`} alt={skill} width={76} height={76} className="skill-icon" />
+                <Image
+                  key={`backend-${skill.id}`}
+                  src={`/svgs/skills/${skill.filename}.svg`}
+                  alt={skill.name}
+                  width={76}
+                  height={76}
+                  className="skill-icon"
+                  data-tip={`${skill.name}<br />(${skill.description})`}
+                />
               ))}
             </div>
           </SkillMiddle>
@@ -84,8 +103,16 @@ const SkillSection = () => {
             <div className="top">
               <h3 className='seq'>UI, Design UX & 3D</h3>
               <div className='skill-icons seq'>
-                {SKILLS.userInterface.map(skill => (
-                  <Image key={skill} src={`/svgs/skills/${skill}.svg`} alt={skill} width={76} height={76} className="skill-icon" />
+                {SKILLS.userInterface.map( skill => (
+                  <Image
+                    key={`design-${skill.id}`}
+                    src={`/svgs/skills/${skill.filename}.svg`}
+                    alt={skill.name}
+                    width={76}
+                    height={76}
+                    className="skill-icon"
+                    data-tip={`${skill.name}<br />(${skill.description})`}
+                  />
                 ))}
               </div>
             </div>
@@ -94,7 +121,15 @@ const SkillSection = () => {
               <h3 className='seq'>Autres compétences & Outils</h3>
               <div className={`skill-icons seq ${willChange ? "will-change-opacity" : ""}`}>
                 {SKILLS.other.map(skill => (
-                  <Image key={skill} src={`/svgs/skills/${skill}.svg`} alt={skill} width={76} height={76} className="skill-icon" />
+                  <Image
+                    key={`tools-${skill.id}`}
+                    src={`/svgs/skills/${skill.filename}.svg`}
+                    alt={skill.name}
+                    width={76}
+                    height={76}
+                    className="skill-icon"
+                    data-tip={`${skill.name}<br />(${skill.description})`}
+                  />
                 ))}
               </div>
             </div>
@@ -138,6 +173,13 @@ const Container = styled.div`
 
 const SkillWrapper = styled.div`
   ${tw`flex flex-col`}
+  
+  .skill-tooltip {
+    background-color: ${props => props.theme.colorWhite};
+    color: ${props => props.theme.colorSecondary};
+    margin-top: 20px;
+    width: 20vw;
+  }
 `
 
 const SkillTop = styled.div`

@@ -89,10 +89,67 @@ export const PROJECTS: IProject[] = [
 ]
 
 export const SKILLS = {
-  frontend: ['javascript', 'typescript', 'react', 'next', 'redux', 'graphql', 'tailwind', 'gsap', 'gatsby', 'sass', 'html', 'css'],
-  backend: ['nodejs', 'nestjs', 'express', 'php', 'symfony', 'mongodb', 'mysql'],
-  userInterface: ['xd', 'illustrator', 'photoshop', 'blender', 'threejs'],
-  other: ['git', 'docker', 'webpack', 'gulp', 'postman', 'idea', 'vscode']
+  frontend: [
+    {id: 1, filename: 'javascript', name: 'JavaScript (JS)', description: 'Souvent abrégé « JS », langage de script léger, orienté objet, principalement connu comme le langage de script des pages' +
+        ' web'},
+    {id: 2, filename: 'typescript', name: 'TypeScript (TS)', description: 'Langage de programmation libre et open source développé par Microsoft qui a pour but d\'améliorer et de sécuriser la' +
+        ' production de code JavaScript. Il s\'agit d\'un sur-ensemble syntaxique strict de JavaScript.'},
+    {id: 3, filename: 'react', name: 'React', description: 'Bibliothèque JavaScript libre développée par Facebook depuis 2013. Le but principal de cette bibliothèque est de faciliter la création' +
+        ' d\'application web monopage, via la création de composants dépendant d\'un état et générant une page HTML à chaque changement d\'état.'},
+    {id: 4, filename: 'next', name: 'NextJS', description: 'Framework gratuit et open source s\'appuyant sur la bibliothèque JavaScript React et sur la technologie Node.js.'},
+    {id: 5, filename: 'redux', name: 'Redux', description: 'Bibliothèque open-source JavaScript de gestion d\'état pour applications web. Elle est plus couramment utilisée avec des bibliothèques' +
+        ' comme React ou Angular pour la construction d\'interfaces utilisateur. Semblable à l\'architecture Flux, elle a été créée par Dan Abramov et Andrew Clark.'},
+    {id: 6, filename: 'graphql', name: 'GraphQL', description: 'Langage de requêtes et un environnement d\'exécution, créé par Facebook en 2012, avant d\'être publié comme projet open-source en' +
+        ' 2015. Inscrit dans le modèle Client-Serveur, il propose une alternative aux API REST.'},
+    {id: 7, filename: 'tailwind', name: 'Tailwind CSS', description: 'Framework CSS open source. La principale caractéristique de cette bibliothèque est que, contrairement à d\'autres frameworks' +
+        ' CSS comme Bootstrap, elle ne fournit pas une série de classes prédéfinies pour des éléments tels que des boutons ou des tableaux.'},
+    {id: 8, filename: 'gsap', name: 'GSAP (Greensock)', description: 'Bibliothèque d\'animation pour HTML5 et Flash. Cela permet d\'animer tout ce à quoi JavaScript peut accéder (propriétés CSS,' +
+        ' SVG, objets de la bibliothèque canevas, objets génériques...). GSAP est constitué de plusieurs outils de bases, associés à quelques extensions.'},
+    {id: 9, filename: 'gatsby', name: 'Gatsby', description: 'Générateur de site statique open source construit sur Node.js en utilisant React et GraphQL. Utilisé en JamStack.'},
+    {id: 10, filename: 'sass', name: 'SASS', description: 'Préprocesseur qui ajoute des fonctionnalités à CSS. Il permet, entre autres, de mieux structurer et simplifier le code, d\'éviter les' +
+        ' répétitions et plus encore. Le code SASS doit être dans des fichiers ayant l\'extension.'},
+    {id: 11, filename: 'html', name: 'HTML', description: 'Le HyperText Markup Language, généralement abrégé HTML ou, dans sa dernière version, HTML5, est le langage de balisage conçu pour' +
+        ' représenter les pages web. Ce langage permet : d’écrire de l’hypertexte, d’où son nom, de structurer sémantiquement la page, de mettre en forme le contenu.'},
+    {id: 12, filename: 'css', name: 'CSS', description: 'Les feuilles de style en cascade, généralement appelées CSS de l\'anglais Cascading Style Sheets, forment un langage informatique qui décrit' +
+        ' la présentation des documents HTML et XML.'}
+  ],
+  backend: [
+    {id: 1, filename: 'nodejs', name: 'NodeJS', description: 'Plateforme logicielle libre en JavaScript, orientée vers les applications réseau évènementielles hautement concurrentes qui doivent' +
+        ' pouvoir monter en charge. Elle utilise la machine virtuelle V8, la librairie libuv pour sa boucle d\'évènements, et implémente sous licence MIT les spécifications CommonJS.'},
+    {id: 2, filename: 'nestjs', name: 'NestJS', description: 'Frameworks Node.js pour construire des applications backend efficaces, évolutives et de niveau entreprise en utilisant' +
+        ' Node.js. Il est connu pour produire des applications hautement testables, maintenables et évolutives à l’aide de JavaScript et TypeScript modernes.'},
+    {id: 3, filename: 'express', name: 'express', description: 'Framework pour construire des applications web basées sur Node.js. C\'est de fait le framework standard pour le développement de' +
+        ' serveur en Node.js.'},
+    {id: 4, filename: 'php', name: 'PHP', description: 'Le PHP (PHP Hypertext Preprocessor ) est un langage de scripts généraliste et Open' +
+        ' Source, spécialement conçu pour le développement d\'applications web. Il peut être intégré facilement au HTML.'},
+    {id: 5, filename: 'symfony', name: 'Symfony', description: 'Framework MVC libre écrit en PHP avec un ensemble de composants PHP. Fournit des fonctionnalités modulables et adaptables qui' +
+        ' permettent de faciliter et d’accélérer le développement d\'un site web.'},
+    {id: 6, filename: 'mongodb', name: 'MongoDB', description: 'Système de gestion de base de données orienté documents, répartissable sur un nombre quelconque d\'ordinateurs et ne nécessitant pas' +
+        ' de schéma prédéfini des données.'},
+    {id: 7, filename: 'mysql', name: 'MySQL', description: 'Système de gestion de bases de données relationnelles.'}
+  ],
+  userInterface: [
+    {id: 1, filename: 'xd', name: 'ADOBE XD', description: 'Outil de conception vectorielle pour les applications Web et mobiles, développé et publié par Adobe Inc'},
+    {id: 2, filename: 'illustrator', name: 'Adobe Illustrator', description: 'Logiciel de création graphique vectorielle. Il fait partie de la gamme Adobe, peut être utilisé indépendamment ou en' +
+        ' complément de Photoshop, et offre des outils de dessin vectoriel puissants. Les images vectorielles sont constituées de courbes générées par des formules mathématiques.'},
+    {id: 3, filename: 'photoshop', name: 'Adobe Photoshop', description: 'Logiciel de retouche, de traitement et de dessin assisté par ordinateur développé et publié par Adobe Inc'},
+    {id: 4, filename: 'blender', name: 'Blender', description: 'Logiciel libre de modélisation, d’animation par ordinateur et de rendu en 3D, créé en 1998. Il est actuellement développé par la' +
+        ' Fondation Blender. Depuis 2019 le logiciel Blender est de plus en plus reconnu par les entreprises du secteur de l\'animation 3D, comme Epic Games, Ubisoft et NVIDIA.'},
+    {id: 5, filename: 'threejs', name: 'ThreeJS', description: 'Bibliothèque JavaScript pour créer des scènes 3D dans un navigateur web. Elle peut être utilisée avec la balise canvas du HTML5 sans' +
+        ' avoir besoin d\'un plugin.'}
+  ],
+  other: [
+    {id: 1, filename: 'git', name: 'Git', description: 'Système de contrôle de version permettant de gérer et de suivre l\'historique d\'un code source.'},
+    {id: 2, filename: 'docker', name: 'Docker', description: 'Plateforme permettant de lancer certaines applications dans des conteneurs logiciels. Permet de faciliter la coordination des' +
+        ' comportements entre les conteneurs, et de les connecter entre eux pour créer des stacks d\'applications.'},
+    {id: 3, filename: 'webpack', name: 'Webpack', description: 'Outil logiciel open-source de type « module bundler », conçu pour faciliter le développement et la gestion de sites et' +
+        ' d\'applications web modernes.'},
+    {id: 4, filename: 'gulp', name: 'Gulp', description: 'Automatiseur de tâches en JavaScript (task runner) utilisé en développement web frontend.'},
+    {id: 5, filename: 'postman', name: 'Postman', description: 'Application  créée en 2012 permettant de tester des API. Permet de construire des collections de requête HTTP et de lancer cette' +
+        ' série de requêtes en une fois'},
+    {id: 6, filename: 'idea', name: 'PhpStorm', description: 'Outil de développement pour les projets web. Editeur de code pour PHP, HTML, CSS et JavaScript, édité par JetBrains.'},
+    {id: 7, filename: 'vscode', name: 'VsCode', description: 'Editeur de code open-source, gratuit et multi-plateforme (Windows, Mac et Linux), développé par Microsoft'}
+  ]
 }
 
 export enum Branch {
