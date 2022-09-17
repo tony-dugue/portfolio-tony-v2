@@ -168,6 +168,11 @@ const Container = styled.div`
   .skill-icon {
     padding-right: 1.25rem !important;
     padding-bottom: 1.25rem !important;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(20px);
+    }
   }
 `
 
@@ -179,6 +184,11 @@ const SkillWrapper = styled.div`
     color: ${props => props.theme.colorSecondary};
     margin-top: 20px;
     width: 20vw;
+    border-radius: 20px;
+
+    @media screen and (max-width: 768px) {
+      width: 60vw;
+    }
   }
 `
 

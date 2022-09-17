@@ -468,9 +468,7 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
 
                 {svgCheckpointItems.map((item, index) => (
                   <Image
-                    className={`w-full absolute top-0 object-cover slide-${
-                      index + 1
-                    }`}
+                    className={`timeline-slide-image slide-${index + 1}`}
                     key={index}
                     src={(item as CheckpointNode).slideImage || ""}
                     alt="Timeline"
@@ -552,7 +550,7 @@ const TimelineContentColLeft = styled.div`
 `
 
 const TimelineContentColRight = styled.div`
-  ${tw`col-span-12 md:col-span-6 md:flex hidden`}
+  ${tw`col-span-12 md:col-span-6 md:flex`}
 `
 
 const TimelineScreenContainer = styled.div`

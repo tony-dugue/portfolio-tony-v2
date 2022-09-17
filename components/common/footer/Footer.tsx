@@ -59,7 +59,7 @@ const Container = styled.div`
 
   .footer-copyright {
     ${tw`text-center pt-5`}
-    color: ${props => props.theme.colorBackground};
+    color: rgba(187, 187, 190, 0.71);
   }
 `
 

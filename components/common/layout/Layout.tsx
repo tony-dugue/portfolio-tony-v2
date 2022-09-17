@@ -8,7 +8,6 @@ const Cursor = dynamic(() => import("../elements/Cursor"), { ssr: false })
 const ProgressIndicator = dynamic(() => import("../elements/ProgressIndicator"), { ssr: false })
 
 import Header from "../header/Header";
-import NavigationMenu from "../header/NavigationMenu";
 
 interface Props {
   children: React.ReactNode,

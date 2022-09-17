@@ -158,7 +158,7 @@ const OuterMenu = styled.nav`
     backface-visibility: hidden;
 
     > div {
-      height: 0.125rem;
+      height: 0.15rem;
       transition: all 0.4s ease;
       -webkit-box-pack: center;
       &:before,
@@ -169,7 +169,7 @@ const OuterMenu = styled.nav`
         left: 0;
         width: 100%;
         top: -0.5rem;
-        height: 0.125rem;
+        height: 0.15rem;
         background: inherit;
         transition: all 0.4s ease;
       }
