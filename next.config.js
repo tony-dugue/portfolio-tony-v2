@@ -4,8 +4,9 @@ const withTM = require('next-transpile-modules')(['gsap'])
 
 const nextConfig = {
   reactStrictMode: false,
-  compiler: {
-    styledComponents: true,
+  images: {
+    loader: 'akamai',
+    path:'./'
   },
   webpack: (config) => {
     config.resolve.fallback = { fs: false }

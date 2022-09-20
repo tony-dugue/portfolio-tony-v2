@@ -1,4 +1,4 @@
-import React, {RefObject, useEffect, useRef, useState} from 'react';
+import React, {RefObject, useCallback, useEffect, useRef, useState} from 'react';
 import { NAVLINKS, Branch, BranchNode, CheckpointNode, ItemSize, NodeTypes, TIMELINE, TimelineNode } from '../../constants';
 import Image from 'next/image';
 import { gsap, Linear } from 'gsap'
@@ -319,7 +319,7 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
     return timeline;
   };
 
-  const animateTimeline = (timeline: GSAPTimeline, duration: number): void => {
+  const animateTimeline: any = useCallback((timeline: GSAPTimeline, duration: number): void => {
     let index = 0;
 
     addNodeRefsToItems(TIMELINE).forEach((item) => {
@@ -339,9 +339,9 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
         index++;
       }
     });
-  };
+  }, []);
 
-  const setTimelineSvg = (svgContainer: RefObject<HTMLDivElement>, timelineSvg: RefObject<SVGSVGElement>) => {
+  const setTimelineSvg: any = useCallback((svgContainer: RefObject<HTMLDivElement>, timelineSvg: RefObject<SVGSVGElement>) => {
 
     const containerWidth = svgContainer.current!.clientWidth;
     setSvgWidth(containerWidth);
@@ -352,7 +352,7 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
     if (isSmallScreen()) {
       setRightBranchX(70);
     }
-  };
+  }, []);
 
   const setSlidesAnimation = (timeline: GSAPTimeline): void => {
     svgCheckpointItems.forEach((_, index) => {
@@ -372,7 +372,7 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
     });
   };
 
-  const initScrollTrigger = (): {
+  const initScrollTrigger: any = useCallback( (): {
     timeline: GSAPTimeline;
     duration: number;
   } => {
@@ -421,14 +421,13 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
       animation: timeline,
     });
     return { timeline, duration };
-  };
+  }, []);
 
   useEffect(() => {
     // Generate and set the timeline svg
     setTimelineSvg(svgContainer, timelineSvg);
 
-    const { timeline, duration }: { timeline: GSAPTimeline; duration: number } =
-      initScrollTrigger();
+    const { timeline, duration }: { timeline: GSAPTimeline; duration: number } = initScrollTrigger();
 
     // Animation for Timeline SVG
     animateTimeline(timeline, duration);
@@ -441,6 +440,9 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
     screenContainer,
     isDesktop,
     svgLength,
+    animateTimeline,
+    setTimelineSvg,
+    initScrollTrigger
   ]);
 
   return (
