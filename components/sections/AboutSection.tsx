@@ -51,7 +51,7 @@ const AboutSection = () => {
           <br/><br/>
 
           <span className={`about-2 leading-tight ${willChange ? "will-change-opacity" : ""}`}>
-            Passionné depuis toujours par les nouvelles technologies mais aussi par le design, je conçois et réalise des applications web intuitive et fonctionnelle mais toujours avec une dose de créativité.{" "}
+            Spécialisé en JavaScript, je conçois et réalise des applications web intuitives et fonctionnelles avec en parallèle, du développement créatif et de la conception d&lsquo;expériences 3D interactives.{" "}
           </span>
         </h1>
 

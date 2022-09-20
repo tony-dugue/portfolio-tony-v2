@@ -86,7 +86,7 @@ const CollaborationSection: React.FunctionComponent<Props> = (props:Props) => {
           {Array(5).fill(" React Next JavaScript Nest Sass ").reduce((str, el) => str.concat(el), '')}
         </p>
 
-        <h1 ref={quoteRef} className={`${willChange ? "will-change-opacity" : ""}`}>Envie de faire<span className='text-strong'>&nbsp;connaissance</span> ? ☕</h1>
+        <h1 ref={quoteRef} className={`${willChange ? "will-change-opacity" : ""}`}>Envie de faire<a href="#contact" className="link"><span className='text-strong'>&nbsp;connaissance</span></a> ? ☕</h1>
 
         <p className='ui-right'>
           {Array(5).fill(' Développement frontend backend fullStack Design UI ').reduce((str, el) => str.concat(el), '')}

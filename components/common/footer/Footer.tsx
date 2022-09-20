@@ -15,7 +15,7 @@ const FooterTest = () => {
             <FooterContentLeft>
               <h2>Let&lsquo;s talk <br/> Right now !</h2>
               <p className="text-with-mark">Hello! Je suis Tony Dugué, un <mark>développeur web et mobile</mark> situé à Rennes, France.</p>
-              <p>Développeur Web et mobile Fullstack JS spécialisé en React, NextJS et NestJS</p>
+              <p>Développeur Web et mobile Fullstack JS,<br/>spécialisé en React, NextJS et NestJS.</p>
             </FooterContentLeft>
 
             <FooterContentRight>

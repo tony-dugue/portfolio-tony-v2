@@ -8,15 +8,6 @@ import styled from "styled-components";
 import tw from "twin.macro";
 import Heading from "../headings/Heading";
 
-const svgColor = '#9CA3AF';
-const animColor = '#FCD34D';
-const dotColor = '#9CA3AF';
-const separation = 450;
-const strokeWidth = 3;
-const leftBranchX = 10;
-const curveLength = 150;
-const dotSize = 26;
-
 type LinkedTimelineNode = LinkedCheckpointNode | LinkedBranchNode;
 type LinkedCheckpointNode = LinkNode & CheckpointNode;
 type LinkedBranchNode = LinkNode & BranchNode;
@@ -35,8 +26,18 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
 
   const { isDesktop, isSmallScreen } = props
 
+  const svgColor = '#9CA3AF';
+  const animColor = '#FCD34D';
+  const dotColor = '#9CA3AF';
+  const separation = 450;
+  const strokeWidth = 3;
+  const leftBranchX = 10;
+  const curveLength = 150;
+  const dotSize = 26;
+  const numberOfElement = 13;
+
   const [svgWidth, setSvgWidth] = useState(400);
-  const [rightBranchX, setRightBranchX] = useState(109);
+  const [rightBranchX, setRightBranchX] = useState(85);
 
   const svgCheckpointItems = TIMELINE.filter( item => item.type === NodeTypes.CHECKPOINT && item.shouldDrawLine);
 
@@ -155,21 +156,10 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
 
     const titleSizeClass = size === ItemSize.LARGE ? "text-big" : "";
 
-    const logoString = image
-      ? `<img src='${image}' class='timeline-logo' loading='lazy' width='100' height='32' alt='${image}' />`
-      : "";
-
-    const titleString = title
-      ? `<p class='timeline-item-title ${titleSizeClass}'>${title}</p>`
-      : "";
-
-    const subtitleString = subtitle
-      ? `<p class='timeline-item-subtitle'>${subtitle}</p>`
-      : "";
-
-    const periodString = period
-      ? `<p class='timeline-item-period'>${period}</p>`
-      : "";
+    const logoString = image ? `<img src='${image}' class='timeline-logo' loading='lazy' width='100' height='32' alt='${image}' />` : "";
+    const titleString = title ? `<p class='timeline-item-title ${titleSizeClass}'>${title}</p>` : "";
+    const subtitleString = subtitle ? `<p class='timeline-item-subtitle'>${subtitle}</p>` : "";
+    const periodString = period ? `<p class='timeline-item-period'>${period}</p>` : "";
 
     return `
        <foreignObject x=${foreignObjectX} y=${foreignObjectY} width=${foreignObjectWidth} height=${separation}>
@@ -350,32 +340,32 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
     timelineSvg.current!.innerHTML = resultSvgString;
 
     if (isSmallScreen()) {
-      setRightBranchX(70);
+      setRightBranchX(60);
     }
-  }, []);
-
-  const setSlidesAnimation = (timeline: GSAPTimeline): void => {
-    svgCheckpointItems.forEach((_, index) => {
-      // all except the first slide
-      if (index !== 0) {
-        timeline.fromTo(
-          screenContainer.current!.querySelector(`.slide-${index + 1}`),
-          { opacity: 0 },
-          { opacity: 1 }
-        );
-      }
-
-      // all except the last slide
-      if (index !== svgCheckpointItems.length - 1) {
-        timeline.to(screenContainer.current!.querySelector(`.slide-${index + 1}`), {opacity: 0, delay: 2.35 });
-      }
-    });
-  };
+  }, [isSmallScreen, generateTimelineSvg]);
 
   const initScrollTrigger: any = useCallback( (): {
     timeline: GSAPTimeline;
     duration: number;
   } => {
+
+    const setSlidesAnimation = (timeline: GSAPTimeline): void => {
+      svgCheckpointItems.forEach((_, index) => {
+        // all except the first slide
+        if (index !== 0) {
+          timeline.fromTo(
+            screenContainer.current!.querySelector(`.slide-${index + 1}`),
+            { opacity: 0 },
+            { opacity: 1 }
+          );
+        }
+
+        // all except the last slide
+        if (index !== svgCheckpointItems.length - 1) {
+          timeline.to(screenContainer.current!.querySelector(`.slide-${index + 1}`), {opacity: 0, delay: 2.35 });
+        }
+      });
+    };
 
     const timeline = gsap
       .timeline({ defaults: { ease: Linear.easeNone, duration: 0.44 } })
@@ -402,7 +392,7 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
         pin: true,
         pinSpacing: true,
       };
-      duration = timeline.totalDuration() / 15;
+      duration = timeline.totalDuration() / numberOfElement;
     } else {
       // Clearing out the right side on mobile devices
       screenContainer.current!.innerHTML = "";
@@ -421,7 +411,7 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
       animation: timeline,
     });
     return { timeline, duration };
-  }, []);
+  }, [isDesktop, isSmallScreen, svgLength, svgCheckpointItems]);
 
   useEffect(() => {
     // Generate and set the timeline svg
@@ -519,12 +509,13 @@ const TimelineContentColLeft = styled.div`
   ${tw`col-span-12 md:col-span-6 mr-16`};
 
   @media screen and (max-width: 768px) {
-  ${tw`mr-2`};
+  ${tw`w-full`};
 }
 
   .timeline-item-period {
     ${tw`text-xl font-medium tracking-wide`};
     color: ${props => props.theme.colorSecondary};
+    width: 100%;
 
     @media screen and (max-width: 768px) {
       font-size: 1.1rem;
@@ -532,31 +523,45 @@ const TimelineContentColLeft = styled.div`
   }
   
   .timeline-item-title {
-    ${tw`text-3xl font-bold tracking-wide`};
+    ${tw`text-2xl font-bold tracking-wide`};
     color: ${props => props.theme.colorSecondary};
     margin-top: -0.4rem;
+    width: 100%;
 
     @media screen and (max-width: 768px) {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
+      line-height: 1.3;
+      width: 70%;
     }
   }
   
   .timeline-item-subtitle {
-    ${tw`text-xl mt-2 font-medium tracking-wide`}
+    ${tw`text-lg mt-2 font-medium tracking-wide`}
     color: ${props => props.theme.colorSecondary};
+    width: 100%;
 
     @media screen and (max-width: 768px) {
       font-size: 1.1rem;
+      line-height: 1.5;
+      width: 70%;
     }
   }
 `
 
 const TimelineContentColRight = styled.div`
-  ${tw`col-span-12 md:col-span-6 md:flex`}
+  ${tw`col-span-12 md:col-span-6 md:flex`};
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `
 
 const TimelineScreenContainer = styled.div`
-  ${tw`max-w-full h-96 shadow-xl bg-gray-800 rounded-2xl overflow-hidden`}
+  ${tw`max-w-full h-96 shadow-xl bg-gray-800 rounded-2xl overflow-hidden`};
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
   
   .timeline-screen-image {
     ${tw`w-full h-8`}

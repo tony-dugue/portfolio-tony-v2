@@ -231,7 +231,7 @@ export const TIMELINE: Array<TimelineNode> = [
   },
   {
     type: NodeTypes.CHECKPOINT,
-    title: "Société Airmdrone (www.airmdrone.com)",
+    title: "Société Airmdrone",
     size: ItemSize.LARGE,
     period: "2018-2019",
     subtitle: "Création d'un site vitrine pour un pilote de drone professionnel afin d'apporter une présence en ligne et faciliter les demandes de clients potentiels.",
