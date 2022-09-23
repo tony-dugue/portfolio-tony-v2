@@ -160,16 +160,14 @@ const ProjectTitle = styled.div`
 
 const ProjectItems = styled.div`
   width: fit-content;
-  ${tw`tall:mt-0 mt-6 flex grid grid-flow-col auto-cols-max md:gap-10 gap-6 w-fit`};
-
-
+  ${tw`tall:mt-0 mt-6 flex grid grid-flow-col auto-cols-max md:gap-10 gap-4 w-fit`};
   
   &.full-width {
     ${tw`overflow-x-auto`}
   }
   
   a {
-    ${tw`mr-10`}
+    ${tw`md:mr-10 mr-4`}
     
     &:last-child {
       ${tw`mr-0`}

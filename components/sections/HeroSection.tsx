@@ -78,7 +78,9 @@ const HeroSection = () => {
 
           <GoBack className="round" ref={goBackRef}>
             <GoBackCircle>&#x2193;</GoBackCircle>
-            <img src='/images/rounded-text-black.png' alt="animation pour aller à la prochaine section" />
+            <a href="#competences" className="link">
+              <img src='/images/rounded-text-black.png' alt="animation pour aller à la prochaine section" />
+            </a>
           </GoBack>
 
         </Container>

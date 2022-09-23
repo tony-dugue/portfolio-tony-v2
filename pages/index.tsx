@@ -18,7 +18,7 @@ import Skill from "../components/sections/SkillSection"
 import TimelineSection from "../components/sections/TimelineSection"
 import CollaborationSection from "../components/sections/CollaborationSection"
 import Footer from "../components/common/footer/Footer"
-//import Scripts from "../components/common/scripts"
+import Scripts from "../components/common/scripts"
 import AboutPortraitSection from "../components/sections/AboutPortraitSection";
 
 const DEBOUNCE_TIME = 100;
@@ -80,7 +80,7 @@ const Home: NextPage = () => {
           <Footer />
         </Main>
 
-        {/*<Scripts />*/}
+        <Scripts />
 
       </Layout>
     </>

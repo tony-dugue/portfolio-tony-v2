@@ -1,5 +1,5 @@
 export const METADATA = {
-  title: "Portfolio | Tony Dugué",
+  title: "Tony Dugué | Portfolio",
   description: "Mon portfolio",
   siteUrl: "https://tonydugue.fr/",
 }
@@ -32,10 +32,10 @@ export const TITLE_HERO = 'Tony Dugué'
 export const EMAIL = 'hello@tonydugue.fr'
 
 export const SOCIAL_LINKS = [
-  { name: 'linkedin', url: '#'},
+  { name: 'linkedin', url: 'https://www.linkedin.com/in/tony-dugu%C3%A9-bb9435251'},
   { name: 'github', url: 'https://github.com/tony-dugue'},
   { name: 'instagram', url: 'https://www.instagram.com/tony_dugue/'},
-  { name: 'facebook', url: 'https://www.facebook.com/tony.dugue'},
+  // { name: 'facebook', url: 'https://www.facebook.com/tony.dugue'},
   { name: 'mail', url: 'mailto:hello@duguetony.fr'}
 ]
 
@@ -181,7 +181,7 @@ export const TIMELINE: Array<TimelineNode> = [
     title: "Développeur web & mobile FullStack (Insaniam)",
     size: ItemSize.LARGE,
     period: "De avril 2021 à aujourd'hui",
-    subtitle: "Développement de site, d'application web / mobile & API (React/Native/Redux/Saga, Symfony, Ghost, WordPress).",
+    subtitle: "Développement de site, d'application web / mobile & API (React/Native/Redux/Saga, Symfony, Ghost, WordPress)",
     image: "/images/logos/logo-insaniam.png",
     slideImage: "/images/timeline/insaniam.jpg",
     shouldDrawLine: true,
@@ -189,7 +189,7 @@ export const TIMELINE: Array<TimelineNode> = [
   },
   {
     type: NodeTypes.CHECKPOINT,
-    title: "Diplôme Développeur Web & Web Mobile",
+    title: "🎓 Diplôme Développeur Web & Web Mobile",
     size: ItemSize.LARGE,
     period: "Juillet 2021",
     subtitle: "Niveau V (RNCP) - Digital Campus Rennes (35)",
@@ -212,7 +212,7 @@ export const TIMELINE: Array<TimelineNode> = [
     title: "Motoo Planner (Projet personnel)",
     size: ItemSize.LARGE,
     period: "Février à Juillet 2021",
-    subtitle: "Application web pour faciliter la planification de road trip à moto en groupe avec une approche collaborative et une expérience utilisateur intuitive.",
+    subtitle: "Application web pour faciliter la planification de road trip à moto en groupe avec une approche collaborative et une expérience utilisateur intuitive",
     image: "/images/logos/logo-motooplanner.png",
     slideImage: "/images/timeline/motoo.png",
     shouldDrawLine: true,
@@ -234,7 +234,7 @@ export const TIMELINE: Array<TimelineNode> = [
     title: "Société Airmdrone",
     size: ItemSize.LARGE,
     period: "2018-2019",
-    subtitle: "Création d'un site vitrine pour un pilote de drone professionnel afin d'apporter une présence en ligne et faciliter les demandes de clients potentiels.",
+    subtitle: "Création d'un site vitrine pour un pilote de drone professionnel afin d'apporter une présence en ligne et faciliter les demandes de clients potentiels",
     image: "/images/logos/logo-airmdrone.png",
     slideImage: "/images/timeline/airmdrone.png",
     shouldDrawLine: true,
@@ -295,7 +295,7 @@ export const TIMELINE: Array<TimelineNode> = [
     period: "De juillet 2008 à août 2012",
     title: "CROSS Réunion (île de la Réunion) - Affaires Maritimes",
     size: ItemSize.LARGE,
-    subtitle: "Surveillance des pêches & exploitation d'imagerie satellite pour lutter contre la pêche illicite dans l'Océan Indien.",
+    subtitle: "Surveillance des pêches & exploitation d'imagerie satellite pour lutter contre la pêche illicite dans l'Océan Indien",
     image: "/images/logos/logo-cross.png",
     slideImage: "/images/timeline/reunion.jpg",
     shouldDrawLine: true,

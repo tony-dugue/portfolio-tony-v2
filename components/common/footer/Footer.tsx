@@ -41,7 +41,7 @@ const FooterTest = () => {
 
           </FooterContent>
 
-          <p className="footer-copyright">Design & Développement avec ❤️ - NextJS, TypeScript, TailWind & GSAP</p>
+          <p className="footer-copyright">Design & développement avec ❤️ en NextJS, TypeScript, TailWind & GSAP</p>
 
         </Container>
     </FooterSection>
@@ -60,7 +60,7 @@ const Container = styled.div`
   ${tw`w-full flex flex-col justify-center items-center 2xl:container mx-auto xl:px-20 md:px-12 px-4`};
 
   .footer-copyright {
-    ${tw`text-center pt-5`}
+    ${tw`text-center pt-5 text-base`}
     color: rgba(187, 187, 190, 0.71);
   }
 `
