@@ -39,6 +39,13 @@ npm run build
 yarn build
 ```
 
+Pour créer un export (export des pages en fichiers html statiques) :
+```bash
+npm run export
+# ou
+yarn export
+```
+
 - Dans le terminal, accéder à : [http://localhost:3000](http://localhost:3000)
 
 ## Ressources utilisées dans le projet
