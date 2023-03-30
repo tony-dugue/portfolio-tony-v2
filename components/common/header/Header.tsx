@@ -1,67 +1,78 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 
 import styled from "styled-components";
 import tw from "twin.macro";
 
-import RoundButton from "../../buttons/RoundButton"
+import RoundButton from "../../buttons/RoundButton";
 import NavigationMenu from "./NavigationMenu";
+import Toggle from "../toggleTheme/Toggler";
+import { useDarkMode } from "../toggleTheme/useDarkMode";
 
-const Header = () => {
+interface Props {
+  toggleTheme: any;
+}
 
+const Header: React.FunctionComponent<Props> = (props: Props) => {
   const [menuVisible, setMenuVisible] = useState(false);
+
+  // dark/light mode
+  const [theme, themeToggler] = useDarkMode();
 
   return (
     <HeaderWrapper>
       <Container>
-
         <ImageWrapper>
-          <a href="#home" className='link'>
-            <img src="/images/usb-blue.png" className="logo" alt="Logo - Tony Dugué" />
+          <a href="#home" className="link">
+            <img
+              src="/images/usb-blue.png"
+              className="logo"
+              alt="Logo - Tony Dugué"
+            />
           </a>
         </ImageWrapper>
 
         <RightContent>
-
           <ButtonWrapper>
             <RoundButton text="Contact" link="/#contact" />
           </ButtonWrapper>
 
           <OuterMenu className={`${menuVisible ? "menu-visible" : ""}`}>
+            <OuterMenuLinks>
+              <HamburgerCtr className="hamburger">
+                <HamburgerItem
+                  className="link"
+                  onClick={() => setMenuVisible(!menuVisible)}
+                />
 
-            <HamburgerToggle className='link' onClick={() => setMenuVisible(!menuVisible)}>
-
-              <HamburgerCtr className='hamburger'>
-                <HamburgerItem></HamburgerItem>
+                <ToggleContainer>
+                  <Toggle toggleTheme={props.toggleTheme} />
+                </ToggleContainer>
               </HamburgerCtr>
-
-            </HamburgerToggle>
+            </OuterMenuLinks>
 
             <NavigationMenu setMenuVisible={setMenuVisible} />
-
           </OuterMenu>
         </RightContent>
-
       </Container>
     </HeaderWrapper>
-  )
-}
+  );
+};
 
 export default Header;
 
 const HeaderWrapper = styled.header`
-  ${tw`w-full fixed top-0 left-0 right-0 select-none z-50`}
-  // bg-gradient-to-b from-gray-200 to-transparent
-`
+  ${tw`w-full fixed top-0 left-0 right-0 select-none z-50`}// bg-gradient-to-b from-gray-200 to-transparent
+`;
 
 const Container = styled.div`
-  height: ${props => props.theme.navHeight};
+  height: ${(props) => props.theme.navHeight};
   ${tw`relative flex justify-between items-center mx-auto 2xl:container xl:px-20 md:px-12 px-4`};
 
   @media screen and (max-width: 992px) {
     height: 40px;
   }
-`
+`;
 
 const ImageWrapper = styled.div`
   width: auto;
@@ -72,11 +83,11 @@ const ImageWrapper = styled.div`
   @media screen and (max-width: 992px) {
     margin-top: 40px;
   }
-  
+
   &:hover {
     transform: scale(1.1);
   }
-  
+
   img {
     width: 120px;
     transform: rotate(180deg);
@@ -85,7 +96,7 @@ const ImageWrapper = styled.div`
       width: 100px;
     }
   }
-`
+`;
 
 const RightContent = styled.div`
   width: 240px;
@@ -96,28 +107,37 @@ const RightContent = styled.div`
   }
   @media screen and (max-width: 768px) {
     margin-top: 10px;
-    margin-right: 15px;
+    margin-right: 40px;
   }
-`
+`;
+
+const ToggleContainer = styled.span`
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-top: 4px;
+`;
 
 const ButtonWrapper = styled.div`
   ${tw`md:block hidden`};
-`
+`;
 
-const HamburgerToggle = styled.a`${tw`w-6 h-6`}`
+const OuterMenuLinks = styled.a`
+  ${tw`w-6 h-6`}
+`;
 
-const HamburgerCtr = styled.div`${tw`absolute top-0 right-0 w-6 h-6 flex items-center justify-center`}`
+const HamburgerCtr = styled.div`
+  ${tw`absolute top-0 right-0 w-6 h-6 flex items-center justify-center`}
+`;
 
 const HamburgerItem = styled.div`
-  background-color: ${props => props.theme.colorPrimary};
+  background-color: ${(props) => props.theme.colorPrimary};
   ${tw`relative flex-none w-full duration-300 flex items-center justify-center`}
-`
+`;
 
 const OuterMenu = styled.nav`
   z-index: 1;
 
   &.menu-visible {
-
     .hamburger {
       > div {
         transform: rotate(135deg);
@@ -133,18 +153,18 @@ const OuterMenu = styled.nav`
       }
 
       &:hover {
-          > div {
-            transform: rotate(225deg);
-          }
+        > div {
+          transform: rotate(225deg);
+        }
       }
     }
-    
+
     .menu {
       pointer-events: auto;
       visibility: visible !important;
       backdrop-filter: blur(0.625rem);
       -webkit-backdrop-filter: blur(0.625rem);
-      
+
       > div {
         transform: scale(1);
         transition-duration: 0.75s;
@@ -183,7 +203,7 @@ const OuterMenu = styled.nav`
   .menu {
     backface-visibility: hidden;
     outline: 0.0625rem solid transparent;
-    
+
     > div {
       width: 250vw;
       height: 250vw;
@@ -203,4 +223,4 @@ const OuterMenu = styled.nav`
       }
     }
   }
-`
+`;

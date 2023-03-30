@@ -1,21 +1,21 @@
 import styled from "styled-components";
-import React, {useEffect, useRef, useState} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import tw from "twin.macro";
-import { NAVLINKS, PROJECTS } from '../../constants';
-import { gsap, Linear } from 'gsap'
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { NAVLINKS, PROJECTS } from "../../constants";
+import { gsap, Linear } from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { NO_MOTION_PREFERENCE_QUERY } from "../../pages/index";
 
-import ProjectCard from './ProjectCard'
+import ProjectCard from "./ProjectCard";
 import Heading from "../headings/Heading";
 
 const ProjectSection = ({ isDesktop }: { isDesktop: boolean }) => {
-
   const sectionRef = useRef<null | HTMLDivElement>(null);
   const sectionTitleElementRef = useRef<null | HTMLDivElement>(null);
 
   const [willChange, setwillChange] = useState(false);
-  const [horizontalAnimationEnabled, sethorizontalAnimationEnabled] = useState(false);
+  const [horizontalAnimationEnabled, sethorizontalAnimationEnabled] =
+    useState(false);
 
   const initRevealAnimation = (
     targetSectionRef: any
@@ -40,12 +40,15 @@ const ProjectSection = ({ isDesktop }: { isDesktop: boolean }) => {
 
   const initProjectsAnimation = (
     targetSectionRef: any,
-    sectionTitleElementRef: any,
+    sectionTitleElementRef: any
   ): [GSAPTimeline, ScrollTrigger] => {
-
     const timeline = gsap.timeline({ defaults: { ease: Linear.easeNone } });
-    const sidePadding = document.body.clientWidth - targetSectionRef.current.querySelector(".inner-container")!.clientWidth;
-    const elementWidth = sidePadding + targetSectionRef.current.querySelector(".project-wrapper")!.clientWidth;
+    const sidePadding =
+      document.body.clientWidth -
+      targetSectionRef.current.querySelector(".inner-container")!.clientWidth;
+    const elementWidth =
+      sidePadding +
+      targetSectionRef.current.querySelector(".project-wrapper")!.clientWidth;
 
     targetSectionRef.current!.style.width = `${elementWidth}px`;
 
@@ -69,10 +72,7 @@ const ProjectSection = ({ isDesktop }: { isDesktop: boolean }) => {
     return [timeline, scrollTrigger];
   };
 
-
-
   useEffect(() => {
-
     let projectsScrollTrigger: ScrollTrigger | undefined;
     let projectsTimeline: GSAPTimeline | undefined;
 
@@ -86,7 +86,9 @@ const ProjectSection = ({ isDesktop }: { isDesktop: boolean }) => {
         sectionTitleElementRef
       );
     } else {
-      const projectWrapper = sectionRef.current!.querySelector(".project-wrapper") as HTMLDivElement;
+      const projectWrapper = sectionRef.current!.querySelector(
+        ".project-wrapper"
+      ) as HTMLDivElement;
 
       const parentPadding = window
         .getComputedStyle(sectionRef.current!)
@@ -96,7 +98,10 @@ const ProjectSection = ({ isDesktop }: { isDesktop: boolean }) => {
       projectWrapper.classList.add("full-width");
       projectWrapper.style.setProperty("width", `calc(100vw)`);
       projectWrapper.style.setProperty("padding", `0 ${parentPadding}`);
-      projectWrapper.style.setProperty("transform", `translateX(-${parentPadding})`);
+      projectWrapper.style.setProperty(
+        "transform",
+        `translateX(-${parentPadding})`
+      );
     }
 
     const [revealTimeline, revealScrollTrigger] =
@@ -113,9 +118,17 @@ const ProjectSection = ({ isDesktop }: { isDesktop: boolean }) => {
   const { ref: projectsSectionRef } = NAVLINKS[1];
 
   return (
-    <Section ref={sectionRef} id={projectsSectionRef} className={`section-container`}>
-
-      <ProjectTitle ref={sectionTitleElementRef} className={`inner-container ${willChange ? "will-change-transform" : ""}`}>
+    <Section
+      ref={sectionRef}
+      id={projectsSectionRef}
+      className={`section-container`}
+    >
+      <ProjectTitle
+        ref={sectionTitleElementRef}
+        className={`inner-container ${
+          willChange ? "will-change-transform" : ""
+        }`}
+      >
         <Heading
           title="Mes projets"
           description="Passionné depuis toujours par les nouvelles technologies mais aussi par le design, je conçois et réalise des applications web intuitive et fonctionnelle mais toujours avec une dose de créativité."
@@ -124,7 +137,7 @@ const ProjectSection = ({ isDesktop }: { isDesktop: boolean }) => {
       </ProjectTitle>
 
       <ProjectItems className="project-wrapper snap-x seq scroll-pl-6 snap-mandatory">
-        {PROJECTS.map( (project) => (
+        {PROJECTS.map((project) => (
           <ProjectCard
             animationEnabled={horizontalAnimationEnabled}
             project={project}
@@ -132,22 +145,20 @@ const ProjectSection = ({ isDesktop }: { isDesktop: boolean }) => {
           />
         ))}
       </ProjectItems>
-
-
     </Section>
-  )
-}
+  );
+};
 
 export default ProjectSection;
 
 const Section = styled.section`
   ${tw`w-full relative select-none flex-col flex py-8 justify-center`};
-  background: ${props => props.theme.colorBackground};
+  background: ${(props) => props.theme.colorBackground};
 
   &.isDesktop {
     ${tw`min-h-screen`}
   }
-`
+`;
 
 const ProjectTitle = styled.div`
   ${tw`flex flex-col`}
@@ -156,32 +167,32 @@ const ProjectTitle = styled.div`
   @media screen and (max-width: 768px) {
     margin-top: 60px;
   }
-`
+`;
 
 const ProjectItems = styled.div`
   width: fit-content;
   ${tw`tall:mt-0 mt-6 flex grid grid-flow-col auto-cols-max md:gap-10 gap-4 w-fit`};
-  
+
   &.full-width {
     ${tw`overflow-x-auto`}
   }
-  
+
   a {
     ${tw`md:mr-10 mr-4`}
-    
+
     &:last-child {
       ${tw`mr-0`}
     }
   }
-  
+
   &.big {
     ${tw`mt-12`}
   }
   &.small {
     ${tw`mt-6`}
   }
-  
+
   &::-webkit-scrollbar {
     display: none;
   }
-`
+`;

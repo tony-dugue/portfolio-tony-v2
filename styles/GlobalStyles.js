@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
   @tailwind base;
@@ -201,8 +201,7 @@ const GlobalStyles = createGlobalStyle`
     background: white;
   }
   ::-webkit-scrollbar-thumb {
-    //background: rgb(170, 170, 170);
-    background: #0f3b56;
+    background: ${({ theme }) => theme.colorHeroTitle};
   }
   ::-moz-selection,
   ::selection {
@@ -219,6 +218,8 @@ const GlobalStyles = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
     position: relative;
     overflow-x: hidden;
+    background: ${({ theme }) => theme.colorBackground};
+    color: ${({ theme }) => theme.colorText};
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -267,7 +268,7 @@ const GlobalStyles = createGlobalStyle`
   }
   
   mark {
-    background-color: #FFE1AD;
+    background-color: ${({ theme }) => theme.colorMark};
     position: relative;
     padding: 4px 5px;
     border-radius: 6px;
@@ -293,6 +294,6 @@ const GlobalStyles = createGlobalStyle`
   .will-change-opacity {
     will-change: opacity;
   }
-`
+`;
 
-export default GlobalStyles
+export default GlobalStyles;

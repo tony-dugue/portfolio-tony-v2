@@ -103,7 +103,7 @@ export const SKILLS = {
       name: "JavaScript (JS)",
       description:
         "Souvent abrégé « JS », langage de script léger, orienté objet, principalement connu comme le langage de script des pages" +
-        " web",
+        " web.",
     },
     {
       id: 2,
@@ -149,15 +149,14 @@ export const SKILLS = {
       filename: "tailwind",
       name: "Tailwind CSS",
       description:
-        "Framework CSS open source. La principale caractéristique de cette bibliothèque est que, contrairement à d'autres frameworks" +
-        " CSS comme Bootstrap, elle ne fournit pas une série de classes prédéfinies pour des éléments tels que des boutons ou des tableaux.",
+        "Framework utility-fist CSS open source pour faciliter la création et la conception de page web. Contient des classes prédéfinies que l'on peut utiliser pour construire et concevoir des pages web directement dans le balisage.",
     },
     {
       id: 8,
       filename: "gsap",
       name: "GSAP (Greensock)",
       description:
-        "Bibliothèque d'animation pour HTML5 et Flash. Cela permet d'animer tout ce à quoi JavaScript peut accéder (propriétés CSS," +
+        "Bibliothèque d'animation pour HTML5 et Flash. Permet d'animer tout ce à quoi JavaScript peut accéder (propriétés CSS," +
         " SVG, objets de la bibliothèque canevas, objets génériques...). GSAP est constitué de plusieurs outils de bases, associés à quelques extensions.",
     },
     {
@@ -172,8 +171,7 @@ export const SKILLS = {
       filename: "sass",
       name: "SASS",
       description:
-        "Préprocesseur qui ajoute des fonctionnalités à CSS. Il permet, entre autres, de mieux structurer et simplifier le code, d'éviter les" +
-        " répétitions et plus encore. Le code SASS doit être dans des fichiers ayant l'extension.",
+        "SASS (Syntactically Awesome Style Sheet) est un langage de script préprocesseur qui est compilé ou interprété en CSS.",
     },
     {
       id: 11,
@@ -245,7 +243,14 @@ export const SKILLS = {
       id: 7,
       filename: "mysql",
       name: "MySQL",
-      description: "Système de gestion de bases de données relationnelles.",
+      description: "Système de gestion de base de données relationnelle.",
+    },
+    {
+      id: 8,
+      filename: "postgresql",
+      name: "PostgreSQL",
+      description:
+        "Système de gestion de base de données relationnelle et objet.",
     },
   ],
   userInterface: [
@@ -254,7 +259,7 @@ export const SKILLS = {
       filename: "xd",
       name: "ADOBE XD",
       description:
-        "Outil de conception vectorielle pour les applications Web et mobiles, développé et publié par Adobe Inc",
+        "Outil de conception vectorielle pour les applications Web et mobiles, développé et publié par Adobe Inc.",
     },
     {
       id: 2,
@@ -269,7 +274,7 @@ export const SKILLS = {
       filename: "photoshop",
       name: "Adobe Photoshop",
       description:
-        "Logiciel de retouche, de traitement et de dessin assisté par ordinateur développé et publié par Adobe Inc",
+        "Logiciel de retouche, de traitement et de dessin assisté par ordinateur développé et publié par Adobe Inc.",
     },
     {
       id: 4,
@@ -325,21 +330,21 @@ export const SKILLS = {
       name: "Postman",
       description:
         "Application  créée en 2012 permettant de tester des API. Permet de construire des collections de requête HTTP et de lancer cette" +
-        " série de requêtes en une fois",
+        " série de requêtes en une fois.",
     },
     {
       id: 6,
       filename: "idea",
-      name: "PhpStorm",
+      name: "PhpStorm / IntelliJ IDEA",
       description:
-        "Outil de développement pour les projets web. Editeur de code pour PHP, HTML, CSS et JavaScript, édité par JetBrains.",
+        "Outils de développement pour les projets web. Editeur de code édité par JetBrains.",
     },
     {
       id: 7,
       filename: "vscode",
       name: "VsCode",
       description:
-        "Editeur de code open-source, gratuit et multi-plateforme (Windows, Mac et Linux), développé par Microsoft",
+        "Editeur de code open-source, gratuit et multi-plateforme (Windows, Mac et Linux), développé par Microsoft.",
     },
   ],
 };
@@ -374,7 +379,7 @@ export const TIMELINE: Array<TimelineNode> = [
     size: ItemSize.LARGE,
     period: "De février 2023 à aujourd'hui",
     subtitle:
-      "Développement d'application web (React/Next/Typescript/Redux/RxJS/MUI/Swagger/Java)",
+      "Développement d'application web (React / Next / Typescript / Redux / RxJS / MUI / Swagger / PostgreSQL)",
     image: "/images/logos/logo-open.jpg",
     slideImage: "/images/timeline/open.png",
     shouldDrawLine: true,
@@ -386,7 +391,7 @@ export const TIMELINE: Array<TimelineNode> = [
     size: ItemSize.LARGE,
     period: "De avril 2021 à février 2023",
     subtitle:
-      "Développement de site, d'application web / mobile & API (React/Native/Redux/Saga, Symfony, Ghost, WordPress)",
+      "Développement de site, d'application web / mobile & API (React / Native / Redux / Saga, Symfony, Ghost, WordPress)",
     image: "/images/logos/logo-insaniam.png",
     slideImage: "/images/timeline/insaniam.jpg",
     shouldDrawLine: true,

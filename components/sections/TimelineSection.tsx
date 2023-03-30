@@ -1,8 +1,23 @@
-import React, {RefObject, useCallback, useEffect, useRef, useState} from 'react';
-import { NAVLINKS, Branch, BranchNode, CheckpointNode, ItemSize, NodeTypes, TIMELINE, TimelineNode } from '../../constants';
-import Image from 'next/image';
-import { gsap, Linear } from 'gsap'
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import React, {
+  RefObject,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import {
+  NAVLINKS,
+  Branch,
+  BranchNode,
+  CheckpointNode,
+  ItemSize,
+  NodeTypes,
+  TIMELINE,
+  TimelineNode,
+} from "../../constants";
+import Image from "next/image";
+import { gsap, Linear } from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 import styled from "styled-components";
 import tw from "twin.macro";
@@ -18,17 +33,19 @@ interface LinkNode {
 }
 
 interface Props {
-  isDesktop: boolean,
-  isSmallScreen: () => {}
+  isDesktop: boolean;
+  isSmallScreen: () => {};
 }
 
-const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
+const TimelineSection: React.FunctionComponent<Props> = (props: Props) => {
+  const { isDesktop, isSmallScreen } = props;
 
-  const { isDesktop, isSmallScreen } = props
-
-  const svgColor = '#9CA3AF';
-  const animColor = '#FCD34D';
-  const dotColor = '#9CA3AF';
+  const themeMode = window.localStorage.getItem("theme");
+  
+  const svgColor = "#9CA3AF";
+  const animColor = "#FCD34D";
+  const dotColor = "#9CA3AF";
+  const dotFill = themeMode && themeMode === "dark" ? "#111827" : "#fafafa";
   const separation = 450;
   const strokeWidth = 3;
   const leftBranchX = 10;
@@ -39,7 +56,9 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
   const [svgWidth, setSvgWidth] = useState(400);
   const [rightBranchX, setRightBranchX] = useState(85);
 
-  const svgCheckpointItems = TIMELINE.filter( item => item.type === NodeTypes.CHECKPOINT && item.shouldDrawLine);
+  const svgCheckpointItems = TIMELINE.filter(
+    (item) => item.type === NodeTypes.CHECKPOINT && item.shouldDrawLine
+  );
 
   const svgLength = svgCheckpointItems?.length * separation;
 
@@ -47,7 +66,8 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
   const svgContainer = useRef<null | HTMLDivElement>(null);
   const screenContainer = useRef<null | HTMLDivElement>(null);
 
-  const addNodeRefsToItems = (timeline: Array<TimelineNode>
+  const addNodeRefsToItems = (
+    timeline: Array<TimelineNode>
   ): Array<LinkedTimelineNode> => {
     return timeline.map((node, idx) => ({
       ...node,
@@ -70,39 +90,41 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
 
         switch (type) {
           case NodeTypes.CHECKPOINT:
-          {
-            const { shouldDrawLine } = node;
+            {
+              const { shouldDrawLine } = node;
 
-            // special handling for last checkpoint
-            if (!next) lineY = y - separation / 2;
+              // special handling for last checkpoint
+              if (!next) lineY = y - separation / 2;
 
-            // special handling for dot without line
-            if (!shouldDrawLine) dotY = y;
+              // special handling for dot without line
+              if (!shouldDrawLine) dotY = y;
 
-            if (shouldDrawLine) {
-              // TO DO fix syntax
-              svg = shouldDrawLine ? `${drawLine(node, lineY, index, isDiverged)}${svg}` : svg;
-              y = y + separation;
-              index++;
+              if (shouldDrawLine) {
+                // TO DO fix syntax
+                svg = shouldDrawLine
+                  ? `${drawLine(node, lineY, index, isDiverged)}${svg}`
+                  : svg;
+                y = y + separation;
+                index++;
+              }
+
+              svg = svg.concat(drawDot(node, dotY, isDiverged));
             }
-
-            svg = svg.concat(drawDot(node, dotY, isDiverged));
-          }
             break;
           case NodeTypes.DIVERGE:
-          {
-            isDiverged = true;
+            {
+              isDiverged = true;
 
-            svg = `${drawBranch(node, y, index)}${svg}`;
-          }
+              svg = `${drawBranch(node, y, index)}${svg}`;
+            }
             break;
           case NodeTypes.CONVERGE:
-          {
-            isDiverged = false;
+            {
+              isDiverged = false;
 
-            // Drawing CONVERGE branch with previous line and index
-            svg = `${drawBranch(node, y - separation, index - 1)}${svg}`;
-          }
+              // Drawing CONVERGE branch with previous line and index
+              svg = `${drawBranch(node, y - separation, index - 1)}${svg}`;
+            }
             break;
         }
 
@@ -115,7 +137,11 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
   };
 
   const getDotString = (x: number, y: number) => {
-    return `<rect class='dot' width=${dotSize} height=${dotSize} fill='#fafafa' x=${x - dotSize / 2} y=${y - dotSize / 2} ></rect><circle cx=${x} cy=${y} r='7' stroke=${dotColor} class='dot' ></circle>`;
+    return `<rect class='dot' width=${dotSize} height=${dotSize} fill=${dotFill} x=${
+      x - dotSize / 2
+    } y=${
+      y - dotSize / 2
+    } ></rect><circle cx=${x} cy=${y} r='7' stroke=${dotColor} class='dot' ></circle>`;
   };
 
   const drawDot = (
@@ -145,8 +171,11 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
     return `${textString}${dotString}`;
   };
 
-  const addText = ( timelineNode: LinkedCheckpointNode, y: number, isDiverged: boolean ) => {
-
+  const addText = (
+    timelineNode: LinkedCheckpointNode,
+    y: number,
+    isDiverged: boolean
+  ) => {
     const { title, subtitle, period, size, image } = timelineNode;
 
     const offset = isDiverged ? rightBranchX : 10;
@@ -156,10 +185,18 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
 
     const titleSizeClass = size === ItemSize.LARGE ? "text-big" : "";
 
-    const logoString = image ? `<img src='${image}' class='timeline-logo' loading='lazy' width='100' height='32' alt='${image}' />` : "";
-    const titleString = title ? `<p class='timeline-item-title ${titleSizeClass}'>${title}</p>` : "";
-    const subtitleString = subtitle ? `<p class='timeline-item-subtitle'>${subtitle}</p>` : "";
-    const periodString = period ? `<p class='timeline-item-period'>${period}</p>` : "";
+    const logoString = image
+      ? `<img src='${image}' class='timeline-logo' loading='lazy' width='100' height='32' alt='${image}' />`
+      : "";
+    const titleString = title
+      ? `<p class='timeline-item-title ${titleSizeClass}'>${title}</p>`
+      : "";
+    const subtitleString = subtitle
+      ? `<p class='timeline-item-subtitle'>${subtitle}</p>`
+      : "";
+    const periodString = period
+      ? `<p class='timeline-item-period'>${period}</p>`
+      : "";
 
     return `
        <foreignObject x=${foreignObjectX} y=${foreignObjectY} width=${foreignObjectWidth} height=${separation}>
@@ -200,7 +237,8 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
 
     // If already diverged, draw parallel line to the existing line
     if (isDiverged) {
-      const divergedLineX = alignment === Branch.LEFT ? rightBranchX : leftBranchX;
+      const divergedLineX =
+        alignment === Branch.LEFT ? rightBranchX : leftBranchX;
 
       str = str.concat(
         `<line class='str' x1=${divergedLineX} y1=${y} x2=${divergedLineX} y2=${lineY} stroke=${svgColor} /><line class='str line-${i}' x1=${divergedLineX} y1=${y} x2=${divergedLineX} y2=${lineY} stroke=${animColor} />`
@@ -213,7 +251,6 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
     const { type } = timelineNode;
 
     switch (type) {
-
       case NodeTypes.DIVERGE:
         return `<path class='str' d='M ${leftBranchX} ${y} C ${leftBranchX} ${
           y + curveLength / 2
@@ -231,7 +268,7 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
           y + curveLength
         } x2=${rightBranchX} y2=${y + separation} stroke=${animColor} />`;
 
-        case NodeTypes.CONVERGE:
+      case NodeTypes.CONVERGE:
         return `<path class='str' d='M ${rightBranchX} ${
           y + separation - curveLength
         } C ${rightBranchX} ${
@@ -254,7 +291,7 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
           y + separation - curveLength
         )} stroke=${animColor} />`;
 
-        default:
+      default:
         return "";
     }
   };
@@ -266,7 +303,11 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
   ): GSAPTimeline => {
     const startTime = `start+=${duration * index}`;
 
-    timeline.from(svgContainer.current!.querySelectorAll(`.line-${index + 1}`), { scaleY: 0, duration }, startTime);
+    timeline.from(
+      svgContainer.current!.querySelectorAll(`.line-${index + 1}`),
+      { scaleY: 0, duration },
+      startTime
+    );
 
     return timeline;
   };
@@ -277,9 +318,21 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
     index: number
   ): GSAPTimeline => {
     timeline
-      .from(svgContainer.current!.querySelector(`.line-${index + 1}`), { scaleY: 0, duration }, `start+=${duration * index}`)
-      .from(svgContainer.current!.querySelector(`.branch-${index + 1}`), { strokeDashoffset: 186, duration: duration - 2 }, `start+=${duration * index}`)
-      .from(svgContainer.current!.querySelector(`.branch-line-${index + 1}`), { scaleY: 0, duration: duration - 1 }, `start+=${duration * (index + 1) - 2}`);
+      .from(
+        svgContainer.current!.querySelector(`.line-${index + 1}`),
+        { scaleY: 0, duration },
+        `start+=${duration * index}`
+      )
+      .from(
+        svgContainer.current!.querySelector(`.branch-${index + 1}`),
+        { strokeDashoffset: 186, duration: duration - 2 },
+        `start+=${duration * index}`
+      )
+      .from(
+        svgContainer.current!.querySelector(`.branch-line-${index + 1}`),
+        { scaleY: 0, duration: duration - 1 },
+        `start+=${duration * (index + 1) - 2}`
+      );
 
     return timeline;
   };
@@ -309,46 +362,53 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
     return timeline;
   };
 
-  const animateTimeline: any = useCallback((timeline: GSAPTimeline, duration: number): void => {
-    let index = 0;
+  const animateTimeline: any = useCallback(
+    (timeline: GSAPTimeline, duration: number): void => {
+      let index = 0;
 
-    addNodeRefsToItems(TIMELINE).forEach((item) => {
-      const { type } = item;
+      addNodeRefsToItems(TIMELINE).forEach((item) => {
+        const { type } = item;
 
-      if (type === NodeTypes.CHECKPOINT && item.shouldDrawLine) {
-        const { next, prev } = item;
+        if (type === NodeTypes.CHECKPOINT && item.shouldDrawLine) {
+          const { next, prev } = item;
 
-        if (prev?.type === NodeTypes.DIVERGE) {
-          addDivergingBranchLineAnimation(timeline, duration, index);
-        } else if (next?.type === NodeTypes.CONVERGE) {
-          addConvergingBranchLineAnimation(timeline, duration, index);
-        } else {
-          addLineSvgAnimation(timeline, duration, index);
+          if (prev?.type === NodeTypes.DIVERGE) {
+            addDivergingBranchLineAnimation(timeline, duration, index);
+          } else if (next?.type === NodeTypes.CONVERGE) {
+            addConvergingBranchLineAnimation(timeline, duration, index);
+          } else {
+            addLineSvgAnimation(timeline, duration, index);
+          }
+
+          index++;
         }
+      });
+    },
+    []
+  );
 
-        index++;
+  const setTimelineSvg: any = useCallback(
+    (
+      svgContainer: RefObject<HTMLDivElement>,
+      timelineSvg: RefObject<SVGSVGElement>
+    ) => {
+      const containerWidth = svgContainer.current!.clientWidth;
+      setSvgWidth(containerWidth);
+
+      const resultSvgString = generateTimelineSvg(TIMELINE);
+      timelineSvg.current!.innerHTML = resultSvgString;
+
+      if (isSmallScreen()) {
+        setRightBranchX(60);
       }
-    });
-  }, []);
+    },
+    [isSmallScreen, generateTimelineSvg]
+  );
 
-  const setTimelineSvg: any = useCallback((svgContainer: RefObject<HTMLDivElement>, timelineSvg: RefObject<SVGSVGElement>) => {
-
-    const containerWidth = svgContainer.current!.clientWidth;
-    setSvgWidth(containerWidth);
-
-    const resultSvgString = generateTimelineSvg(TIMELINE);
-    timelineSvg.current!.innerHTML = resultSvgString;
-
-    if (isSmallScreen()) {
-      setRightBranchX(60);
-    }
-  }, [isSmallScreen, generateTimelineSvg]);
-
-  const initScrollTrigger: any = useCallback( (): {
+  const initScrollTrigger: any = useCallback((): {
     timeline: GSAPTimeline;
     duration: number;
   } => {
-
     const setSlidesAnimation = (timeline: GSAPTimeline): void => {
       svgCheckpointItems.forEach((_, index) => {
         // all except the first slide
@@ -362,7 +422,10 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
 
         // all except the last slide
         if (index !== svgCheckpointItems.length - 1) {
-          timeline.to(screenContainer.current!.querySelector(`.slide-${index + 1}`), {opacity: 0, delay: 2.35 });
+          timeline.to(
+            screenContainer.current!.querySelector(`.slide-${index + 1}`),
+            { opacity: 0, delay: 2.35 }
+          );
         }
       });
     };
@@ -379,11 +442,11 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
 
     // Slide as a trigger for Desktop
     if (isDesktop && !isSmallScreen()) {
-
       // Animation for right side slides
       setSlidesAnimation(timeline);
 
-      const platformHeight = screenContainer.current!.getBoundingClientRect().height;
+      const platformHeight =
+        screenContainer.current!.getBoundingClientRect().height;
 
       trigger = screenContainer.current;
       start = `top ${(window.innerHeight - platformHeight) / 2}`;
@@ -417,11 +480,11 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
     // Generate and set the timeline svg
     setTimelineSvg(svgContainer, timelineSvg);
 
-    const { timeline, duration }: { timeline: GSAPTimeline; duration: number } = initScrollTrigger();
+    const { timeline, duration }: { timeline: GSAPTimeline; duration: number } =
+      initScrollTrigger();
 
     // Animation for Timeline SVG
     animateTimeline(timeline, duration);
-
   }, [
     timelineSvg,
     svgContainer,
@@ -432,12 +495,11 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
     svgLength,
     animateTimeline,
     setTimelineSvg,
-    initScrollTrigger
+    initScrollTrigger,
   ]);
 
   return (
     <Section id={NAVLINKS[3].ref} className="section-container">
-
       <Heading
         title="Mon parcours"
         description="Un aperçu des étapes de mon parcours professionnel"
@@ -445,19 +507,32 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
       />
 
       <TimelineContentCol>
-
-        <TimelineContentColLeft className="line-svg" style={{ display: 'flex' }} ref={svgContainer}>
-          <svg width={svgWidth} height={svgLength} viewBox={`0 0 ${svgWidth} ${svgLength}`} fill='none' ref={timelineSvg}></svg>
+        <TimelineContentColLeft
+          className="line-svg"
+          style={{ display: "flex" }}
+          ref={svgContainer}
+        >
+          <svg
+            width={svgWidth}
+            height={svgLength}
+            viewBox={`0 0 ${svgWidth} ${svgLength}`}
+            fill="none"
+            ref={timelineSvg}
+          ></svg>
         </TimelineContentColLeft>
 
         <TimelineContentColRight>
           <TimelineScreenContainer ref={screenContainer}>
-
-            <Image className='timeline-screen-image' src='/images/timeline/title-bar.svg' alt='Title bar' width={644} height={34} />
+            <Image
+              className="timeline-screen-image"
+              src="/images/timeline/title-bar.svg"
+              alt="Title bar"
+              width={644}
+              height={34}
+            />
 
             <div className="timeline-slide-container">
               <div className="timeline-slide">
-
                 {svgCheckpointItems.map((item, index) => (
                   <Image
                     className={`timeline-slide-image slide-${index + 1}`}
@@ -467,22 +542,20 @@ const TimelineSection: React.FunctionComponent<Props> = (props:Props) => {
                     layout="fill"
                   />
                 ))}
-
               </div>
             </div>
           </TimelineScreenContainer>
         </TimelineContentColRight>
-
       </TimelineContentCol>
     </Section>
-  )
-}
+  );
+};
 
 export default TimelineSection;
 
 const Section = styled.section`
   ${tw`w-full relative select-none min-h-screen py-8 flex flex-col justify-center 2xl:container mx-auto`}
-`
+`;
 
 const TimelineContentCol = styled.div`
   ${tw`grid grid-cols-12 gap-4 mt-20`}
@@ -503,28 +576,28 @@ const TimelineContentCol = styled.div`
   .timeline-description {
     ${tw`text-xl mt-2 font-medium tracking-wide`}
   }
-`
+`;
 
 const TimelineContentColLeft = styled.div`
   ${tw`col-span-12 md:col-span-6 mr-16`};
 
   @media screen and (max-width: 768px) {
-  ${tw`w-full`};
-}
+    ${tw`w-full`};
+  }
 
   .timeline-item-period {
     ${tw`text-xl font-medium tracking-wide`};
-    color: ${props => props.theme.colorSecondary};
+    color: ${(props) => props.theme.colorTimeline};
     width: 100%;
 
     @media screen and (max-width: 768px) {
       font-size: 1.1rem;
     }
   }
-  
+
   .timeline-item-title {
     ${tw`text-2xl font-bold tracking-wide`};
-    color: ${props => props.theme.colorSecondary};
+    color: ${(props) => props.theme.colorTimeline};
     margin-top: -0.4rem;
     width: 100%;
 
@@ -534,10 +607,10 @@ const TimelineContentColLeft = styled.div`
       width: 70%;
     }
   }
-  
+
   .timeline-item-subtitle {
     ${tw`text-lg mt-2 font-medium tracking-wide`}
-    color: ${props => props.theme.colorSecondary};
+    color: ${(props) => props.theme.colorTimeline};
     width: 100%;
 
     @media screen and (max-width: 768px) {
@@ -546,7 +619,7 @@ const TimelineContentColLeft = styled.div`
       width: 70%;
     }
   }
-`
+`;
 
 const TimelineContentColRight = styled.div`
   ${tw`col-span-12 md:col-span-6 md:flex`};
@@ -554,7 +627,7 @@ const TimelineContentColRight = styled.div`
   @media screen and (max-width: 768px) {
     display: none;
   }
-`
+`;
 
 const TimelineScreenContainer = styled.div`
   ${tw`max-w-full h-96 shadow-xl bg-gray-800 rounded-2xl overflow-hidden`};
@@ -562,20 +635,20 @@ const TimelineScreenContainer = styled.div`
   @media screen and (max-width: 768px) {
     display: none;
   }
-  
+
   .timeline-screen-image {
     ${tw`w-full h-8`}
   }
-  
+
   .timeline-slide-container {
     ${tw`relative h-full w-full -mt-2`}
-    
+
     .timeline-slide {
       ${tw`absolute top-0 left-0 h-full w-full`}
-      
+
       &-image {
         ${tw`w-full absolute top-0 object-cover`}
       }
     }
   }
-`
+`;
